@@ -35,6 +35,7 @@ class Login extends Component {
       isShowPassword: !this.state.isShowPassword
     })
   }
+
   render() {
     let { username, password, isShowPassword } = this.state;
     return (
