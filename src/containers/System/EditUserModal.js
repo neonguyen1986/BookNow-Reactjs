@@ -1,46 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { emitter } from '../../utils/emitter'
+import _ from 'lodash';
 
-import { createNewUser } from '../../services/userService'
-
-class UserModal extends Component {
+class EditUserModal extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             email: '',
             password: '',
             firstName: '',
             lastName: '',
             address: '',
             phoneNumber: '',
-            gender: 0,
-            roleId: 0,
+            gender: '',
+            roleId: '',
         }
-        this.listenToEmitter();
-    }
-    listenToEmitter() {
-        emitter.on('EVENT_CLEAR_MODAL_DATA', () => {
-            //reset child state
-            this.setState({
-                email: '',
-                password: '',
-                firstName: '',
-                lastName: '',
-                address: '',
-                phoneNumber: '',
-                gender: 0,
-                roleId: 0,
-            })
-        })
+
     }
 
     componentDidMount() {
+        let user = this.props.userToEdit;
+        if (user && !_.isEmpty(user)) {// _.isEmpty -> lodash
+            this.setState({
+                id: user.id,
+                email: user.email,
+                password: 'nothing',
+                firstName: user.firstName,
+                lastName: user.lastName,
+                address: user.address,
+                phoneNumber: user.phoneNumber,
+                gender: user.gender,
+                roleId: user.roleId,
+            })
+        }
     }
     toggle = () => {
-        this.props.toggleFromParent();
+        this.props.toggleEditFromParent();
     }
 
     //================CREATE================
@@ -49,14 +47,6 @@ class UserModal extends Component {
             [e.target.name]: e.target.value,
         })
     }
-    ////good way to write setState  
-    // handleOnChangeInput = (e) => {
-    //     let copyState = {...this.state}
-    //     copyState[e.target.name] = e.target.value
-    //     this.setState({
-    //         ...copyState
-    //     })
-    // }
 
     checkValidateInput = () => {
         let isValid = true;
@@ -71,12 +61,12 @@ class UserModal extends Component {
         return isValid;
     }
 
-    handleAddNewUser = () => {
+    handleEditUser = () => {
         let isValid = this.checkValidateInput()
         if (isValid === true) {
             //Call API
             //truyền this.state từ con sang cha
-            this.props.createNewUserDad(this.state);
+            this.props.editUserDad(this.state);
         }
     }
 
@@ -85,12 +75,12 @@ class UserModal extends Component {
         // console.log('>>>check props:', this.props)
         return (
             <Modal
-                isOpen={this.props.isOpen}
+                isOpen={this.props.isOpen1}
                 toggle={() => this.toggle()}
                 className={'modal-user-container'}
                 size='lg'
                 centered={true}>
-                <ModalHeader toggle={() => this.toggle()}>Create a new user</ModalHeader>
+                <ModalHeader toggle={() => this.toggle()}>Edit a user</ModalHeader>
                 <ModalBody>
                     <div className='modal-user-body'>
                         <div className='input-container' >
@@ -99,14 +89,16 @@ class UserModal extends Component {
                                 type='email'
                                 name='email'
                                 value={this.state.email}
-                                onChange={(e) => this.handleOnChangeInput(e)} />
+                                onChange={(e) => this.handleOnChangeInput(e)}
+                                readOnly />
                         </div>
                         <div className='input-container' >
                             <label>Password</label>
                             <input type='password'
                                 name='password'
                                 value={this.state.password}
-                                onChange={(e) => this.handleOnChangeInput(e)} />
+                                onChange={(e) => this.handleOnChangeInput(e)}
+                                readOnly />
                         </div>
                         <div className='input-container' >
                             <label>First Name</label>
@@ -119,6 +111,7 @@ class UserModal extends Component {
                             <label>Last Name</label>
                             <input type='text'
                                 name='lastName'
+                                // placeholder={userToEdit.lastName}
                                 value={this.state.lastName}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
@@ -126,6 +119,7 @@ class UserModal extends Component {
                             <label>Address</label>
                             <input type='text'
                                 name='address'
+                                // placeholder={userToEdit.address}
                                 value={this.state.address}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
@@ -133,19 +127,27 @@ class UserModal extends Component {
                             <label>Phone Number</label>
                             <input type='email'
                                 name='phoneNumber'
+                                // placeholder={userToEdit.phoneNumber}
                                 value={this.state.phoneNumber}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
                             <label>Gender</label>
-                            <select name="gender" className="form-control" defaultValue='1'>
+                            <select
+                                name="gender"
+                                className="form-control"
+                                defaultValue={this.state.gender}
+                            >
                                 <option value="1">Male</option>
                                 <option value="0">Female</option>
                             </select>
                         </div>
                         <div className="input-container">
                             <label>Role</label>
-                            <select name="roleId" className="form-control" defaultValue='1'>
+                            <select name="roleId"
+                                className="form-control"
+                                defaultValue={this.state.roleId}
+                            >
                                 <option value="1">Admin</option>
                                 <option value="2">Doctor</option>
                                 <option value="3">Patient</option>
@@ -157,7 +159,7 @@ class UserModal extends Component {
                     <Button
                         className='btn px-2'
                         color="primary"
-                        onClick={() => this.handleAddNewUser()}>
+                        onClick={() => this.handleEditUser()}>
                         Save Changes
                     </Button>{' '}
                     <Button className='btn px-2' color="secondary" onClick={() => this.toggle()}>
@@ -182,7 +184,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserModal);
 
 
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './UserManage.scss'
-import { getAllUsers, createNewUserService, deleteUserService } from '../../services/userService'
+import { getAllUsers, createNewUserService, deleteUserService, editUserService } from '../../services/userService'
 import UserModal from './UserModal';
+import EditUserModal from './EditUserModal';
 import { emitter } from '../../utils/emitter'
 
 class UserManage extends Component {
@@ -11,7 +12,9 @@ class UserManage extends Component {
         super(props);//without this line, the this.props will return 'undefined' 
         this.state = {
             arrUser: [],
-            isOpenUserModal: false
+            isOpenUserModal: false,
+            isOpenEditModal: false,
+            userToEdit: {}
         }
     }
 
@@ -31,20 +34,20 @@ class UserManage extends Component {
         }
     }
 
-    //===========click Add New User Button Event===========
+
+    //===========CREATE============
+    //click Add New User Button Event
     handleAddNewUser = () => {
         this.setState({
             isOpenUserModal: true
         })
     }
-    //===========toggle action for UserModal.js===========
+    //toggle action for UserModal.js
     toggleUserModal = () => {
         this.setState({
-            isOpenUserModal: !this.state.isOpenUserModal
+            isOpenUserModal: !this.state.isOpenUserModal,
         })
     }
-
-    //===========CREATE============
     createNewUserDad = async (data) => {
         try {
             let res = await createNewUserService(data);
@@ -82,7 +85,38 @@ class UserManage extends Component {
             console.log(error)
         }
     }
+    //=============UPDATE=============
+    handleOnClickEdit = (user) => {
+        this.setState({
+            isOpenEditModal: true,
+            userToEdit: user
+        })
+    }
 
+    //toggle action for UserModal.js
+    toggleEditModal = () => {
+        this.setState({
+            isOpenEditModal: !this.state.isOpenEditModal
+        })
+    }
+    editUserDad = async (user) => {
+        try {
+            // let data = { ...user, id: this.state.userToEdit.id }
+            console.log('>>> check user:', user)
+            let res = await editUserService(user)
+            if (res && res.errCode === 0) {
+                await this.getAllUsersFromReact();
+                this.setState({
+                    isOpenEditModal: false
+                })
+            } else {
+                alert(res.errMessage)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     render() {
         let arrUser = this.state.arrUser
         // console.log('check user:', arrUser)
@@ -94,6 +128,15 @@ class UserManage extends Component {
                     toggleFromParent={this.toggleUserModal}
                     createNewUserDad={this.createNewUserDad}
                 />
+                {this.state.isOpenEditModal &&
+                    <EditUserModal
+                        userToEdit={this.state.userToEdit}
+                        isOpen1={this.state.isOpenEditModal}
+                        toggleEditFromParent={this.toggleEditModal}
+                        editUserDad={this.editUserDad}
+                    />
+                }
+
                 <div className='title text-center'>
                     MANAGE USER
                 </div>
@@ -128,7 +171,12 @@ class UserManage extends Component {
                                         <td>{item.address}</td>
                                         <td>
                                             <div>
-                                                <button className='btn-edit'><i className="fas fa-edit"></i></button>
+                                                <button
+                                                    className='btn-edit'
+                                                    onClick={() => this.handleOnClickEdit(item)}
+                                                >
+                                                    <i className="fas fa-edit"></i>
+                                                </button>
                                                 <button
                                                     className='btn-delete'
                                                     onClick={() => this.handleOnClickDelete(item)}

@@ -34,7 +34,7 @@ class Login extends Component {
 			// console.log('>>>check', data)
 			if (data && data.errCode !== 0) {
 				this.setState({
-					errMessage: data.message,
+					errMessage: data.errMessage,
 				})
 			}
 			if (data && data.errCode === 0) {
