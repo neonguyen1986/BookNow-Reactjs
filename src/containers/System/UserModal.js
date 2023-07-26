@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { emitter } from '../../utils/emitter'
 
 import { createNewUser } from '../../services/userService'
 
@@ -18,7 +19,24 @@ class UserModal extends Component {
             gender: 0,
             roleId: 0,
         }
+        this.listenToEmitter();
     }
+    listenToEmitter() {
+        emitter.on('EVENT_CLEAR_MODAL_DATA', () => {
+            //reset child state
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: '',
+                phoneNumber: '',
+                gender: 0,
+                roleId: 0,
+            })
+        })
+    }
+
     componentDidMount() {
     }
     toggle = () => {
