@@ -40,3 +40,35 @@
         color: rgba(255, 0, 0, 0.534);
     }
 }
+
+// CSS for UserModal
+
+.modal-user-container {
+    .modal-header {
+        button {
+            background-color: transparent;
+            border: none;
+            font-size: 30px;
+            color: white
+        }
+    }
+
+    .modal-user-body {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 25% 25% 25% 25%;
+
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            margin: 0 3px;
+
+            input {
+                border-radius: 3px;
+                height: 30px;
+                border: 0.5px solid rgb(206, 203, 203);
+            }
+        }
+    }
+}

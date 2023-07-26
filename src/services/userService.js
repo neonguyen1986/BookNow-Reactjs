@@ -12,7 +12,12 @@ const getAllUsers = (inputId) => {
 
 }
 
+const createNewUserService = (newUser) => {
+    return axios.post('/api/create-new-users', newUser)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
+    createNewUserService,
 }
