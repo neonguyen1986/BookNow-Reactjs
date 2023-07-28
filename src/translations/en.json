@@ -1,4 +1,23 @@
 {
+    "home-header": {
+        "specialty": "Specialty",
+        "search-doctor": "Search doctor by specialty",
+        "facilities": "Facilities",
+        "choose-facilities": "Choose facilities",
+        "doctor": "Doctor",
+        "find-doctor": "Find good doctor",
+        "package": "Examination package",
+        "health-check": "General health check",
+        "support": "Support",
+        "medical-background": "MEDICAL BACKGROUND",
+        "comprehensive": "COMPREHENSIVE HEALTH CARE",
+        "specialist-exam": "Specialist Examination",
+        "remote-exam": "Remote Examination",
+        "general-exam": "General Examination",
+        "medical-test": "Medical Test",
+        "mental-health": "Mental Health",
+        "dental-exam": "Dental Examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
