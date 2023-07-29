@@ -2,15 +2,57 @@
     width: 100%;
     aspect-ratio: 6.5/2;
 
-    .section-specialty {
+    &.doctors {
+        aspect-ratio: 5.5/2;
+    }
+
+    &.about-section {
+        height: 450px;
+
+        .about-footer {
+            font-size: 30px;
+            font-weight: 600;
+            margin: 0 30px;
+            padding: 0 60px;
+            border-top: 1px solid black;
+        }
+
+        .about-footer-content {
+            display: flex;
+            justify-content: start;
+
+            .left-content {
+                width: 50%;
+                margin: 0 30px;
+                padding: 0 10px 0 60px;
+
+            }
+
+            .right-content {
+                width: 50%;
+                vertical-align: middle;
+                padding: 30px 60px 0 10px;
+                font-style: italic;
+
+            }
+        }
+    }
+
+    .section-shared {
         background: #f5f5f5;
         // height: 360px;
         width: 100%;
         height: 100%;
         padding: 0 60px;
 
-        .specialty-container {
-            .specialty-header {
+        &.medical-facility-section,
+        &.handbooks {
+            background: white;
+        }
+
+
+        .section-container {
+            .section-header {
                 height: 60px;
                 display: flex;
                 justify-content: space-between;
@@ -18,7 +60,7 @@
                 margin-bottom: 20px;
                 padding-top: 20px;
 
-                .specialty-title {
+                .section-title {
                     font-size: 30px;
                     font-weight: 700;
                 }
@@ -36,7 +78,8 @@
                 }
             }
 
-            .specialty-body {
+            .section-body {
+
                 .img-customize {
                     // border: 1px solid green;
                     text-align: center;
@@ -53,6 +96,32 @@
                     }
                 }
 
+                .img-customize-doctor {
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+
+                    .tempdiv {
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+
+                        .image {
+                            width: 60%;
+                            height: 60%;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+
+                .title-name {
+                    width: 60%;
+                    margin: 0 auto;
+                }
+
+
                 //config slick slider
 
                 .slick-prev {
@@ -60,7 +129,7 @@
                     left: -12px !important;
                     height: 48px !important;
                     width: 44px !important;
-                    z-index: 1000;
+                    z-index: 100;
                     background: #fff !important;
                     border: 2px solid #d7d7d7 !important;
 
@@ -103,4 +172,11 @@
             }
         }
     }
+}
+
+.home-footer {
+    text-align: left;
+    padding: 15px 15px;
+    background-color: #64b9e5;
+    color: white;
 }
