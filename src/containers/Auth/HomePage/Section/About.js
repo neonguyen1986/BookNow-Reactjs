@@ -21,7 +21,7 @@ class About extends Component {
                     </div>
                     <div className='about-footer-content'>
                         <div className='left-content'>
-                            <iframe width="100%" height="400px" src="https://www.youtube.com/embed/ViFYbu_u4j0" title="MÀN RA MẮT CÀN QUÉT NƯỚC MỸ - VÌ MESSI &quot;OUT TRÌNH&quot; HAY MLS QUÁ TỆ?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe width="100%" height="400px" src="https://www.youtube.com/embed/ViFYbu_u4j0" title="MÀN RA MẮT CÀN QUÉT NƯỚC MỸ - VÌ MESSI &quot;OUT TRÌNH&quot; HAY MLS QUÁ TỆ?" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         </div>
                         <div className='right-content'>
                             Good specialist, information was authentic, many patients believe, colleagues appreciated, respected in the industry. Already, working in leading hospitals in Hanoi.
