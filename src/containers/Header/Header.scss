@@ -9,6 +9,10 @@
     height: 40px;
     position: relative;
 
+    .welcome {
+        margin-right: 10px;
+    }
+
     .btn-logout {
         color: $common-text-color;
         line-height: 40px;
