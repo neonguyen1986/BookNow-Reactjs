@@ -1,33 +1,65 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    isLoggedIn: false,
-    adminInfo: null
+    genders: [],
+    roles: [],
+    positions: [],
+    isLoadingGender: false
 }
 
-const appReducer = (state = initialState, action) => {
+const adminReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADMIN_LOGIN_SUCCESS:
+        //===============Gender================
+        case actionTypes.FETCH_GENDER_START:
+            // console.log('fetch start:', action)
             return {
                 ...state,
-                isLoggedIn: true,
-                adminInfo: action.adminInfo
+                isLoadingGender: true,
             }
-        case actionTypes.ADMIN_LOGIN_FAIL:
+        case actionTypes.FETCH_GENDER_SUCCESS:
+            // console.log('fetch success:', action)
             return {
                 ...state,
-                isLoggedIn: false,
-                adminInfo: null
+                genders: action.payload,
+                isLoadingGender: false,
             }
-        case actionTypes.PROCESS_LOGOUT:
+        case actionTypes.FETCH_GENDER_FAILED:
+            // console.log('fetch fail:', action)
             return {
                 ...state,
-                isLoggedIn: false,
-                adminInfo: null
+                isLoadingGender: false,
+            }
+        //===============Position================
+        case actionTypes.FETCH_POSITION_SUCCESS:
+            // console.log('fetch success:', action)
+            return {
+                ...state,
+                positions: action.payload,
+                // isLoadingGender: false,
+            }
+        case actionTypes.FETCH_POSITION_FAILED:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                // isLoadingGender: false,
+            }
+        //===============Role================
+        case actionTypes.FETCH_ROLE_SUCCESS:
+            // console.log('fetch success:', action)
+            return {
+                ...state,
+                roles: action.payload,
+                // isLoadingGender: false,
+            }
+        case actionTypes.FETCH_ROLE_FAILED:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                // isLoadingGender: false,
             }
         default:
             return state;
     }
 }
 
-export default appReducer;
+export default adminReducer;
