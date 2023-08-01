@@ -4,8 +4,9 @@ const initContentOfConfirmModal = {
     isOpen: false,
     messageId: "",
     handleFunc: null,
-    dataFunc: null
+    dataFunc: null,
 }
+
 
 const initialState = {
     started: true,
@@ -32,7 +33,7 @@ const appReducer = (state = initialState, action) => {
                 }
             }
         case actionTypes.CHANGE_LANGUAGE:
-            console.log('check reducer:', action)
+            // console.log('check reducer:', action)
             return {
                 ...state,
                 language: action.language,
