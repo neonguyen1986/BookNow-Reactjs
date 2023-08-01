@@ -29,10 +29,15 @@ class TableManageUser extends Component {
         await this.props.fetchAllUsersStart()
         toast.success("User deleted")
     }
+    handleOnClickEdit = async (id) => {
+        await this.props.getUserStartRedux(id)
+        let user = await this.props.getOneUserRedux
+        this.props.updateForm(user)
+    }
+
     render() {
         let userRedux = this.state.userRedux;
         // let userRedux = this.props.getAllUserRedux
-        console.log(userRedux)
         return (
             <div >
                 <div className='user-table mt-3'>
@@ -60,7 +65,7 @@ class TableManageUser extends Component {
                                             <div>
                                                 <button
                                                     className='btn-edit'
-                                                    onClick={() => this.handleOnClickEdit(item)}
+                                                    onClick={() => this.handleOnClickEdit(item.id)}
                                                 >
                                                     <i className="fas fa-edit"></i>
                                                 </button>
@@ -89,7 +94,8 @@ class TableManageUser extends Component {
 
 const mapStateToProps = state => {
     return {
-        getAllUserRedux: state.admin.users
+        getAllUserRedux: state.admin.users,
+        getOneUserRedux: state.admin.oneuser
     };
 };
 
@@ -97,7 +103,9 @@ const mapDispatchToProps = dispatch => {
     return {
         //CRUD Redux
         fetchAllUsersStart: () => dispatch(actions.fetchAllUsersStart()),
-        deleteUserRedux: (data) => dispatch(actions.deleteUser(data))
+        deleteUserRedux: (data) => dispatch(actions.deleteUser(data)),
+        getUserStartRedux: (id) => dispatch(actions.getUserStart(id)),
+
     };
 };
 

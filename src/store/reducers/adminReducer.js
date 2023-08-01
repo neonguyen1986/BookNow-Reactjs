@@ -6,6 +6,7 @@ const initialState = {
     positions: [],
     isLoadingGender: false,
     users: [],
+    oneuser: {}
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -67,6 +68,20 @@ const adminReducer = (state = initialState, action) => {
                 // isLoadingGender: false,
             }
         case actionTypes.FETCH_ALL_USERS_FAILED:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                // isLoadingGender: false,
+            }
+        //===============GET ONE USER================
+        case actionTypes.GET_USER_SUCCESS:
+            // console.log('fetch success:', action)
+            return {
+                ...state,
+                oneuser: action.payload,
+                // isLoadingGender: false,
+            }
+        case actionTypes.GET_USER_FAILED:
             // console.log('fetch fail:', action)
             return {
                 ...state,

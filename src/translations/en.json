@@ -46,6 +46,8 @@
         "position": "Position",
         "role-id": "Role Id",
         "save": "Save",
-        "image": "Avatar"
+        "image": "Avatar",
+        "save-changes": "Save Changes",
+        "cancel-btn": "Cancel"
     }
 }

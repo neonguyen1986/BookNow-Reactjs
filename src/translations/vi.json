@@ -46,6 +46,8 @@
         "position": "Chức danh",
         "role-id": "Vai trò",
         "save": "Lưu",
-        "image": "Ảnh đại diện"
+        "image": "Ảnh đại diện",
+        "save-changes": "Lưu thay đổi",
+        "cancel-btn": "Hủy"
     }
 }

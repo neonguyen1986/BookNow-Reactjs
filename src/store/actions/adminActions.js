@@ -3,7 +3,8 @@ import {
     getAllCodeService,
     createNewUserService,
     getAllUsers,
-    deleteUserService
+    deleteUserService,
+    editUserService
 }
     from '../../services/userService'
 
@@ -95,7 +96,7 @@ export const createNewUser = (data) => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await createNewUserService(data);
-        console.log('check create user Redux:', res)
+        // console.log('check create user Redux:', res)
         if (res && res.errCode === 0) {
             dispatch(saveUserSuccess());
         } else {
@@ -122,7 +123,7 @@ export const fetchAllUsersStart = () => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await getAllUsers("ALL");
-        console.log('check getAllUsers:', res)
+        // console.log('check getAllUsers:', res)
         if (res && res.errCode === 0) {
             dispatch(fetchAllUsersSuccess(res.user));
         } else {
@@ -163,9 +164,64 @@ export const deleteUser = (data) => async (dispatch, getState) => {
 };
 
 export const delteUserSuccess = () => ({
-    type: actionTypes.CREATE_USER_SUCCESS,
+    type: actionTypes.DELETE_USER_SUCCESS,
 })
 export const delteUserFailed = (error) => ({
-    type: actionTypes.CREATE_USER_FAILED,
+    type: actionTypes.DELETE_USER_FAILED,
+    payload: error,
+})
+
+//=================== UPDATE USER ====================
+export const getUserStart = (id) => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        const res = await getAllUsers(id);
+        // console.log('check get one user:', res.user)
+        if (res && res.errCode === 0) {
+            dispatch(getUsersSuccess(res.user));
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to get user data';
+            dispatch(getUsersFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllUsersFailed());
+        console.log('>>>Get user data error:', error);
+    }
+};
+
+export const getUsersSuccess = (data) => ({
+    type: actionTypes.GET_USER_SUCCESS,
+    payload: data,
+})
+export const getUsersFailed = (error) => ({
+    type: actionTypes.GET_USER_FAILED,
+    payload: error,
+})
+//============
+export const updateUserStart = (data) => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        console.log('check data before:', data)
+        const res = await editUserService(data);
+        console.log('check data after:', res)
+        if (res && res.errCode === 0) {
+            dispatch(updateUsersSuccess());
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to update user';
+            dispatch(updateUsersFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllUsersFailed());
+        console.log('>>>Update user data error:', error);
+    }
+};
+
+export const updateUsersSuccess = () => ({
+    type: actionTypes.UPDATE_USER_SUCCESS,
+})
+export const updateUsersFailed = (error) => ({
+    type: actionTypes.UPDATE_USER_FAILED,
     payload: error,
 })

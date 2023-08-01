@@ -26,6 +26,7 @@ class UserRedux extends Component {
             previewIgmURL: '',
             isOpen: false,
 
+            id: '',
             email: '',
             password: '',
             firstName: '',
@@ -36,6 +37,8 @@ class UserRedux extends Component {
             position: '',
             role: '',
             avatar: '',
+
+            isEditForm: false,
         }
     }
 
@@ -55,19 +58,17 @@ class UserRedux extends Component {
         }
 
         if (prevProps.positionRedux !== this.props.positionRedux) {
-            let arrPosition = this.props.genderRedux;
+            let arrPosition = this.props.positionRedux;
             this.setState({
                 positionArr: this.props.positionRedux,
                 position: arrPosition?.length > 0 ? arrPosition[0].key : ''
-
             })
         }
         if (prevProps.roleRedux !== this.props.roleRedux) {
-            let arrRole = this.props.genderRedux;
+            let arrRole = this.props.roleRedux;
             this.setState({
                 roleArr: this.props.roleRedux,
                 role: arrRole?.length > 0 ? arrRole[0].key : ''
-
             })
         }
     }
@@ -126,7 +127,7 @@ class UserRedux extends Component {
             //truyền state vào DB bằng redux
             await this.props.createNewUser(this.state)
             await this.props.fetchAllUsersStart()
-            console.log('check state after save:', this.state)
+            // console.log('check state after save:', this.state)
 
             this.setState({
                 email: '',
@@ -139,13 +140,51 @@ class UserRedux extends Component {
                 position: '',
                 role: '',
                 avatar: '',
-
             })
             toast.success("One user just added")
         }
 
     }
 
+    updateForm = (user) => {
+        // console.log('>>>check user after update:', user)
+        this.setState({
+            id: user.id,
+            email: user.email,
+            password: 'default',
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            address: user.address,
+            gender: user.gender,
+            position: user.positionId,
+            role: user.roleId,
+
+            isEditForm: true,
+        })
+    }
+    handleOnClickEdit = async () => {
+        await this.props.updateUserStart(this.state)
+        await this.props.fetchAllUsersStart()
+        toast.success("The user has just edited")
+    }
+
+    handleOnClickCancel = () => {
+        this.setState({
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            address: '',
+            gender: '',
+            position: '',
+            role: '',
+            avatar: '',
+
+            isEditForm: false,
+        })
+    }
     render() {
         // let { genderArr } = this.state;
         let language = this.props.language
@@ -154,7 +193,7 @@ class UserRedux extends Component {
         // console.log('>>>check image:', previewIgmURL)
 
         let { email, password, firstName, lastName, phoneNumber,
-            address, gender, position, role, avatar
+            address, gender, position, role, avatar, isEditForm
         } = this.state
 
         return (
@@ -165,7 +204,7 @@ class UserRedux extends Component {
                 <div className='container'>
 
                     <TableManageUser
-                        updateTableDad={this.state.updateTableDad} />
+                        updateForm={this.updateForm} />
                 </div>
                 {isLoadingGenderReact === true
                     ?
@@ -183,13 +222,16 @@ class UserRedux extends Component {
                                         <input className='form-control' type='email'
                                             value={email}
                                             name='email'
-                                            onChange={(e) => this.handleOnChangeInput(e)} />
+                                            disabled={isEditForm === true}
+                                            onChange={(e) => this.handleOnChangeInput(e)}
+                                        />
                                     </div>
                                     <div className='col-6'>
                                         <label><FormattedMessage id='manage-user.password' /></label>
                                         <input className='form-control' type='password'
                                             value={password}
                                             name='password'
+                                            disabled={isEditForm === true}
                                             onChange={(e) => this.handleOnChangeInput(e)} />
                                     </div>
                                     <div className='col-6'>
@@ -220,9 +262,11 @@ class UserRedux extends Component {
                                             name='address'
                                             onChange={(e) => this.handleOnChangeInput(e)} />
                                     </div>
+
                                     <div className='col-3'>
                                         <label><FormattedMessage id='manage-user.gender' /></label>
                                         <select className="form-control"
+                                            value={gender}
                                             name='gender'
                                             onChange={(e) => this.handleOnChangeInput(e)}>
                                             {genderArr && genderArr.length > 0 &&
@@ -238,6 +282,7 @@ class UserRedux extends Component {
                                     <div className='col-3'>
                                         <label><FormattedMessage id='manage-user.position' /></label>
                                         <select className="form-control"
+                                            value={position}
                                             name='position'
                                             onChange={(e) => this.handleOnChangeInput(e)}>
                                             {positionArr?.length > 0 &&
@@ -253,13 +298,16 @@ class UserRedux extends Component {
                                     <div className='col-3'>
                                         <label><FormattedMessage id='manage-user.role-id' /></label>
                                         <select className="form-control"
-                                            name='roleId'
+                                            value={role}
+                                            name='role'
                                             onChange={(e) => this.handleOnChangeInput(e)}>
                                             {roleArr?.length > 0 &&
                                                 roleArr.map(item => {
+                                                    // console.log('gender:', gender, 'position:', position, 'role:', role,)
                                                     return (
-                                                        <option key={item.id} value={item.key}>
-                                                            {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
+                                                        < option key={item.id} value={item.key} >
+                                                            {language === LANGUAGE.VI ? item.valueVi : item.valueEn
+                                                            }
                                                         </option>
                                                     )
                                                 })}
@@ -281,12 +329,24 @@ class UserRedux extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <button className='btn btn-primary my-3'
-                                    onClick={() => this.handleOnClickSave()}
-                                >
-                                    <FormattedMessage id='manage-user.save' />
-                                </button>
-
+                                {isEditForm === false
+                                    ?
+                                    <button className='btn btn-primary my-3'
+                                        onClick={() => this.handleOnClickSave()}
+                                    ><FormattedMessage id='manage-user.save' />
+                                    </button>
+                                    :
+                                    <div>
+                                        <button className='btn btn-warning my-3'
+                                            onClick={() => this.handleOnClickEdit()}
+                                        ><FormattedMessage id='manage-user.save-changes' />
+                                        </button>
+                                        <button className='btn btn-secondary my-3 mx-2'
+                                            onClick={() => this.handleOnClickCancel()}
+                                        ><FormattedMessage id='manage-user.cancel-btn' />
+                                        </button>
+                                    </div>
+                                }
                             </div>
                         </div>
                         {isOpen === true &&
@@ -308,7 +368,6 @@ const mapStateToProps = state => {
         language: state.app.language,
         genderRedux: state.admin.genders,
         isLoadingGenderRedux: state.admin.isLoadingGender,
-        genderRedux: state.admin.genders,
         positionRedux: state.admin.positions,
         roleRedux: state.admin.roles,
 
@@ -324,6 +383,7 @@ const mapDispatchToProps = dispatch => {
         //CRUD with Redux
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
         fetchAllUsersStart: () => dispatch(actions.fetchAllUsersStart()),
+        updateUserStart: (data) => dispatch(actions.updateUserStart(data)),
     };
 };
 
