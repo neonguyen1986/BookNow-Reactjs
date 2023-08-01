@@ -1,5 +1,11 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, createNewUserService } from '../../services/userService'
+import {
+    getAllCodeService,
+    createNewUserService,
+    getAllUsers,
+    deleteUserService
+}
+    from '../../services/userService'
 
 //=================== Fetch Gender ====================
 export const fetchGenderStart = () => async (dispatch, getState) => {
@@ -93,20 +99,73 @@ export const createNewUser = (data) => async (dispatch, getState) => {
         if (res && res.errCode === 0) {
             dispatch(saveUserSuccess());
         } else {
-            const errorMessage = res?.message ? res.message : 'Failed to save user';
+            const errorMessage = res?.message ? res.message : 'Failed to create user';
             dispatch(saveUserFailed(errorMessage));
         }
     } catch (error) {
         dispatch(saveUserFailed());
-        console.log('>>>fetch Role error:', error);
+        console.log('>>>Create user error:', error);
     }
 };
 
-export const saveUserSuccess = (roleData) => ({
+export const saveUserSuccess = () => ({
     type: actionTypes.CREATE_USER_SUCCESS,
-    payload: roleData,
 })
 export const saveUserFailed = (error) => ({
+    type: actionTypes.CREATE_USER_FAILED,
+    payload: error,
+})
+//=================== READ USER ====================
+
+export const fetchAllUsersStart = () => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        const res = await getAllUsers("ALL");
+        console.log('check getAllUsers:', res)
+        if (res && res.errCode === 0) {
+            dispatch(fetchAllUsersSuccess(res.user));
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to load user data';
+            dispatch(fetchAllUsersFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllUsersFailed());
+        console.log('>>>Load all users error:', error);
+    }
+};
+
+export const fetchAllUsersSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+    payload: data,
+})
+export const fetchAllUsersFailed = (error) => ({
+    type: actionTypes.FETCH_ALL_USERS_FAILED,
+    payload: error,
+})
+
+//=================== DELETE USER ====================
+export const deleteUser = (data) => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        let res = await deleteUserService(data);
+        if (res && res.errCode === 0) {
+            dispatch(delteUserSuccess());
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to delete user';
+            dispatch(delteUserFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(saveUserFailed());
+        console.log('>>>Delete User error:', error);
+    }
+};
+
+export const delteUserSuccess = () => ({
+    type: actionTypes.CREATE_USER_SUCCESS,
+})
+export const delteUserFailed = (error) => ({
     type: actionTypes.CREATE_USER_FAILED,
     payload: error,
 })

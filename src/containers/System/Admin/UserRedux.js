@@ -5,9 +5,14 @@ import { LANGUAGE } from '../../../utils'
 import * as actions from "../../../store/actions"
 import './UserRedux.scss'
 
+import TableManageUser from './TableManageUser';
+
 //Lightbox
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+
+import { toast } from 'react-toastify';
+
 
 
 class UserRedux extends Component {
@@ -111,19 +116,35 @@ class UserRedux extends Component {
         return isValid;
     }
 
-    handleOnClickSave = () => {
+
+
+    handleOnClickSave = async () => {
         let isValid = this.checkValidateInput();
         if (isValid === false) {
             return;
         } else {
             //truyền state vào DB bằng redux
-            this.props.createNewUser(this.state)
-
+            await this.props.createNewUser(this.state)
+            await this.props.fetchAllUsersStart()
             console.log('check state after save:', this.state)
+
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: '',
+                position: '',
+                role: '',
+                avatar: '',
+
+            })
+            toast.success("One user just added")
         }
 
     }
-
 
     render() {
         // let { genderArr } = this.state;
@@ -140,6 +161,11 @@ class UserRedux extends Component {
             <div className="user-redux-container" >
                 <div className='title'>
                     Redux User Management
+                </div>
+                <div className='container'>
+
+                    <TableManageUser
+                        updateTableDad={this.state.updateTableDad} />
                 </div>
                 {isLoadingGenderReact === true
                     ?
@@ -294,7 +320,10 @@ const mapDispatchToProps = dispatch => {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
+
+        //CRUD with Redux
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        fetchAllUsersStart: () => dispatch(actions.fetchAllUsersStart()),
     };
 };
 

@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
@@ -19,6 +20,8 @@ import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from './Auth/HomePage/HomePage.js'
 
 import CustomScrollbars from '../components/CustomScrollbars';
+
+
 
 class App extends Component {
 
@@ -43,6 +46,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
+
                 <Router history={history}>
                     <div className="main-container">
                         {/* {this.props.isLoggedIn && <Header />} */}
@@ -57,12 +61,17 @@ class App extends Component {
                                 </Switch>
                             </CustomScrollbars>
                         </div>
-
                         <ToastContainer
-                            className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
-                            autoClose={false} hideProgressBar={true} pauseOnHover={false}
-                            pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
+                            position="top-right"
+                            autoClose={2000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="dark"
                         />
                     </div>
                 </Router>
