@@ -203,9 +203,8 @@ export const updateUserStart = (data) => async (dispatch, getState) => {
     try {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
-        console.log('check data before:', data)
         const res = await editUserService(data);
-        console.log('check data after:', res)
+        // console.log('check data after:', res)
         if (res && res.errCode === 0) {
             dispatch(updateUsersSuccess());
         } else {

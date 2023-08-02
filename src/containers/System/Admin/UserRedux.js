@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGE } from '../../../utils'
+import { LANGUAGE, CommonUtils } from '../../../utils'
 import * as actions from "../../../store/actions"
 import './UserRedux.scss'
 
@@ -73,18 +73,20 @@ class UserRedux extends Component {
         }
     }
 
-    handleOnChangeImage = (e) => {
+    handleOnChangeImage = async (e) => {
         let data = e.target.files;
         let file = data[0];
         if (file) {
             //Ta sẽ tạo một API (của HTML) của ảnh này
+            let base64file = await CommonUtils.convertBlobToBase64(file)
+            // console.log('>>>check base64', base64file)
+
             let objectUrl = URL.createObjectURL(file)
             this.setState({
                 previewIgmURL: objectUrl,
-                avatar: file
+                avatar: base64file
             })
         }
-        // console.log('>>>check image:', objectUrl)
     }
     handleOpenPreviewImage = () => {
         if (!this.state.previewIgmURL) return;
@@ -140,6 +142,7 @@ class UserRedux extends Component {
                 position: '',
                 role: '',
                 avatar: '',
+                previewIgmURL: '',
             })
             toast.success("One user just added")
         }
@@ -148,10 +151,15 @@ class UserRedux extends Component {
 
     updateForm = (user) => {
         // console.log('>>>check user after update:', user)
+        let imageBase64 = ''
+        if (user.image) {
+            imageBase64 = new Buffer(user.image, 'base64').toString('binary')
+        }
+
         this.setState({
             id: user.id,
             email: user.email,
-            password: 'default',
+            password: 'nothing',
             firstName: user.firstName,
             lastName: user.lastName,
             phoneNumber: user.phoneNumber,
@@ -159,7 +167,7 @@ class UserRedux extends Component {
             gender: user.gender,
             position: user.positionId,
             role: user.roleId,
-
+            previewIgmURL: imageBase64,
             isEditForm: true,
         })
     }
@@ -181,6 +189,7 @@ class UserRedux extends Component {
             position: '',
             role: '',
             avatar: '',
+            previewIgmURL: '',
 
             isEditForm: false,
         })
@@ -322,6 +331,7 @@ class UserRedux extends Component {
                                             <label className='upload-label' htmlFor='previewImg'>Image <i class="fas fa-upload"></i></label>
                                             {/* htmlFor phải trùng với id của input, khi này 
                                             label này sẽ đại diện cho thẻ input ở trên */}
+
                                             <div className='preview-image'
                                                 style={{ backgroundImage: `url(${previewIgmURL}` }}
                                                 onClick={() => this.handleOpenPreviewImage()}
