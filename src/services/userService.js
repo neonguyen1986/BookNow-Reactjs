@@ -40,6 +40,14 @@ const getAllCodeService = (inputType) => {
         }
     })
 }
+
+const getTopDoctorService = (limit) => {
+    return axios.get('/api/homepage-top-doctor', {
+        params: {
+            limit: limit
+        }
+    })
+}
 export {
     handleLoginApi,
     getAllUsers,
@@ -47,4 +55,6 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
+    getTopDoctorService,
+
 }

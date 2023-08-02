@@ -4,7 +4,8 @@ import {
     createNewUserService,
     getAllUsers,
     deleteUserService,
-    editUserService
+    editUserService,
+    getTopDoctorService,
 }
     from '../../services/userService'
 
@@ -14,6 +15,7 @@ export const fetchGenderStart = () => async (dispatch, getState) => {
         //FETCH_GENDER_START: to show isLoadingGender
         dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await getAllCodeService("GENDER");
+        // console.log('check gender', res)
         if (res && res.errCode === 0) {
             dispatch(fetchGenderSuccess(res.data));
             // console.log('check getState:', getState)
@@ -93,6 +95,8 @@ export const fetchRoleFailed = (error) => ({
 //=================== CREATE NEW USER ====================
 export const createNewUser = (data) => async (dispatch, getState) => {
     try {
+        // console.log('check create user Redux:', data)
+
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await createNewUserService(data);
@@ -123,7 +127,7 @@ export const fetchAllUsersStart = () => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await getAllUsers("ALL");
-        // console.log('check getAllUsers:', res)
+        // console.log('check getAllUsers', res)
         if (res && res.errCode === 0) {
             dispatch(fetchAllUsersSuccess(res.user));
         } else {
@@ -222,5 +226,33 @@ export const updateUsersSuccess = () => ({
 })
 export const updateUsersFailed = (error) => ({
     type: actionTypes.UPDATE_USER_FAILED,
+    payload: error,
+})
+//=================== FETCH OUSTANDING DOCTORS ====================
+
+export const fetchTopDoctors = () => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        const res = await getTopDoctorService(10)
+        // console.log('check top Doctor:', res)
+        if (res && res.errCode === 0) {
+            dispatch(fetchTopDoctorsSuccess(res.data));
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to load top doctors';
+            dispatch(fetchTopDoctorsFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllUsersFailed());
+        console.log('>>>Load top doctors error:', error);
+    }
+};
+
+export const fetchTopDoctorsSuccess = (data) => ({
+    type: actionTypes.FETCH_TOP_DOCTORS_SUCCESS,
+    payload: data,
+})
+export const fetchTopDoctorsFailed = (error) => ({
+    type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
     payload: error,
 })
