@@ -38,9 +38,8 @@ class OutstandingDoctors extends Component {
 
     render() {
         let arrDoctors = this.state.arrDoctors;
-        arrDoctors = arrDoctors.concat(arrDoctors)
         let language = this.props.language;
-        console.log('check topDoctorsRedux:', arrDoctors)
+        // console.log('check topDoctorsRedux:', arrDoctors)
         return (
             <>
                 <div className='fit-height-width doctors'>

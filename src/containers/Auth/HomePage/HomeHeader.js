@@ -16,7 +16,7 @@ class HomeHeader extends Component {
 
     }
     render() {
-        console.log('>>>check redux props:', this.props);
+        // console.log('>>>check redux props:', this.props);
         let language = this.props.language;
         return (
             <>
