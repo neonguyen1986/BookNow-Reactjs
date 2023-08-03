@@ -49,5 +49,9 @@
         "image": "Ảnh đại diện",
         "save-changes": "Lưu thay đổi",
         "cancel-btn": "Hủy"
+    },
+    "home-page": {
+        "outstanding-doctor": "Bác sĩ nổi bật",
+        "more-info": "XEM THÊM"
     }
 }

@@ -9,7 +9,7 @@
         "package": "Examination package",
         "health-check": "General health check",
         "support": "Support",
-        "medical-background": "MEDICAL BACKGROUND",
+        "medical-background": "MEDICAL PLATFORM",
         "comprehensive": "COMPREHENSIVE HEALTH CARE",
         "specialist-exam": "Specialist Examination",
         "remote-exam": "Remote Examination",
@@ -49,5 +49,9 @@
         "image": "Avatar",
         "save-changes": "Save Changes",
         "cancel-btn": "Cancel"
+    },
+    "home-page": {
+        "outstanding-doctor": "Outstanding Doctor",
+        "more-info": "MORE INFO"
     }
 }

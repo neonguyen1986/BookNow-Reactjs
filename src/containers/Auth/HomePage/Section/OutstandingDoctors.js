@@ -46,8 +46,8 @@ class OutstandingDoctors extends Component {
                     <div className='section-shared'>
                         <div className='section-container'>
                             <div className='section-header'>
-                                <div className='section-title'>Outstanding Doctors</div>
-                                <button>VIEW MORE...</button>
+                                <div className='section-title'><FormattedMessage id='home-page.outstanding-doctor' /></div>
+                                <button><FormattedMessage id='home-page.more-info' /></button>
                             </div>
                             <div className='section-body'>
                                 <Slider {...this.props.settings}>

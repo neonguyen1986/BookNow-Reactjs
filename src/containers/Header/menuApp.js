@@ -4,7 +4,7 @@ export const adminMenu = [
             { name: 'menu.admin.user-CRUD', link: '/system/user-manage' },
             { name: 'menu.admin.redux-CRUD', link: '/system/user-redux' },
             { name: 'menu.admin.manage-admin', link: '/system/user-admin' },
-            { name: 'menu.admin.manage-doctor', link: '/system/user-doctor' },
+            { name: 'menu.admin.manage-doctor', link: '/system/manage-doctor' },
 
 
 

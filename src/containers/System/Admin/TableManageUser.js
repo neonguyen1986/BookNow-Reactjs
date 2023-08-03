@@ -4,6 +4,17 @@ import * as actions from "../../../store/actions"
 import './TableManageUser.scss'
 import { toast } from 'react-toastify';
 
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+// import style manually
+import 'react-markdown-editor-lite/lib/index.css';
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+// Finish!
+function handleEditorChange({ html, text }) {
+    console.log('handleEditorChange', html, text);
+}
 
 class TableManageUser extends Component {
 
@@ -39,58 +50,64 @@ class TableManageUser extends Component {
         let userRedux = this.state.userRedux;
         // let userRedux = this.props.getAllUserRedux
         return (
-            <div >
-                <div className='user-table mt-3'>
-                    <table id="TableManageUser">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Email</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Address</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {userRedux?.length > 0 && userRedux.map(item => {
-                                return (
-                                    <tr key={item.id}>
-                                        <td>{item.id}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.firstName}</td>
-                                        <td>{item.lastName}</td>
-                                        <td>{item.address}</td>
-                                        <td>
-                                            <div>
-                                                <button
-                                                    className='btn-edit'
-                                                    onClick={() => this.handleOnClickEdit(item.id)}
-                                                >
-                                                    <i className="fas fa-edit"></i>
-                                                </button>
-                                                <button
-                                                    className='btn-delete'
-                                                    onClick={() => this.handleOnClickDelete(item.id)}
-                                                >
-                                                    <i className="fas fa-trash-alt"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+            <>
+                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
 
-                                )
-                            })}
-                        </tbody>
+                <div >
+                    <div className='user-table mt-3'>
+                        <table id="TableManageUser">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {userRedux?.length > 0 && userRedux.map(item => {
+                                    return (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.firstName}</td>
+                                            <td>{item.lastName}</td>
+                                            <td>{item.address}</td>
+                                            <td>
+                                                <div>
+                                                    <button
+                                                        className='btn-edit'
+                                                        onClick={() => this.handleOnClickEdit(item.id)}
+                                                    >
+                                                        <i className="fas fa-edit"></i>
+                                                    </button>
+                                                    <button
+                                                        className='btn-delete'
+                                                        onClick={() => this.handleOnClickDelete(item.id)}
+                                                    >
+                                                        <i className="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    )
+                                })}
+                            </tbody>
 
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 
 }
+
+
 
 const mapStateToProps = state => {
     return {
