@@ -6,6 +6,8 @@ import {
     deleteUserService,
     editUserService,
     getTopDoctorService,
+    getAllDoctorsService,
+    postDoctorInfo,
 }
     from '../../services/userService'
 
@@ -243,7 +245,7 @@ export const fetchTopDoctors = () => async (dispatch, getState) => {
             dispatch(fetchTopDoctorsFailed(errorMessage));
         }
     } catch (error) {
-        dispatch(fetchAllUsersFailed());
+        dispatch(fetchTopDoctorsFailed());
         console.log('>>>Load top doctors error:', error);
     }
 };
@@ -254,5 +256,61 @@ export const fetchTopDoctorsSuccess = (data) => ({
 })
 export const fetchTopDoctorsFailed = (error) => ({
     type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
+    payload: error,
+})
+//=================== FETCH ALL DOCTORS ====================
+
+export const fetchAllDoctors = () => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        const res = await getAllDoctorsService()
+        // console.log('check top Doctor:', res.data)
+        if (res && res.errCode === 0) {
+            dispatch(fetchAllDoctorsSuccess(res.data));
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to load top doctors';
+            dispatch(fetchAllDoctorsFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllDoctorsFailed());
+        console.log('>>>Load top doctors error:', error);
+    }
+};
+
+export const fetchAllDoctorsSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+    payload: data,
+})
+export const fetchAllDoctorsFailed = (error) => ({
+    type: actionTypes.FETCH_ALL_DOCTORS_FAILED,
+    payload: error,
+})
+
+//=================== POST ALL DOCTORS ====================
+
+export const postDoctors = (data) => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        const res = await postDoctorInfo(data)
+        // console.log('check top Doctor:', res.data)
+        if (res && res.errCode === 0) {
+            dispatch(postDoctorsSuccess());
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to save doctors info';
+            dispatch(postDoctorsFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllDoctorsFailed());
+        console.log('>>>Save doctors info error:', error);
+    }
+};
+
+export const postDoctorsSuccess = () => ({
+    type: actionTypes.POST_DOCTORS_SUCCESS,
+})
+export const postDoctorsFailed = (error) => ({
+    type: actionTypes.POST_DOCTORS_FAILED,
     payload: error,
 })
