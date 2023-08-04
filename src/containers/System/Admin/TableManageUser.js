@@ -4,18 +4,6 @@ import * as actions from "../../../store/actions"
 import './TableManageUser.scss'
 import { toast } from 'react-toastify';
 
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-// import style manually
-import 'react-markdown-editor-lite/lib/index.css';
-
-const mdParser = new MarkdownIt(/* Markdown-it options */);
-
-// Finish!
-function handleEditorChange({ html, text }) {
-    console.log('handleEditorChange', html, text);
-}
-
 class TableManageUser extends Component {
 
     constructor(props) {
@@ -51,8 +39,6 @@ class TableManageUser extends Component {
         // let userRedux = this.props.getAllUserRedux
         return (
             <>
-                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
-
                 <div >
                     <div className='user-table mt-3'>
                         <table id="TableManageUser">

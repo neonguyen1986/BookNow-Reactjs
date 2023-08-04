@@ -20,6 +20,7 @@ import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from './Auth/HomePage/HomePage.js'
 
 import CustomScrollbars from '../components/CustomScrollbars';
+import DetailDoctor from './Patients/Doctor/DetailDoctor';
 
 
 
@@ -58,6 +59,7 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} exact component={HomePage} />
+                                    <Route path={path.DETAIL_DOCTOR} exact component={DetailDoctor} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

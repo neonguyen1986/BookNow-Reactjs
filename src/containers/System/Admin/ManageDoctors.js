@@ -4,6 +4,8 @@ import * as actions from "../../../store/actions"
 import { toast } from 'react-toastify';
 import './ManageDoctors.scss'
 import { LANGUAGE } from '../../../utils'
+import { FormattedMessage } from 'react-intl';
+
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -46,8 +48,8 @@ class ManageDoctors extends Component {
     handleEditorChange = ({ html, text }) => {
         // console.log('handleEditorChange', html, text);
         this.setState({
-            HTMLContent: text,
-            markdownContent: html
+            HTMLContent: html,
+            markdownContent: text
         })
     }
     //================= React Select=================
@@ -107,11 +109,11 @@ class ManageDoctors extends Component {
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
-                    Create Doctor information
+                    <FormattedMessage id='manage-doctor.doctor-title' />
                 </div>
                 <div className='doctor-info'>
                     <div className='content-left form-group'>
-                        <label>Choose Doctor</label>
+                        <label><FormattedMessage id='manage-doctor.choose-doctor' /></label>
                         <Select
                             value={this.state.selectedDoctor}
                             onChange={this.handleChange}
@@ -119,7 +121,7 @@ class ManageDoctors extends Component {
                         />
                     </div>
                     <div className='content-right form-group'>
-                        <label>Referral information about the doctor</label>
+                        <label><FormattedMessage id='manage-doctor.doctor-info' /></label>
                         <textarea className='form-control' rows='4'
                             onChange={(e) => this.handleOnChangeDescription(e)}
                             value={this.state.description}>
@@ -137,7 +139,7 @@ class ManageDoctors extends Component {
                 <button
                     className='save-content-doctor'
                     onClick={() => this.handleSaveContentMarkdown()}>
-                    Save
+                    <FormattedMessage id='manage-doctor.save' />
                 </button>
             </div>
         );

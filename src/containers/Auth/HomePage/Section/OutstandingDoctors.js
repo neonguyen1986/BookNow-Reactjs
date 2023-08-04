@@ -9,13 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as actions from '../../../../store/actions'
 import { LANGUAGE, CommonUtils } from '../../../../utils'
-
-import doctor1 from '../../../../assets/img-doctors/1.pgs-nguyen-thi-hoai-an.jpg'
-import doctor2 from '../../../../assets/img-doctors/2.bsnguyen-hung.jpg'
-import doctor3 from '../../../../assets/img-doctors/3.bs-tran-huu-loi-yd1.jpg'
-import doctor4 from '../../../../assets/img-doctors/4.bs-tran-huu-binh.jpg'
-import doctor5 from '../../../../assets/img-doctors/5.thac-si-bac-si-ha-quoc-hung.jpg'
-import doctor6 from '../../../../assets/img-doctors/6.bsii-tran-minh-khuyen.jpg'
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 class OutstandingDoctors extends Component {
     constructor(props) {
@@ -36,6 +30,11 @@ class OutstandingDoctors extends Component {
         }
     }
 
+
+    handleViewDetailDoctor = (doctor) => {
+        console.log('doctor info:', doctor)
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
+    }
     render() {
         let arrDoctors = this.state.arrDoctors;
         let language = this.props.language;
@@ -55,8 +54,10 @@ class OutstandingDoctors extends Component {
                                         arrDoctors.map((item, index) => {
                                             let position = language === LANGUAGE.EN ? item.positionData.valueEn : item.positionData.valueVi
                                             let name = language === LANGUAGE.EN ? `${item.firstName} ${item.lastName} ` : `${item.lastName} ${item.firstName} `
+                                            // console.log('>>>image check;;;', item.image)
                                             return (
-                                                <div className='img-customize-doctor' key={index}>
+                                                <div className='img-customize-doctor' key={index}
+                                                    onClick={() => this.handleViewDetailDoctor(item)}>
                                                     <div className='tempdiv'><img
                                                         className='image' src={CommonUtils.convertBase64ToBinary(item.image)} /></div>
                                                     <div className='title-name'>
@@ -94,4 +95,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctors);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctors));

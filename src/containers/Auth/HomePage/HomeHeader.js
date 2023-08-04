@@ -61,61 +61,63 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='home-header-banner'>
-                    <div className='content-up'>
-                        <h1 className='title1'>
-                            <FormattedMessage id="home-header.medical-background" />
-                        </h1>
-                        <h1 className='title2'>
-                            <FormattedMessage id="home-header.comprehensive" />
-                        </h1>
-                        <div className='search'>
-                            <i className="fas fa-search"></i>
-                            <input
-                                className='search-box'
-                                type='text'
-                                placeholder='Find a clinic ' />
+                {this.props.isShowBanner === true &&
+                    <div className='home-header-banner'>
+                        <div className='content-up'>
+                            <h1 className='title1'>
+                                <FormattedMessage id="home-header.medical-background" />
+                            </h1>
+                            <h1 className='title2'>
+                                <FormattedMessage id="home-header.comprehensive" />
+                            </h1>
+                            <div className='search'>
+                                <i className="fas fa-search"></i>
+                                <input
+                                    className='search-box'
+                                    type='text'
+                                    placeholder='Find a clinic ' />
+                            </div>
+                        </div>
+                        <div className='content-down'>
+                            <div className='icon-block'>
+                                <div className='icon'>
+                                    <img className='img' src={require('../../../assets/icon1-specialist-examination.png').default} />
+                                </div>
+                                <div className='text'><FormattedMessage id="home-header.specialist-exam" /></div>
+                            </div>
+                            <div className='icon-block'>
+                                <div className='icon'>
+                                    <img className='img' src={require('../../../assets/icon2-remote-examination.png').default} />
+                                </div>
+                                <div className='text'><FormattedMessage id="home-header.remote-exam" /></div>
+                            </div>
+                            <div className='icon-block'>
+                                <div className='icon'>
+                                    <img className='img' src={require('../../../assets/icon3-general-examination.png').default} />
+                                </div>
+                                <div className='text'><FormattedMessage id="home-header.general-exam" /></div>
+                            </div>
+                            <div className='icon-block'>
+                                <div className='icon'>
+                                    <img className='img' src={require('../../../assets/icon4-medical-test.png').default} />
+                                </div>
+                                <div className='text'><FormattedMessage id="home-header.medical-test" /></div>
+                            </div>
+                            <div className='icon-block'>
+                                <div className='icon'>
+                                    <img className='img' src={require('../../../assets/icon5-mental-health.png').default} />
+                                </div>
+                                <div className='text'><FormattedMessage id="home-header.mental-health" /></div>
+                            </div>
+                            <div className='icon-block'>
+                                <div className='icon'>
+                                    <img className='img' src={require('../../../assets/icon6-dental-examination.png').default} />
+                                </div>
+                                <div className='text'><FormattedMessage id="home-header.dental-exam" /></div>
+                            </div>
                         </div>
                     </div>
-                    <div className='content-down'>
-                        <div className='icon-block'>
-                            <div className='icon'>
-                                <img className='img' src={require('../../../assets/icon1-specialist-examination.png').default} />
-                            </div>
-                            <div className='text'><FormattedMessage id="home-header.specialist-exam" /></div>
-                        </div>
-                        <div className='icon-block'>
-                            <div className='icon'>
-                                <img className='img' src={require('../../../assets/icon2-remote-examination.png').default} />
-                            </div>
-                            <div className='text'><FormattedMessage id="home-header.remote-exam" /></div>
-                        </div>
-                        <div className='icon-block'>
-                            <div className='icon'>
-                                <img className='img' src={require('../../../assets/icon3-general-examination.png').default} />
-                            </div>
-                            <div className='text'><FormattedMessage id="home-header.general-exam" /></div>
-                        </div>
-                        <div className='icon-block'>
-                            <div className='icon'>
-                                <img className='img' src={require('../../../assets/icon4-medical-test.png').default} />
-                            </div>
-                            <div className='text'><FormattedMessage id="home-header.medical-test" /></div>
-                        </div>
-                        <div className='icon-block'>
-                            <div className='icon'>
-                                <img className='img' src={require('../../../assets/icon5-mental-health.png').default} />
-                            </div>
-                            <div className='text'><FormattedMessage id="home-header.mental-health" /></div>
-                        </div>
-                        <div className='icon-block'>
-                            <div className='icon'>
-                                <img className='img' src={require('../../../assets/icon6-dental-examination.png').default} />
-                            </div>
-                            <div className='text'><FormattedMessage id="home-header.dental-exam" /></div>
-                        </div>
-                    </div>
-                </div>
+                }
             </>
         );
     }
