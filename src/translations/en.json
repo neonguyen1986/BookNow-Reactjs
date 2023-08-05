@@ -58,6 +58,8 @@
         "doctor-title": "Create Doctors information",
         "doctor-info": "Referral information about the doctor",
         "choose-doctor": "Choose Doctor",
-        "save": "Save"
+        "save": "Save",
+        "update": "Update",
+        "cancel": "Cancel"
     }
 }

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import './ManageDoctors.scss'
 import { LANGUAGE } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
+import { getDetailDoctorInfo, updateDoctorMardownService } from '../../../services/userService'
 
 
 import MarkdownIt from 'markdown-it';
@@ -18,6 +19,7 @@ import Select from 'react-select';
 
 
 
+
 class ManageDoctors extends Component {
 
     constructor(props) {
@@ -28,17 +30,38 @@ class ManageDoctors extends Component {
             listDoctors: '',
             selectedDoctor: {},
             description: '',
+            isNewDoctor: 'true',
         }
     }
-    componentDidMount() {
-        this.props.fetchAllDoctorsRedux();
+    async componentDidMount() {
+        await this.props.fetchAllDoctorsRedux();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allDoctorsRedux !== this.props.allDoctorsRedux) {
             this.setState({
                 listDoctors: this.props.allDoctorsRedux,
             })
+        }
+        //===Display doctor Markdown on description and Mardown when Selected
+        if (prevState.selectedDoctor !== this.state.selectedDoctor && this.state.selectedDoctor !== '') {
+            let id = this.state.selectedDoctor.value;
+            let res = await getDetailDoctorInfo(id)
+            let data = res.data.Markdown
+            if (data?.description || data?.markdownContent) {
+                this.setState({
+                    description: data.description,
+                    markdownContent: data.markdownContent,
+                    isNewDoctor: false,
+                })
+            } else {
+                this.setState({
+                    description: '',
+                    markdownContent: '',
+                    isNewDoctor: true,
+                })
+            }
+            // console.log('>>>>check state:', this.state)
         }
     }
 
@@ -79,11 +102,8 @@ class ManageDoctors extends Component {
         }
         return result
     }
-    handleChange = (selectedDoctor) => {
+    handleChange = async (selectedDoctor) => {
         this.setState({ selectedDoctor })
-        // , () =>
-        // console.log(`Option selected:`, this.state.selectedDoctor)
-        // );
     };
     //================================================
     handleOnChangeDescription = (e) => {
@@ -93,19 +113,50 @@ class ManageDoctors extends Component {
     }
 
     handleSaveContentMarkdown = () => {
-        this.props.postDoctorsRedux({
-            HTMLContent: this.state.HTMLContent,
-            markdownContent: this.state.markdownContent,
-            description: this.state.description,
-            doctorId: this.state.selectedDoctor.value
+        if (this.state.markdownContent !== '') {
+            this.props.postDoctorsRedux({
+                HTMLContent: this.state.HTMLContent,
+                markdownContent: this.state.markdownContent,
+                description: this.state.description,
+                doctorId: this.state.selectedDoctor.value
+            })
+            // console.log('check state:', this.state.selectedDoctor)
+            toast.success("Doctor info's just added")
+            this.setState({
+                markdownContent: '',
+                description: '',
+                selectedDoctor: ''
+            })
+        } else {
+            toast.warning("Missing Markdown Content")
+        }
+    }
+
+    handleUpdateContentMarkdown = async () => {
+        if (this.state.markdownContent === '') {
+            toast.warning("Missing Markdown Content")
+        } else {
+            await updateDoctorMardownService({
+                HTMLContent: this.state.HTMLContent,
+                markdownContent: this.state.markdownContent,
+                description: this.state.description,
+                doctorId: this.state.selectedDoctor.value
+            })
+            toast.success("Doctor info's just updated")
+        }
+    }
+    handleCancelContentMarkdown = () => {
+        this.setState({
+            markdownContent: '',
+            description: '',
+            selectedDoctor: ''
         })
-        // console.log('check state:', this.state.selectedDoctor)
-        toast.success("Doctor info's just added")
     }
 
     render() {
         let options = this.changeListDoctorToOptions(this.state.listDoctors)
-        // console.log('check list doctor', this.state)
+        let { isNewDoctor } = this.state
+
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -133,13 +184,23 @@ class ManageDoctors extends Component {
                     <MdEditor
                         style={{ height: '500px' }}
                         renderHTML={text => this.mdParser.render(text)}
+                        value={this.state.markdownContent}
                         onChange={this.handleEditorChange} />
 
                 </div>
                 <button
                     className='save-content-doctor'
-                    onClick={() => this.handleSaveContentMarkdown()}>
-                    <FormattedMessage id='manage-doctor.save' />
+                    onClick={isNewDoctor === true
+                        ? () => this.handleSaveContentMarkdown()
+                        : () => this.handleUpdateContentMarkdown()}>
+                    {isNewDoctor === true
+                        ? <FormattedMessage id='manage-doctor.save' />
+                        : <FormattedMessage id='manage-doctor.update' />
+                    }
+                </button>
+                <button className='cancel-content-doctor'
+                    onClick={() => this.handleCancelContentMarkdown()}>
+                    <FormattedMessage id='manage-doctor.cancel' />
                 </button>
             </div>
         );

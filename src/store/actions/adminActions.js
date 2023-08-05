@@ -258,7 +258,7 @@ export const fetchTopDoctorsFailed = (error) => ({
     type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
     payload: error,
 })
-//=================== FETCH ALL DOCTORS ====================
+//=================== FETCH ALL DOCTORS FOR SELECT IN MANAGE DOCTOR ====================
 
 export const fetchAllDoctors = () => async (dispatch, getState) => {
     try {

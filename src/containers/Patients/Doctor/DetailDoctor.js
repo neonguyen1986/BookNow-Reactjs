@@ -58,10 +58,8 @@ class DetailDoctor extends Component {
                         <div className='right-content'>
                             <div className='up'>
                                 {language === LANGUAGE.EN
-                                    ?
-                                    nameEn
-                                    :
-                                    nameVi
+                                    ? nameEn
+                                    : nameVi
                                 }
                             </div>
                             <div className='down'>

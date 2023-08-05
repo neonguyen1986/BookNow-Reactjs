@@ -39,4 +39,18 @@
             opacity: 0.8;
         }
     }
+    .cancel-content-doctor{
+        margin: 20px 10px;
+        border-radius: 3px;
+        outline: none;
+        border: none;
+        padding: 5px;
+        background-color: gray;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
 }

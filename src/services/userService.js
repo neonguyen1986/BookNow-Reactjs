@@ -48,20 +48,26 @@ const getTopDoctorService = (limit) => {
         }
     })
 }
+//============== GET DOCTORS FOR SELECT IN MANAGE DOCTOR ===============
 const getAllDoctorsService = () => {
     return axios.get('/api/get-all-doctors')
 }
 
+//============== SAVE DOCTOR INFO ===============
 const postDoctorInfo = (doctor) => {
     return axios.post('/api/save-doctors-info', doctor)
 }
-
+//==============GET DATA DETAIL DOCTOR PAGES ===============
 const getDetailDoctorInfo = (inputId) => {
     return axios.get(`/api/get-doctors-detail-by-id`, {
         params: {
             id: inputId
         }
     })
+}
+//==============UPDATE MARKDOWN DB===============
+const updateDoctorMardownService = (user) => {
+    return axios.put('/api/update-doctors-info', user)
 }
 export {
     handleLoginApi,
@@ -74,4 +80,5 @@ export {
     getAllDoctorsService,
     postDoctorInfo,
     getDetailDoctorInfo,
+    updateDoctorMardownService,
 }

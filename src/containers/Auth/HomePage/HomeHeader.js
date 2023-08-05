@@ -4,6 +4,7 @@ import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGE } from '../../../utils'
 import { changeLanguageApp } from './../../../store/actions/appActions';
+import { withRouter } from 'react-router-dom'
 
 
 
@@ -15,12 +16,16 @@ class HomeHeader extends Component {
         this.props.changeLanguageAppRedux(language)
 
     }
+    handleClickBackHome = () => {
+        if (this.props.history) this.props.history.push('/home')
+    }
     render() {
         // console.log('>>>check redux props:', this.props);
         let language = this.props.language;
         return (
             <>
-                <div className='home-header-container'>
+                <div className='home-header-container'
+                    onClick={() => this.handleClickBackHome()}>
                     <div className='home-header-content'>
                         <div className='left-content'>
                             <i className="fas fa-bars"></i>
@@ -137,4 +142,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
