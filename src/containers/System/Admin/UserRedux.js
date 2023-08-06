@@ -138,9 +138,9 @@ class UserRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: 'M',
+                position: 'P0',
+                role: 'R1',
                 avatar: '',
                 previewIgmURL: '',
             })
@@ -199,7 +199,8 @@ class UserRedux extends Component {
         let language = this.props.language
         let { genderArr, positionArr, roleArr, previewIgmURL, isOpen } = this.state
         let isLoadingGenderReact = this.props.isLoadingGenderRedux
-        // console.log('>>>check image:', previewIgmURL)
+
+        // console.log('>>>check genderArr:', genderArr)
 
         let { email, password, firstName, lastName, phoneNumber,
             address, gender, position, role, avatar, isEditForm
@@ -280,6 +281,7 @@ class UserRedux extends Component {
                                             onChange={(e) => this.handleOnChangeInput(e)}>
                                             {genderArr && genderArr.length > 0 &&
                                                 genderArr.map(item => {
+                                                    // console.log('====check key map:', item)
                                                     return (
                                                         <option value={item.keyMap} key={item.id}>
                                                             {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
