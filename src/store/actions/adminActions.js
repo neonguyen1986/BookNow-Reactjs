@@ -314,3 +314,31 @@ export const postDoctorsFailed = (error) => ({
     type: actionTypes.POST_DOCTORS_FAILED,
     payload: error,
 })
+//=================== FETCH ALLCODE TIME ====================
+
+export const fetchAllcodeTimeStart = (type) => async (dispatch, getState) => {
+    try {
+        // //FETCH_GENDER_START: to show isLoadingGender
+        // dispatch({ type: actionTypes.FETCH_GENDER_START });
+        const res = await getAllCodeService("TIME");
+        // console.log('check getAllUsers', res)
+        if (res && res.errCode === 0) {
+            dispatch(fetchAllcodeTimeSuccess(res.data));
+        } else {
+            const errorMessage = res?.message ? res.message : 'Failed to load Allcode Time';
+            dispatch(fetchAllcodeTimeFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(fetchAllcodeTimeFailed());
+        console.log('>>>Load Allcode Time error:', error);
+    }
+};
+
+export const fetchAllcodeTimeSuccess = (data) => ({
+    type: actionTypes.FETCH_ALLCODE_TIME_SUCCESS,
+    payload: data,
+})
+export const fetchAllcodeTimeFailed = (error) => ({
+    type: actionTypes.FETCH_ALLCODE_TIME_FAILED,
+    payload: error,
+})

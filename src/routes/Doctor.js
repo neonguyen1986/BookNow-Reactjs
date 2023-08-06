@@ -8,7 +8,6 @@ import Header from '../containers/Header/Header';
 class Doctor extends Component {
     render() {
         const { isLoggedIn } = this.props;
-        console.log('==========test here')
         return (
             <>
                 {isLoggedIn && <Header />}

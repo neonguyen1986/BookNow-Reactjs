@@ -9,6 +9,8 @@ const initialState = {
     oneuser: {},
     topDoctors: {},
     allDoctors: {},
+    allScheduleTime: [],
+
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -113,6 +115,20 @@ const adminReducer = (state = initialState, action) => {
                 // isLoadingGender: false,
             }
         case actionTypes.FETCH_ALL_DOCTORS_FAILED:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                // isLoadingGender: false,
+            }
+        //===============GET ALLCODE TIME================
+        case actionTypes.FETCH_ALLCODE_TIME_SUCCESS:
+            // console.log('fetch success:', action)
+            return {
+                ...state,
+                allScheduleTime: action.payload,
+                // isLoadingGender: false,
+            }
+        case actionTypes.FETCH_ALLCODE_TIME_FAILED:
             // console.log('fetch fail:', action)
             return {
                 ...state,

@@ -27,6 +27,11 @@ class Login extends Component {
 		// console.log(`check ${inputName}:`, inputValue);
 	};
 
+	handlePressEnter = (e) => {
+		if (e.key === "Enter") {
+			this.handleLogin()
+		}
+	}
 	handleLogin = async () => {
 		this.state.errMessage = ''//clear mã lỗi
 		try {
@@ -87,6 +92,7 @@ class Login extends Component {
 									value={password}
 									name="password"
 									onChange={(e) => this.handleOnChangeInput(e)}
+									onKeyDown={(e) => this.handlePressEnter(e)}
 								/>
 								<span
 									onClick={() => this.handleShowHidePassword()}
@@ -99,7 +105,8 @@ class Login extends Component {
 							{errMessage}
 						</div>
 						<div className="col-12">
-							<button className="login-btn" onClick={() => this.handleLogin()}>
+							<button className="login-btn"
+								onClick={() => this.handleLogin()}>
 								Login
 							</button>
 						</div>

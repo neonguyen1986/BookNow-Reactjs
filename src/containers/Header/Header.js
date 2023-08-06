@@ -32,7 +32,7 @@ class Header extends Component {
         this.setState({
             menuApp: menu,
         })
-        console.log('check userInfo:', this.props.userInfo)
+        // console.log('check userInfo:', this.props.userInfo)
     }
     handleChangeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)

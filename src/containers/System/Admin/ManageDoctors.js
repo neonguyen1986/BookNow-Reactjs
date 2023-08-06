@@ -81,7 +81,7 @@ class ManageDoctors extends Component {
     //     { value: 'strawberry', label: 'Strawberry' },
     //     { value: 'vanilla', label: 'Vanilla' },
     // ];
-    changeListDoctorToOptions = (arrInput) => {
+    buildDataSelect = (arrInput) => {
         let language = this.props.language;
         let result = [];
         if (arrInput?.length > 0) {
@@ -154,7 +154,7 @@ class ManageDoctors extends Component {
     }
 
     render() {
-        let options = this.changeListDoctorToOptions(this.state.listDoctors)
+        let options = this.buildDataSelect(this.state.listDoctors)
         let { isNewDoctor } = this.state
 
         return (
