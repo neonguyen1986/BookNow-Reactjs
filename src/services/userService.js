@@ -69,6 +69,11 @@ const getDetailDoctorInfo = (inputId) => {
 const updateDoctorMardownService = (user) => {
     return axios.put('/api/update-doctors-info', user)
 }
+
+//============== SAVE BULK SCHEDULE ===============
+const saveBulkScheduleDoctor = (data) => {
+    return axios.post('/api/bulk-create-schedule', data)
+}
 export {
     handleLoginApi,
     getAllUsers,
@@ -81,4 +86,5 @@ export {
     postDoctorInfo,
     getDetailDoctorInfo,
     updateDoctorMardownService,
+    saveBulkScheduleDoctor
 }

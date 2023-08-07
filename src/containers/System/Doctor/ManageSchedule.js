@@ -9,6 +9,7 @@ import DatePicker from '../../../components/Input/DatePicker'
 import _ from 'lodash'
 import moment from 'moment';
 import { collapseToast, toast } from 'react-toastify';
+import { saveBulkScheduleDoctor } from '../../../services/userService'
 
 
 
@@ -94,8 +95,9 @@ class ManageSchedule extends Component {
         // console.log('check after click:', this.state.timeRange.isSelected)
     }
 
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         let { timeRange, selectedDoctor, currentDate } = this.state;
+        console.log('check state:', this.state)
         let result = [];
         if (!currentDate) {
             toast.warning('Invalid Date')
@@ -105,7 +107,8 @@ class ManageSchedule extends Component {
             toast.warning('Please select Doctor')
             return;
         }
-        let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+        let formatedDate = new Date(currentDate).getTime();
+
         if (timeRange?.length > 0) {
             let selectedTime = timeRange.filter(item => item.isSelected === true)
             if (selectedTime?.length > 0) {
@@ -113,7 +116,7 @@ class ManageSchedule extends Component {
                     let obj = {}
                     obj.doctorId = selectedDoctor.value;
                     obj.date = formatedDate;
-                    obj.time = schedule.keyMap;
+                    obj.timeType = schedule.keyMap;
                     result.push(obj);
                 })
             } else {
@@ -121,7 +124,15 @@ class ManageSchedule extends Component {
                 return;
             }
         }
-        console.log('check resutl:', result)
+
+        let res = await saveBulkScheduleDoctor({
+            arrSchedule: result,
+            doctorId: selectedDoctor.value,
+            formatedDate: formatedDate,
+        })
+        console.log('check result:', result)
+        // console.log('check res result:', res)
+
     }
     render() {
         let options = this.buildDataSelect(this.state.listDoctors)
