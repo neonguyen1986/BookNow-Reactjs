@@ -41,18 +41,16 @@
     }
 
     .doctor-schedule {
-        border : 1px solid red;
         margin : 50px 0;
         display: flex;
 
         .left-content {
-            border: 1px solid green;
-            width : 50%;
+            width: 60%;
 
         }
 
         .right-content {
-            width: 50%;
+            width: 40%;
 
         }
     }

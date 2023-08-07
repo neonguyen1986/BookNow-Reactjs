@@ -70,5 +70,9 @@
         "choose-doctor": "Choose doctor",
         "choose-date": "Choose date",
         "save": "Save"
+    },
+    "detail-doctor": {
+        "calendar": "calendar",
+        "doctor-avai": "Temporarily the doctor is full of appointments"
     }
 }

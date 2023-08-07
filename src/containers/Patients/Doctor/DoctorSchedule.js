@@ -16,9 +16,13 @@ class DoctorSchedule extends Component {
         super(props)
         this.state = {
             allDays: [],
+            allAvailableTime: [],
         }
     }
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     setDateLanguage = () => {
         // console.log('moment in Vi', moment(new Date()).format('dddd-DD/MM'))
         // console.log('moment in En', moment(new Date()).locale('en').format('ddd-DD/MM'))
@@ -27,7 +31,8 @@ class DoctorSchedule extends Component {
         for (let i = 0; i < 7; i++) {
             let obj = {};
             if (this.props.language === LANGUAGE.VI) {
-                obj.label = moment(new Date()).add(i, 'days').format('dddd-DD/MM')
+                let labelVi = moment(new Date()).add(i, 'days').format('dddd-DD/MM')
+                obj.label = this.capitalizeFirstLetter(labelVi)
             } else {
                 obj.label = moment(new Date()).add(i, 'days').locale('en').format('ddd-DD/MM')
 
@@ -58,15 +63,23 @@ class DoctorSchedule extends Component {
             let doctorId = this.props.doctorIdFromParent;
             let date = e.target.value
             let res = await getDoctorScheduleByDate(doctorId, date)
-            console.log('>>>>>>>check DB', res)
+
+            if (res && res.errCode === 0) {
+                this.setState({
+                    allAvailableTime: res.data ? res.data : []
+                })
+            }
+            // console.log('>>>>>>>check DB', res)
         }
     }
 
     //===============================render=================================
 
     render() {
-        let { allDays } = this.state
+        let { allDays, allAvailableTime } = this.state
         let language = this.props.language
+        console.log('allAvailableTime', allAvailableTime)
+
         return (
             <div className='doctor-schedule-container'>
                 <div className='all-schedule'>
@@ -85,7 +98,31 @@ class DoctorSchedule extends Component {
                     </select>
                 </div>
                 <div className='all-available-time'>
-
+                    <div className='calender-text'>
+                        <span>
+                            <i className='fas fa-calendar-alt'>
+                                <FormattedMessage id='detail-doctor.calendar' />
+                            </i>
+                        </span>
+                    </div>
+                    <div className='time-pick-conainer'>
+                        {allAvailableTime?.length > 0
+                            ?
+                            allAvailableTime.map((item, index) => {
+                                let time = '';
+                                if (item?.timeTypeData?.valueEn && item?.timeTypeData?.valueVi) {
+                                    time = language === LANGUAGE.EN ? item.timeTypeData.valueEn : item.timeTypeData.valueVi
+                                }
+                                return (
+                                    <button key={index}>{time}</button>
+                                )
+                            })
+                            :
+                            <div>
+                                <FormattedMessage id='detail-doctor.doctor-avai' />
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         );
