@@ -132,6 +132,7 @@ class ManageSchedule extends Component {
         })
         console.log('check result:', result)
         // console.log('check res result:', res)
+        toast.success('Schedules are added')
 
     }
     render() {

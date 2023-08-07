@@ -5,6 +5,7 @@ import './DetailDoctor.scss'
 import { getDetailDoctorInfo } from '../../../services/userService'
 import { LANGUAGE, CommonUtils } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
+import DoctorSchedule from './DoctorSchedule';
 
 
 
@@ -69,7 +70,13 @@ class DetailDoctor extends Component {
                         </div>
                     </div>
                     <div className='doctor-schedule'>
+                        <div className='left-content'>
+                            <DoctorSchedule
+                                doctorIdFromParent={detailDoctor?.id ? detailDoctor.id : -1} />
+                        </div>
+                        <div className='right-content'>
 
+                        </div>
                     </div>
                     <div className='doctor-detail'>
                         {detailDoctor?.Markdown?.HTMLContent &&

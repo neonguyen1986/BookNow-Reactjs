@@ -24,10 +24,10 @@ class HomeHeader extends Component {
         let language = this.props.language;
         return (
             <>
-                <div className='home-header-container'
-                    onClick={() => this.handleClickBackHome()}>
+                <div className='home-header-container'>
                     <div className='home-header-content'>
-                        <div className='left-content'>
+                        <div className='left-content'
+                            onClick={() => this.handleClickBackHome()}>
                             <i className="fas fa-bars"></i>
                             <div className='header-logo'></div>
                         </div>

@@ -4,26 +4,26 @@
 
     .doctor-intro {
         display: flex;
-        height: 120px;
+        height : 120px;
 
         .left-content {
-            width: 20%;
+            width     : 20%;
             text-align: center;
 
             .doctor-avatar {
-                height: 100%;
+                height       : 100%;
                 border-radius: 50%;
             }
 
         }
 
         .right-content {
-            width: 80%;
-            display: flex;
+            width         : 80%;
+            display       : flex;
             flex-direction: column;
 
             .up {
-                font-size: 20px;
+                font-size  : 20px;
                 font-weight: 600;
             }
 
@@ -33,9 +33,27 @@
 
         }
     }
-    .doctor-detail{
+
+    .doctor-detail {
         background-color: rgb(228, 227, 227);
-        margin:30px -20px;
-        padding:30px 20px;
+        margin          : 30px -20px;
+        padding         : 30px 20px;
+    }
+
+    .doctor-schedule {
+        border : 1px solid red;
+        margin : 50px 0;
+        display: flex;
+
+        .left-content {
+            border: 1px solid green;
+            width : 50%;
+
+        }
+
+        .right-content {
+            width: 50%;
+
+        }
     }
 }
