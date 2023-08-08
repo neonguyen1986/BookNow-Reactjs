@@ -124,15 +124,19 @@ class ManageSchedule extends Component {
                 return;
             }
         }
+        // console.log('check result:', result)
 
         let res = await saveBulkScheduleDoctor({
             arrSchedule: result,
             doctorId: selectedDoctor.value,
             formatedDate: formatedDate,
         })
-        console.log('check result:', result)
-        // console.log('check res result:', res)
-        toast.success('Schedules are added')
+        if (res?.errCode === 0) {
+            toast.success('Schedules are added')
+        } else {
+            toast.warning('error in saveBulkScheduleDoctor')
+            console.log('error in saveBulkScheduleDoctor>>>res', res)
+        }
 
     }
     render() {
@@ -140,6 +144,9 @@ class ManageSchedule extends Component {
         // console.log('>>>check state:', this.state)
         let { timeRange } = this.state
         let language = this.props.language
+
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+
         return (
             <div className='manage-schedule-container'>
                 <div className='ms-title title' >
@@ -162,7 +169,7 @@ class ManageSchedule extends Component {
                                 className='form-control choose-date'
                                 value={this.state.currentDate}
                                 selected={this.state.currentDate}
-                                minDate={new Date()}
+                                minDate={yesterday}
                             />
                         </div>
                         <div className='col-12 hour-pic-container'>

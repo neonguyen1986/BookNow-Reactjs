@@ -25,28 +25,34 @@
         }
 
         .time-pick-conainer {
-            width    : 100%;
-            display  : flex;
-            flex-wrap: wrap;
+            display       : flex;
+            flex-direction: column;
 
+            .time-pick {
+                width    : 100%;
+                display  : flex;
+                flex-wrap: wrap;
 
-            button {
-                padding         : 5px 10px;
-                border          : none;
-                outline         : none;
-                background-color: #fff04b;
-                flex-basis      : calc(29% - 0px);
-                margin          : 10px;
-                /* Adjust this value to control the gap between items */
-                box-sizing      : border-box;
-                border-radius   : 3px;
-                font-weight     : 600;
+                button {
+                    padding         : 5px 10px;
+                    border          : none;
+                    outline         : none;
+                    background-color: #fff04b;
+                    flex-basis      : calc(29% - 0px);
+                    margin          : 10px;
+                    /* Adjust this value to control the gap between items */
+                    box-sizing      : border-box;
+                    border-radius   : 3px;
+                    font-weight     : 600;
 
-                &:hover {
-                    background-color: #45c3d2;
-                    color           : white;
+                    &:hover {
+                        background-color: #45c3d2;
+                        color           : white;
+                    }
                 }
             }
+
+            .free-pick {}
 
         }
 

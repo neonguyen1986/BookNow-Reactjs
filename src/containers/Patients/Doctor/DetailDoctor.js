@@ -36,7 +36,7 @@ class DetailDoctor extends Component {
     render() {
 
         let detailDoctor = this.state.detailDoctor
-        console.log('>>>>check state:', detailDoctor)
+        // console.log('>>>>check state:', detailDoctor)
 
         let language = this.props.language
 

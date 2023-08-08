@@ -71,8 +71,11 @@
         "choose-date": "Chọn ngày",
         "save": "Lưu"
     },
-    "detail-doctor": {
-        "calendar": "lịch khám",
-        "doctor-avai": "Tạm thời không có lịch hẹn của bác sĩ"
+    "patient": {
+        "detail-doctor": {
+            "calendar": "lịch khám",
+            "doctor-avai": "Tạm thời không có lịch hẹn của bác sĩ",
+            "free-booking": "Đặt lịch miễn phí  "
+        }
     }
 }
