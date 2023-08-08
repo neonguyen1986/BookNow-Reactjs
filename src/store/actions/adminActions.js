@@ -294,13 +294,13 @@ export const postDoctors = (data) => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await postDoctorInfo(data)
-        // console.log('check top Doctor:', res.data)
         if (res && res.errCode === 0) {
             dispatch(postDoctorsSuccess());
         } else {
             const errorMessage = res?.message ? res.message : 'Failed to save doctors info';
             dispatch(postDoctorsFailed(errorMessage));
         }
+        return res
     } catch (error) {
         dispatch(fetchAllDoctorsFailed());
         console.log('>>>Save doctors info error:', error);
@@ -342,3 +342,38 @@ export const fetchAllcodeTimeFailed = (error) => ({
     type: actionTypes.FETCH_ALLCODE_TIME_FAILED,
     payload: error,
 })
+
+//=================== Fetch Doctor Price, Payment, Province ====================
+export const getRequiredDoctorInfo = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START });
+        const resPrice = await getAllCodeService("PRICE");
+        const resPayment = await getAllCodeService("PAYMENT");
+        const resProvince = await getAllCodeService("PROVINCE");
+        let data = ''
+        if (resPrice?.errCode === 0 && resPayment?.errCode === 0 && resProvince?.errCode === 0) {
+            data = {
+                resPrice: resPrice.data,
+                resPayment: resPayment.data,
+                resProvince: resProvince.data,
+            }
+            dispatch(getRequiredDoctorSuccess(data));
+        } else {
+            const errorMessage = data?.message ? data.message : 'Failed to fetch doctor requirement';
+            dispatch(getRequiredDoctorFailed(errorMessage));
+        }
+    } catch (error) {
+        dispatch(getRequiredDoctorFailed());
+        console.log('>>>fetch doctor requirement error:', error);
+    }
+};
+
+export const getRequiredDoctorSuccess = (genderData) => ({
+    type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS,
+    payload: genderData,
+})
+export const getRequiredDoctorFailed = (error) => ({
+    type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED,
+    payload: error,
+})
+

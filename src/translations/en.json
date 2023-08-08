@@ -57,13 +57,25 @@
         "outstanding-doctor": "Outstanding Doctor",
         "more-info": "MORE INFO"
     },
-    "manage-doctor": {
-        "doctor-title": "Create Doctors information",
-        "doctor-info": "Referral information about the doctor",
-        "choose-doctor": "Choose Doctor",
-        "save": "Save",
-        "update": "Update",
-        "cancel": "Cancel"
+    "admin": {
+        "manage-doctor": {
+            "doctor-title": "Create Doctors information",
+            "doctor-info": "Referral information about the doctor",
+            "choose-doctor": "Doctor",
+            "choose-price": "Price",
+            "choose-payment": "Payment",
+            "choose-province": "Province",
+            "choose-doctor-place-holder": "Choose Doctor",
+            "choose-price-place-holder": "Choose Price",
+            "choose-payment-place-holder": "Choose Payment Method",
+            "choose-province-place-holder": "Choose Province",
+            "save": "Save",
+            "update": "Update",
+            "cancel": "Cancel",
+            "clinic-name": "Clinic name",
+            "clinic-address": "Clinic address",
+            "note": "Note"
+        }
     },
     "manage-schedule": {
         "title": "Manage doctors' examination plan",

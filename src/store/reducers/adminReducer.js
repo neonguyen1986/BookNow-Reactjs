@@ -10,7 +10,7 @@ const initialState = {
     topDoctors: {},
     allDoctors: {},
     allScheduleTime: [],
-
+    allDoctorInfoRequirement: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -129,6 +129,20 @@ const adminReducer = (state = initialState, action) => {
                 // isLoadingGender: false,
             }
         case actionTypes.FETCH_ALLCODE_TIME_FAILED:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                // isLoadingGender: false,
+            }
+        //===============GET DOCTOR REQUIREMENT: PRICE, PAYMENT, PROVINCE================
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS:
+            // console.log('fetch success:', action)
+            return {
+                ...state,
+                allDoctorInfoRequirement: action.payload,
+                // isLoadingGender: false,
+            }
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED:
             // console.log('fetch fail:', action)
             return {
                 ...state,

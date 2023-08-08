@@ -57,13 +57,25 @@
         "outstanding-doctor": "Bác sĩ nổi bật",
         "more-info": "XEM THÊM"
     },
-    "manage-doctor": {
-        "doctor-title": "TẠO THÔNG TIN BÁC SĨ",
-        "doctor-info": "Thông tin giới thiệu",
-        "choose-doctor": "Chọn bác sĩ",
-        "save": "Lưu",
-        "update": "Cập nhật",
-        "cancel": "Hủy"
+    "admin": {
+        "manage-doctor": {
+            "doctor-title": "TẠO THÔNG TIN BÁC SĨ",
+            "doctor-info": "Thông tin giới thiệu",
+            "choose-doctor": "Bác sĩ",
+            "choose-price": "Giá khám",
+            "choose-payment": "Thanh toán",
+            "choose-province": "Tỉnh thành",
+            "choose-doctor-place-holder": "Chọn bác sĩ",
+            "choose-price-place-holder": "Chọn giá",
+            "choose-payment-place-holder": "Chọn phương thức thanh toán",
+            "choose-province-place-holder": "Chọn Tỉnh Thành",
+            "save": "Lưu",
+            "update": "Cập nhật",
+            "cancel": "Hủy",
+            "clinic-name": "Tên phòng khám",
+            "clinic-address": "Địa chỉ phòng khám",
+            "note": "Ghi chú"
+        }
     },
     "manage-schedule": {
         "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
