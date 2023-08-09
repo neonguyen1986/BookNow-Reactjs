@@ -21,7 +21,7 @@ class DoctorMoreInfo extends Component {
     }
     async componentDidMount() {
         let res = await getDoctorMoreInfo(this.props.doctorIdFromParent)
-        console.log('check API:', res)
+        // console.log('check API:', res)
         if (res && res.errCode === 0)
             this.setState({
                 doctorMoreInfo: res.data
@@ -31,7 +31,7 @@ class DoctorMoreInfo extends Component {
     async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.doctorIdFromParent !== this.props.doctorIdFromParent) {
             let res = await getDoctorMoreInfo(this.props.doctorIdFromParent)
-            console.log('check API:', res)
+            // console.log('check API:', res)
             if (res && res.errCode === 0)
                 this.setState({
                     doctorMoreInfo: res.data
@@ -46,7 +46,7 @@ class DoctorMoreInfo extends Component {
     render() {
         let { isShowPrice, doctorMoreInfo } = this.state;
         let language = this.props.language;
-        console.log('check state:', doctorMoreInfo);
+        // console.log('>>>>check state:', doctorMoreInfo);
 
         return (
             <div className='doctor-more-info-container'>

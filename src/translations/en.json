@@ -89,10 +89,16 @@
             "doctor-avai": "Temporarily the doctor is full of appointments",
             "free-booking": "Free booking  ",
             "clinic-address": "Clinic Adress",
-            "price": "Price",
+            "price": "Price ",
             "hide": "Hide information",
             "more-detail": "More detail",
-            "payment-text": "Patiens can pay by "
+            "payment-text": "Patiens can pay by ",
+            "name": "Full name",
+            "phone-number": "Phone Number",
+            "address": "Address",
+            "book-for": "Who to book an appointments for",
+            "gender": "Gender",
+            "test-type": "What do you want to test?"
         }
     }
 }

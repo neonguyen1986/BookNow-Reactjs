@@ -92,7 +92,13 @@
             "price": "Giá khám",
             "hide": "Ẩn thông tin",
             "more-detail": "Xem chi tiết",
-            "payment-text": "Người bệnh có thể thanh toán chi phí bằng hình thức "
+            "payment-text": "Người bệnh có thể thanh toán chi phí bằng hình thức ",
+            "name": "Họ và tên",
+            "phone-number": "Số điện thoại",
+            "address": "Địa chỉ",
+            "book-for": "Bạn đặt lịch khám cho ai?",
+            "gender": "Giới tính",
+            "test-type": "Bạn muốn khám gì?"
         }
     }
 }
