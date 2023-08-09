@@ -6,19 +6,23 @@ import { getDetailDoctorInfo } from '../../../services/userService'
 import { LANGUAGE, CommonUtils } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
 import DoctorSchedule from './DoctorSchedule';
-
+import DoctorMoreInfo from './DoctorMoreInfo';
 
 
 class DetailDoctor extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            detailDoctor: {}
+            detailDoctor: {},
+            curDoctorId: -1//used for DoctorMoreInfo and DoctorSchedule
         }
     }
     async componentDidMount() {
         if (this.props?.match?.params?.id) {
             let id = this.props.match.params.id;
+            this.setState({
+                curDoctorId: id
+            })
             let res = await getDetailDoctorInfo(id)
             // console.log('>>>check res:', res)
             // convertBase64ToBinary
@@ -72,10 +76,12 @@ class DetailDoctor extends Component {
                     <div className='doctor-schedule'>
                         <div className='left-content'>
                             <DoctorSchedule
-                                doctorIdFromParent={detailDoctor?.id ? detailDoctor.id : -1} />
+                                doctorIdFromParent={this.state.curDoctorId} />
                         </div>
                         <div className='right-content'>
-
+                            <DoctorMoreInfo
+                                doctorIdFromParent={this.state.curDoctorId}
+                            />
                         </div>
                     </div>
                     <div className='doctor-detail'>
@@ -85,8 +91,7 @@ class DetailDoctor extends Component {
 
                         }
                     </div>
-                    <div className='cdoctor-comment'>
-
+                    <div className='doctor-comment'>
                     </div>
                 </div>
                 {/* } */}

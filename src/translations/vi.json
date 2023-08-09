@@ -87,7 +87,12 @@
         "detail-doctor": {
             "calendar": "lịch khám",
             "doctor-avai": "Tạm thời không có lịch hẹn của bác sĩ",
-            "free-booking": "Đặt lịch miễn phí  "
+            "free-booking": "Đặt lịch miễn phí  ",
+            "clinic-address": "địa chỉ khám",
+            "price": "Giá khám",
+            "hide": "Ẩn thông tin",
+            "more-detail": "Xem chi tiết",
+            "payment-text": "Người bệnh có thể thanh toán chi phí bằng hình thức "
         }
     }
 }

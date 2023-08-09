@@ -87,7 +87,12 @@
         "detail-doctor": {
             "calendar": "calendar",
             "doctor-avai": "Temporarily the doctor is full of appointments",
-            "free-booking": "Free booking  "
+            "free-booking": "Free booking  ",
+            "clinic-address": "Clinic Adress",
+            "price": "Price",
+            "hide": "Hide information",
+            "more-detail": "More detail",
+            "payment-text": "Patiens can pay by "
         }
     }
 }

@@ -1,5 +1,7 @@
 import { reject } from "lodash";
 import { resolveModuleName } from "typescript";
+import { NumericFormat } from 'react-number-format';
+
 
 class CommonUtils {
     static convertBlobToBase64 = (blob) => {
@@ -20,6 +22,18 @@ class CommonUtils {
         // console.log('>>>check image:', binaryData)
         return binaryData;
     }
+    static numberFormat = (number, suffix, widthPx) => {
+        return <NumericFormat
+            type="text"
+            value={number}
+            thousandsGroupStyle="thousand"
+            thousandSeparator=","
+            suffix={suffix}
+            disabled
+            style={{ border: 'none', backgroundColor: 'transparent', width: widthPx }} />
+    }
+
 }
+
 
 export default CommonUtils;
