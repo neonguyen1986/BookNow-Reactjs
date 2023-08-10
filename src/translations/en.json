@@ -96,9 +96,21 @@
             "name": "Full name",
             "phone-number": "Phone Number",
             "address": "Address",
-            "book-for": "Who to book an appointments for",
+            "date-of-birth": "Date of birth",
             "gender": "Gender",
             "test-type": "What do you want to test?"
+        },
+        "booking-modal": {
+            "price": "Price: ",
+            "free-booking": "Free booking  ",
+            "name": "Full name",
+            "phone-number": "Phone Number",
+            "address": "Address",
+            "date-of-birth": "Date of birth",
+            "gender": "Gender",
+            "test-type": "What do you want to test?",
+            "confirm": "Confirm",
+            "cancel": "Cancel"
         }
     }
 }

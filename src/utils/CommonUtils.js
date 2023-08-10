@@ -32,7 +32,12 @@ class CommonUtils {
             disabled
             style={{ border: 'none', backgroundColor: 'transparent', width: widthPx }} />
     }
-
+    static convertToTimestamp = (dateString) => {
+        //date type: yyyy-mm-dd
+        const [year, month, day] = dateString.split('-');
+        const timestamp = new Date(year, month - 1, day).getTime();
+        return timestamp;
+    };
 }
 
 

@@ -7,27 +7,131 @@ import { FormattedMessage } from 'react-intl';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import DoctorProfile from '../DoctorProfile';
 import _ from 'lodash'
+import * as actions from '../../../../store/actions'
+import Select from 'react-select';
+import { postPatientBookingAppointment } from '../../../../services/userService'
+import { toast } from 'react-toastify';
+
+
 
 class BookingModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            fullName: '',
+            phoneNumber: '',
+            email: '',
+            address: '',
+            reason: '',
+            birthday: '',
+            genders: '',
+            doctorId: '',
+            timeType: '',
+
+            selectedGender: '',
         }
     }
     async componentDidMount() {
-
+        await this.props.fetchGender()
+        if (this.props.dataTime && !_.isEmpty(this.props.dataTime)) {
+            this.setState({
+                doctorId: this.props.dataTime.doctorId,
+                timeType: this.props.dataTime.timeType
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        if (this.props.gendersRedux !== prevProps.gendersRedux) {
+            this.setState({
+                genders: this.props.gendersRedux,
+            })
+        }
+        if (this.props.dataTime !== prevProps.dataTime) {
+            if (this.props.dataTime && !_.isEmpty(this.props.dataTime)) {
+                this.setState({
+                    doctorId: this.props.dataTime.doctorId,
+                    timeType: this.props.dataTime.timeType,
+                })
+            }
+        }
     }
     toggleModal = () => {
         this.props.toggleModalParent()
     };
+
+    onChangeInput = (e) => {
+        let stateCopy = { ...this.state };
+        stateCopy[e.target.name] = e.target.value
+        this.setState({
+            ...stateCopy
+        })
+    }
+
+    buildDataSelect = (arrInput, type) => {
+        let language = this.props.language;
+        let result = [];
+        if (arrInput?.length > 0) {
+            for (let i = 0; i < arrInput.length; i++) {
+                let tempArr = arrInput[i]
+                if (language === LANGUAGE.EN) {
+                    result.push({
+                        value: type === 'USER' ? tempArr.id : tempArr.keyMap,
+                        label: type === 'USER' ? `${tempArr.firstName} ${tempArr.lastName}` :
+                            type === 'PRICE' ? `${tempArr.valueEn} USD` : tempArr.valueEn
+
+                    })
+                } else {
+                    result.push({
+                        value: type === 'USER' ? tempArr.id : tempArr.keyMap,
+                        label: type === 'USER' ? `${tempArr.lastName} ${tempArr.firstName}` : tempArr.valueVi
+                    })
+                }
+            }
+        }
+        return result
+    }
+    handleChangeListGender = async (selectedGender) => {
+        this.setState({ selectedGender })
+    };
+
+
+    handleConfirmBooking = async () => {
+        this.toggleModal();
+        console.log('========check state after click', this.state)
+        let res = await postPatientBookingAppointment({
+            fullName: this.state.fullName,
+            phoneNumber: this.state.phoneNumber,
+            email: this.state.email,
+            address: this.state.address,
+            reason: this.state.reason,
+            date: CommonUtils.convertToTimestamp(this.state.birthday),
+            doctorId: this.state.doctorId,
+            timeType: this.state.timeType,
+            selectedGender: this.state.selectedGender.value,
+        })
+        if (res && res.errCode === 0) {
+            toast.success('Booking new appointment success')
+        } else {
+            toast.warning('Booking error!')
+        }
+    }
+
     render() {
         let { dataTime } = this.props
-        console.log('check modal', this.props)
+        let language = this.props.language
+        // console.log('check modal', this.props)
         let dataTimeParent = dataTime && !_.isEmpty(dataTime) ? dataTime : {}
+        let optionsListGender = this.buildDataSelect(this.state.genders)
+
+        let { fullName,
+            phoneNumber,
+            email,
+            address,
+            reason,
+            birthday,
+            doctorId } = this.state
+        // console.log('=====check state:', this.state)
         return (
             <div>
                 {/* <Button color="primary" onClick={this.toggleModal}>
@@ -49,17 +153,25 @@ class BookingModal extends Component {
                             <Col md={6}>
                                 <FormGroup>
                                     <Label for="name">
-                                        <FormattedMessage id='patient.detail-doctor.name' />
+                                        <FormattedMessage id='patient.booking-modal.name' />
                                     </Label>
-                                    <Input type="text" id="name" />
+                                    <Input type="text" id="name"
+                                        value={fullName}
+                                        name='fullName'
+                                        onChange={(e) => this.onChangeInput(e)}
+                                    />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
                                     <Label for="phoneNumber">
-                                        <FormattedMessage id='patient.detail-doctor.phone-number' />
+                                        <FormattedMessage id='patient.booking-modal.phone-number' />
                                     </Label>
-                                    <Input type="number" id="phoneNumber" />
+                                    <Input type="text" id="phoneNumber"
+                                        value={phoneNumber}
+                                        name='phoneNumber'
+                                        onChange={(e) => this.onChangeInput(e)}
+                                    />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -67,33 +179,50 @@ class BookingModal extends Component {
                             <Col md={6}>
                                 <FormGroup>
                                     <Label for="email">Email</Label>
-                                    <Input type="email" id="email" />
+                                    <Input type="email" id="email"
+                                        // pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                        value={email}
+                                        name='email'
+                                        onChange={(e) => this.onChangeInput(e)} />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
                                     <Label for="address">
-                                        <FormattedMessage id='patient.detail-doctor.address' />
+                                        <FormattedMessage id='patient.booking-modal.address' />
                                     </Label>
-                                    <Input type="text" id="address" />
+                                    <Input type="text" id="address"
+                                        value={address}
+                                        name='address'
+                                        onChange={(e) => this.onChangeInput(e)} />
                                 </FormGroup>
                             </Col>
                         </Row>
                         <Row>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="bookFor">
-                                        <FormattedMessage id='patient.detail-doctor.book-for' />
+                                    <Label for="dob">
+                                        <FormattedMessage id='patient.booking-modal.date-of-birth' />
                                     </Label>
-                                    <Input type="text" id="bookFor" />
+                                    <Input type="date" id="dob"
+                                        value={birthday}
+                                        name='birthday'
+                                        onChange={(e) => this.onChangeInput(e)} />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
                                     <Label for="gender">
-                                        <FormattedMessage id='patient.detail-doctor.gender' />
+                                        <FormattedMessage id='patient.booking-modal.gender' />
                                     </Label>
-                                    <Input type="text" id="gender" />
+                                    <Select
+                                        value={this.state.selectedGender}
+                                        onChange={this.handleChangeListGender}
+                                        options={optionsListGender}
+                                        id='gender-select'
+                                        placeholde='Select...'
+                                    // placeholder={<FormattedMessage id='admin.manage-doctor.choose-doctor-place-holder' />}
+                                    />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -101,21 +230,26 @@ class BookingModal extends Component {
                             <Col md={12}>
                                 <FormGroup>
                                     <Label for="location">
-                                        <FormattedMessage id='patient.detail-doctor.test-type' />
+                                        <FormattedMessage id='patient.booking-modal.test-type' />
                                     </Label>
-                                    <Input type="text" id="location" />
+                                    <Input type="text" id="location"
+                                        value={reason}
+                                        name='reason'
+                                        onChange={(e) => this.onChangeInput(e)} />
                                 </FormGroup>
                             </Col>
                         </Row>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary">Confirm</Button>
+                        <Button color="primary"
+                            onClick={() => this.handleConfirmBooking()}
+                        ><FormattedMessage id='patient.booking-modal.confirm' /></Button>
                         <Button color="secondary" onClick={this.toggleModal}>
-                            Cancel
+                            <FormattedMessage id='patient.booking-modal.cancel' />
                         </Button>
                     </ModalFooter>
                 </Modal>
-            </div>
+            </div >
         )
     }
 
@@ -124,13 +258,13 @@ class BookingModal extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-
+        gendersRedux: state.admin.genders
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        fetchGender: () => dispatch(actions.fetchGenderStart()),
     };
 };
 

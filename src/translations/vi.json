@@ -96,9 +96,21 @@
             "name": "Họ và tên",
             "phone-number": "Số điện thoại",
             "address": "Địa chỉ",
-            "book-for": "Bạn đặt lịch khám cho ai?",
+            "date-of-birth": "Ngày sinh",
             "gender": "Giới tính",
             "test-type": "Bạn muốn khám gì?"
+        },
+        "booking-modal": {
+            "price": "Giá khám: ",
+            "free-booking": "Đặt lịch miễn phí  ",
+            "name": "Họ và tên",
+            "phone-number": "Số điện thoại",
+            "address": "Địa chỉ",
+            "date-of-birth": "Ngày sinh",
+            "gender": "Giới tính",
+            "test-type": "Bạn muốn khám gì?",
+            "confirm": "Xác nhận",
+            "cancel": "Hủy"
         }
     }
 }

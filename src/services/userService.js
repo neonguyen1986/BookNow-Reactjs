@@ -100,6 +100,10 @@ const getDoctorDetail = (doctorId) => {
     })
 }
 
+const postPatientBookingAppointment = (data) => {
+    return axios.post('/api/patient-book-appointment', data)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -116,4 +120,5 @@ export {
     getDoctorScheduleByDate,
     getDoctorMoreInfo,
     getDoctorDetail,
+    postPatientBookingAppointment,
 }

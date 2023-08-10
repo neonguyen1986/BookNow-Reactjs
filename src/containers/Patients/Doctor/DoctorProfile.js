@@ -43,7 +43,7 @@ class DoctorProfile extends Component {
     render() {
         let { profileData } = this.state
         let language = this.props.language
-        console.log('check state from API:', profileData)
+        // console.log('check state from API:', profileData)
         let isDescription = this.props.isDoctorDescription
 
         return (
@@ -90,14 +90,14 @@ class DoctorProfile extends Component {
                                     this.props?.dataTimeParent?.date ?
                                         moment.unix(+this.props.dataTimeParent.date / 1000).locale('en').format('ddd-MM/DD/YYYY') : ''
                                 }<br />
-                                <FormattedMessage id='patient.detail-doctor.free-booking' />
+                                <FormattedMessage id='patient.booking-modal.free-booking' />
                             </div>
                         }
                     </div>
 
                 </div>
                 <div className='price'>
-                    <FormattedMessage id='patient.detail-doctor.price' />
+                    <FormattedMessage id='patient.booking-modal.price' />
                     {language === LANGUAGE.EN
                         ? profileData?.Doctor_Info?.priceTypeData?.valueEn ? `${profileData.Doctor_Info.priceTypeData.valueEn} USD` : ''
                         : profileData?.Doctor_Info?.priceTypeData?.valueVi ? CommonUtils.numberFormat(profileData.Doctor_Info.priceTypeData.valueVi, 'đ', 70) : ''
