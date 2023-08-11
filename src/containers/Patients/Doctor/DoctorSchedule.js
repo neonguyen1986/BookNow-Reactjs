@@ -75,6 +75,7 @@ class DoctorSchedule extends Component {
             let doctorId = this.props.doctorIdFromParent;
             // console.log('curDate, doctorId', curDate, doctorId)
             let res = await getDoctorScheduleByDate(doctorId, curDate)
+            // console.log('>>>>>check res:', res)
             if (res && res.errCode === 0) {
                 this.setState({
                     allAvailableTime: res.data ? res.data : []
@@ -115,7 +116,7 @@ class DoctorSchedule extends Component {
     render() {
         let { allDays, allAvailableTime } = this.state
         let language = this.props.language
-        // console.log('allAvailableTime', allAvailableTime)
+        console.log('>>>check state DoctorSchedule:', this.state)
 
         return (
             <>
@@ -177,7 +178,8 @@ class DoctorSchedule extends Component {
                 <BookingModal
                     toggleModalParent={this.toggleModalParent}
                     isOpenParent={this.state.isOpenModalBooking}
-                    dataTime={this.state.dataScheduleTimeModal} />
+                    dataTime={this.state.dataScheduleTimeModal}
+                />
             </>
         );
     }

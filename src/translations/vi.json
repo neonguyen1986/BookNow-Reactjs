@@ -111,6 +111,11 @@
             "test-type": "Bạn muốn khám gì?",
             "confirm": "Xác nhận",
             "cancel": "Hủy"
+        },
+        "verify": {
+            "verify-success": "Xin cám ơn, bạn đã vừa xác nhận lịch khám bệnh",
+            "verify-fail": "Lịch hẹn không tồn tại hoặc đã được xác nhận",
+            "back-to-homepage": "Về trang chủ"
         }
     }
 }

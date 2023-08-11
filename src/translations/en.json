@@ -111,6 +111,11 @@
             "test-type": "What do you want to test?",
             "confirm": "Confirm",
             "cancel": "Cancel"
+        },
+        "verify": {
+            "verify-success": "Thank you. You've just verified your booking!",
+            "verify-fail": "The appointment does not exist or has been verified",
+            "back-to-homepage": "Back to Homepage"
         }
     }
 }

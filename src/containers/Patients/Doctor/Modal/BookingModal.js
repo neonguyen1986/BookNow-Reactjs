@@ -11,6 +11,8 @@ import * as actions from '../../../../store/actions'
 import Select from 'react-select';
 import { postPatientBookingAppointment } from '../../../../services/userService'
 import { toast } from 'react-toastify';
+import moment from 'moment';
+
 
 
 
@@ -29,15 +31,15 @@ class BookingModal extends Component {
             timeType: '',
 
             selectedGender: '',
+            timeBooked: '',
+            dateBooked: '',
+            doctorName: '',
         }
     }
     async componentDidMount() {
         await this.props.fetchGender()
         if (this.props.dataTime && !_.isEmpty(this.props.dataTime)) {
-            this.setState({
-                doctorId: this.props.dataTime.doctorId,
-                timeType: this.props.dataTime.timeType
-            })
+            this.getStateFromProps()
         }
     }
 
@@ -49,12 +51,18 @@ class BookingModal extends Component {
         }
         if (this.props.dataTime !== prevProps.dataTime) {
             if (this.props.dataTime && !_.isEmpty(this.props.dataTime)) {
-                this.setState({
-                    doctorId: this.props.dataTime.doctorId,
-                    timeType: this.props.dataTime.timeType,
-                })
+                this.getStateFromProps()
             }
         }
+    }
+    getStateFromProps = () => {
+        this.setState({
+            doctorId: this.props.dataTime.doctorId,
+            timeType: this.props.dataTime.timeType,
+            timeBooked: this.props.dataTime.timeTypeData,
+            dateBooked: this.props.dataTime.date,
+            doctorName: this.props.dataTime.fullName,
+        })
     }
     toggleModal = () => {
         this.props.toggleModalParent()
@@ -98,7 +106,10 @@ class BookingModal extends Component {
 
     handleConfirmBooking = async () => {
         this.toggleModal();
-        console.log('========check state after click', this.state)
+        let datebookedENVI = {
+            valueVi: moment.unix(+this.state.dateBooked / 1000).format('ddd - DD/MM/YYYY'),
+            valueEn: moment.unix(+this.state.dateBooked / 1000).locale('en').format('ddd-MM/DD/YYYY')
+        }
         let res = await postPatientBookingAppointment({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
@@ -109,6 +120,10 @@ class BookingModal extends Component {
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
             selectedGender: this.state.selectedGender.value,
+            timeBooked: this.state.timeBooked,
+            dateBooked: datebookedENVI,
+            doctorName: this.state.doctorName,
+            language: this.props.language,
         })
         if (res && res.errCode === 0) {
             toast.success('Booking new appointment success')
@@ -116,11 +131,10 @@ class BookingModal extends Component {
             toast.warning('Booking error!')
         }
     }
-
     render() {
         let { dataTime } = this.props
         let language = this.props.language
-        // console.log('check modal', this.props)
+        // console.log('check modal dataTime', this.props)
         let dataTimeParent = dataTime && !_.isEmpty(dataTime) ? dataTime : {}
         let optionsListGender = this.buildDataSelect(this.state.genders)
 
@@ -131,7 +145,7 @@ class BookingModal extends Component {
             reason,
             birthday,
             doctorId } = this.state
-        // console.log('=====check state:', this.state)
+        console.log('=====check state Booking Modal:', this.state)
         return (
             <div>
                 {/* <Button color="primary" onClick={this.toggleModal}>
@@ -147,7 +161,8 @@ class BookingModal extends Component {
                             <DoctorProfile
                                 dataTimeParent={dataTimeParent}
                                 // doctorIdParent={doctorIdParent}
-                                isDoctorDescription={false} />
+                                isDoctorDescription={false}
+                            />
                         </Col>
                         <Row>
                             <Col md={6}>

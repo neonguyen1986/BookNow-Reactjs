@@ -43,7 +43,7 @@ class DoctorProfile extends Component {
     render() {
         let { profileData } = this.state
         let language = this.props.language
-        // console.log('check state from API:', profileData)
+        // console.log('check state from DoctorProfile:', profileData)
         let isDescription = this.props.isDoctorDescription
 
         return (
