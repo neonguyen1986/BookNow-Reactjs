@@ -8,6 +8,7 @@ import {
     getTopDoctorService,
     getAllDoctorsService,
     postDoctorInfo,
+    getAllSpecialty,
 }
     from '../../services/userService'
 
@@ -350,12 +351,17 @@ export const getRequiredDoctorInfo = () => async (dispatch, getState) => {
         const resPrice = await getAllCodeService("PRICE");
         const resPayment = await getAllCodeService("PAYMENT");
         const resProvince = await getAllCodeService("PROVINCE");
+        const resSpecialty = await getAllSpecialty();
         let data = ''
-        if (resPrice?.errCode === 0 && resPayment?.errCode === 0 && resProvince?.errCode === 0) {
+        if (resPrice?.errCode === 0 &&
+            resPayment?.errCode === 0 &&
+            resProvince?.errCode === 0 &&
+            resSpecialty?.errCode === 0) {
             data = {
                 resPrice: resPrice.data,
                 resPayment: resPayment.data,
                 resProvince: resProvince.data,
+                resSpecialty: resSpecialty.data,
             }
             dispatch(getRequiredDoctorSuccess(data));
         } else {
