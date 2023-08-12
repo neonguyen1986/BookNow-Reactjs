@@ -15,7 +15,7 @@ class DoctorMoreInfo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isShowPrice: false,
+            isShowPrice: '',
             doctorMoreInfo: {},
         }
     }
@@ -24,7 +24,8 @@ class DoctorMoreInfo extends Component {
         // console.log('check API:', res)
         if (res && res.errCode === 0)
             this.setState({
-                doctorMoreInfo: res.data
+                doctorMoreInfo: res.data,
+                isShowPrice: this.props.isShowPrice,
             })
     }
 
@@ -34,7 +35,8 @@ class DoctorMoreInfo extends Component {
             // console.log('check API:', res)
             if (res && res.errCode === 0)
                 this.setState({
-                    doctorMoreInfo: res.data
+                    doctorMoreInfo: res.data,
+                    isShowPrice: this.props.isShowPrice,
                 })
         }
     }

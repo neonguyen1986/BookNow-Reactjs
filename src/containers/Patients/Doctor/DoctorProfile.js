@@ -15,15 +15,15 @@ class DoctorProfile extends Component {
         }
     }
     async componentDidMount() {
-        let data = await this.getDoctorData(this.props.dataTimeParent.doctorId)
+        let data = await this.getDoctorData(this.props.doctorIdFromParent)
         this.setState({
             profileData: data
         })
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.doctorIdParent !== this.props.doctorIdParent) {
-            let data = await this.getDoctorData(this.props.dataTimeParent.doctorId)
+        if (prevProps.doctorIdFromParent !== this.props.doctorIdFromParent) {
+            let data = await this.getDoctorData(this.props.doctorIdFromParent)
             this.setState({
                 profileData: data
             })
@@ -43,20 +43,20 @@ class DoctorProfile extends Component {
     render() {
         let { profileData } = this.state
         let language = this.props.language
-        // console.log('check state from DoctorProfile:', profileData)
+        console.log('check state from DoctorProfile:', this.props.dataTimeParent)
         let isDescription = this.props.isDoctorDescription
 
         return (
             <div className='doctor-profile-container'>
                 <div className='doctor-info'>
-                    <div className='left-content'>
+                    <div className='docPro-left-content'>
                         {profileData?.image &&
                             <img className='doctor-avatar'
                                 src={CommonUtils.convertBase64ToBinary(profileData.image)} />
                         }
                     </div>
 
-                    <div className='right-content'>
+                    <div className='docPro-right-content'>
                         <div className='up'>
                             {language === LANGUAGE.EN
                                 ? profileData?.positionData?.valueEn &&

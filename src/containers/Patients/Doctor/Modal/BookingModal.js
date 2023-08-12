@@ -160,7 +160,7 @@ class BookingModal extends Component {
                         <Col md={12}>
                             <DoctorProfile
                                 dataTimeParent={dataTimeParent}
-                                // doctorIdParent={doctorIdParent}
+                                doctorIdFromParent={dataTimeParent.doctorId}
                                 isDoctorDescription={false}
                             />
                         </Col>
