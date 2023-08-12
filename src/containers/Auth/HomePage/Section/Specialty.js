@@ -7,17 +7,31 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import pediatrics from '../../../../assets/img-specialty/pediatrics.jpg'
-import cardiology from '../../../../assets/img-specialty/cardiology.jpg'
-import gastroenterology from '../../../../assets/img-specialty/gastroenterology.jpg'
-import otorhinolaryngology from '../../../../assets/img-specialty/otorhinolaryngology.jpg'
-import spineDepartment from '../../../../assets/img-specialty/spine-department.jpg'
-import gynecological from '../../../../assets/img-specialty/gynecological.jpg'
+import cardiology from '../../../../assets/img-specialty/1. cardiology.jpg'
+import { getAllSpecialty } from '../../../../services/userService';
+import { collapseToast } from 'react-toastify';
+import { CommonUtils } from '../../../../utils';
 
 class Specialty extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            allSpecialties: ''
+        }
+    }
 
+    async componentDidMount() {
+        let res = await getAllSpecialty()
+        console.log('>>>check data', res)
+        if (res?.data?.length > 0) {
+            this.setState({
+                allSpecialties: res.data
+            })
+        }
+    }
     render() {
-
+        let { allSpecialties } = this.state;
+        console.log('>>>>>check state from Specialty:', this.state)
         return (
             <>
                 <div className='fit-height-width'>
@@ -29,30 +43,17 @@ class Specialty extends Component {
                             </div>
                             <div className='section-body'>
                                 <Slider {...this.props.settings}>
-                                    <div className='img-customize'>
-                                        <div className='tempdiv'><img className='image' src={cardiology} /></div>
-                                        <div>cardiology/khoa tim mạch</div>
-                                    </div>
-                                    <div className='img-customize'>
-                                        <div className='tempdiv'><img className='image' src={gastroenterology} /></div>
-                                        <div>Gastroenterology/khoa tiêu hóa</div>
-                                    </div>
-                                    <div className='img-customize'>
-                                        <div className='tempdiv'><img className='image' src={pediatrics} /></div>
-                                        <div>Pediatrics/nhi khoa</div>
-                                    </div>
-                                    <div className='img-customize'>
-                                        <div className='tempdiv'><img className='image' src={otorhinolaryngology} /></div>
-                                        <div>otorhinolaryngology/khoa tai mũi họng</div>
-                                    </div>
-                                    <div className='img-customize'>
-                                        <div className='tempdiv'><img className='image' src={spineDepartment} /></div>
-                                        <div>spine-department/khoa cột sống</div>
-                                    </div>
-                                    <div className='img-customize'>
-                                        <div className='tempdiv'><img className='image' src={gynecological} /></div>
-                                        <div>gynecological/phụ khoa</div>
-                                    </div>
+                                    {allSpecialties?.length > 0 &&
+                                        allSpecialties.map((item, index) => {
+                                            let imgSrc = CommonUtils.convertBase64ToBinary(item.image)
+                                            return (
+                                                <div key={index} className='img-customize'>
+                                                    <div className='tempdiv'><img className='image' src={imgSrc} /></div>
+                                                    <div><b>{item.name}</b></div>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </Slider>
                             </div>
                         </div>
