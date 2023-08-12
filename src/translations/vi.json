@@ -75,6 +75,13 @@
             "clinic-name": "Tên phòng khám",
             "clinic-address": "Địa chỉ phòng khám",
             "note": "Ghi chú"
+        },
+        "manage-specialty": {
+            "title": "GÉRER LES SPÉCIALITÉS",
+            "name": "Nom de la spécialité",
+            "image": "Image de spécialité",
+            "content": "Contenu de la spécialité",
+            "save": "Sauvegarder"
         }
     },
     "manage-schedule": {

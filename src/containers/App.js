@@ -70,7 +70,7 @@ class App extends Component {
                         </div>
                         <ToastContainer
                             position="top-right"
-                            autoClose={1000}
+                            autoClose={2000}
                             hideProgressBar={false}
                             newestOnTop={false}
                             closeOnClick

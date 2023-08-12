@@ -75,6 +75,13 @@
             "clinic-name": "Clinic name",
             "clinic-address": "Clinic address",
             "note": "Note"
+        },
+        "manage-specialty": {
+            "title": "MANAGE SPECIALTIES",
+            "name": "Specialty name",
+            "image": "Specialty Image",
+            "content": "Specialty content",
+            "save": "Save"
         }
     },
     "manage-schedule": {

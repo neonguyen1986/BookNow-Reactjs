@@ -22,7 +22,7 @@ export const adminMenu = [
         ]
     },
     { //specialty mannage
-        name: 'menu.admin.specialty', menus: [
+        name: 'menu.admin.specialty', menus: [//, link: '/system/manage-specialty'
             { name: 'menu.admin.manage-specialty', link: '/system/manage-specialty' },
         ]
     },
