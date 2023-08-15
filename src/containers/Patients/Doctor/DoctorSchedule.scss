@@ -35,12 +35,12 @@
                 flex-wrap: wrap;
 
                 button {
-                    padding         : 5px 10px;
+                    padding         : 0.1rem 0.15rem;
                     border          : none;
                     outline         : none;
                     background-color: #fff04b;
-                    flex-basis      : calc(29% - 0px);
-                    margin          : 10px;
+                    flex-basis      : calc(32% - 0px);
+                    margin          : 0.2rem;
                     /* Adjust this value to control the gap between items */
                     box-sizing      : border-box;
                     border-radius   : 3px;

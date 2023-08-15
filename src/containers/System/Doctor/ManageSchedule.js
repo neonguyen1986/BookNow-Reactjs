@@ -97,7 +97,7 @@ class ManageSchedule extends Component {
 
     handleSaveSchedule = async () => {
         let { timeRange, selectedDoctor, currentDate } = this.state;
-        console.log('check state:', this.state)
+        console.log('>>>>>>>>>check state ManageSchedule:', this.state)
         let result = [];
         if (!currentDate) {
             toast.warning('Invalid Date')
@@ -141,7 +141,7 @@ class ManageSchedule extends Component {
     }
     render() {
         let options = this.buildDataSelect(this.state.listDoctors)
-        // console.log('>>>check state:', this.state)
+        console.log('>>>check state Manage Schedule:', this.state)
         let { timeRange } = this.state
         let language = this.props.language
 

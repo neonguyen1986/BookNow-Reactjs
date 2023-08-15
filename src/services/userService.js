@@ -115,6 +115,26 @@ const postCreateNewSpecialty = (data) => {
 const getAllSpecialty = () => {
     return axios.get('/api/get-all-specialty')
 }
+
+const getDetailSpecialtyIdLocation = (id, locationId) => {
+    return axios.get(`/api/get-detail-specialty-by-id-location`, {
+        params: {
+            id: id,
+            locationId: locationId
+        }
+    })
+}
+
+const getlistPatienByIdDate = (doctorId, date) => {
+    return axios.get(`/api/get-list-patients-byIdDate`, {
+        params: {
+            doctorId,
+            date
+        }
+    })
+}
+
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -135,4 +155,6 @@ export {
     postVerifyBookingAppointment,
     postCreateNewSpecialty,
     getAllSpecialty,
+    getDetailSpecialtyIdLocation,
+    getlistPatienByIdDate,
 }

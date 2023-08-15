@@ -63,6 +63,7 @@ class App extends Component {
                                     <Route path={path.HOMEPAGE} exact component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} exact component={DetailDoctor} />
                                     <Route path='/doctor/' component={userIsAuthenticated(Doctor)} />
+
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
                                     <Route path={path.DETAIL_SPECIALTY} exact component={DetailSpecialty} />
 

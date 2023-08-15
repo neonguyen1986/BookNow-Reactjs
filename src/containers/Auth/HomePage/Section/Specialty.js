@@ -11,6 +11,7 @@ import cardiology from '../../../../assets/img-specialty/1. cardiology.jpg'
 import { getAllSpecialty } from '../../../../services/userService';
 import { collapseToast } from 'react-toastify';
 import { CommonUtils } from '../../../../utils';
+import { Link } from 'react-router-dom';
 
 class Specialty extends Component {
     constructor(props) {
@@ -47,10 +48,12 @@ class Specialty extends Component {
                                         allSpecialties.map((item, index) => {
                                             let imgSrc = CommonUtils.convertBase64ToBinary(item.image)
                                             return (
-                                                <div key={index} className='img-customize'>
-                                                    <div className='tempdiv'><img className='image' src={imgSrc} /></div>
-                                                    <div><b>{item.name}</b></div>
-                                                </div>
+                                                <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
+                                                    <div key={index} className='img-customize'>
+                                                        <div className='tempdiv'><img className='image' src={imgSrc} /></div>
+                                                        <div><b>{item.name}</b></div>
+                                                    </div>
+                                                </Link>
                                             )
                                         })
                                     }

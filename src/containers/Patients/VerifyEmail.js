@@ -4,16 +4,18 @@ import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import { postVerifyBookingAppointment } from '../../services/userService'
 import HomeHeader from '../Auth/HomePage/HomeHeader';
-import { LANGUAGE } from '../../utils';
+import { LANGUAGE, CommonUtils } from '../../utils';
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { Link } from 'react-router-dom';
+import LoadingOverlay from 'react-loading-overlay';
+import * as actions from "../../store/actions"
 
 class VerifyEmail extends Component {
     constructor(props) {
         super(props)
         this.state = {
             bookingStatus: false,
-            isLoading: false,
+            isLoading: true,
         }
     }
     async componentDidMount() {
@@ -29,20 +31,22 @@ class VerifyEmail extends Component {
             // })
             let res = ''
             setTimeout(async () => {
+
                 res = await postVerifyBookingAppointment({
                     token,
                     doctorId,
                 })
+
                 console.log('>>>>check res', res)
                 if (res && res.errCode === 0) {
                     this.setState({
                         bookingStatus: true,
-                        isLoading: true
+                        isLoading: false
                     })
                 } else if (res.errCode === 1 || res.errCode === 2) {
                     this.setState({
                         bookingStatus: false,
-                        isLoading: true,
+                        isLoading: false,
                     })
                 }
             }, 1000)
@@ -54,6 +58,14 @@ class VerifyEmail extends Component {
 
     }
 
+    // div._loading_overlay_wrapper {
+    //     position: unset;
+
+    //     .loading_overlay_overlay {
+    //       z-index: 1000000;
+    //     }
+    //   }
+
     render() {
         let language = this.props.language;
         let { bookingStatus, isLoading } = this.state;
@@ -62,11 +74,16 @@ class VerifyEmail extends Component {
             <>
                 <HomeHeader
                     isShowBanner={false} />
-                {isLoading === false
-                    ? <div className='title'>
-                        Loading data...
-                    </div>
-                    : <>
+                {isLoading === true
+                    ?
+                    <LoadingOverlay
+                        active={isLoading}
+                        spinner
+                        text='Loading your content...'
+                    >
+                    </LoadingOverlay>
+                    :
+                    <>
                         <div className='title'>
                             {bookingStatus === true
                                 ? <FormattedMessage id='patient.verify.verify-success' />
@@ -95,7 +112,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
     };
 };
 

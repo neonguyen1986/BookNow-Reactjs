@@ -6,47 +6,119 @@ import { FormattedMessage } from 'react-intl';
 import HomeHeader from '../../Auth/HomePage/HomeHeader';
 import DoctorProfile from '../Doctor/DoctorProfile';
 import DoctorMoreInfo from '../Doctor/DoctorMoreInfo';
+import DoctorSchedule from '../Doctor/DoctorSchedule';
+import { getDetailSpecialtyIdLocation, getAllCodeService } from '../../../services/userService'
+import ReactMarkdown from 'react-markdown';
+import _ from 'lodash'
 
 class DetailSpecialty extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            doctorsBySpecialty: '',
+            description: '',
+            getAllProvince: '',
+            selectedProvince: '',
+            isAllProvince: true,
         }
     }
     async componentDidMount() {
+        let getParams = await this.props.match.params
+        // console.log('===========check params:', getParams)
+        let res = await getDetailSpecialtyIdLocation(getParams.id, getParams.locationId)
+        // console.log('===========check data:', res)
+        if (res?.errCode === 0) {
+            this.setState({
+                description: res.data[0].descriptionMarkdown,
+                doctorsBySpecialty: res.data[1],
+            })
+        }
 
+        let resAllCode = await getAllCodeService('PROVINCE')
+        console.log('===========check resAllCode:', resAllCode)
+        if (resAllCode.errCode === 0) {
+            this.setState({
+                getAllProvince: resAllCode.data
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
 
+    handleOnChangeProvince = async (e) => {
+        let getParams = await this.props.match.params
+        let provinceENVI = e.target.value;
+        let getAllProvince = this.state.getAllProvince
+        let curProvinceId = ''
+        for (let i = 0; i < getAllProvince.length; i++) {
+            if (getAllProvince[i].valueEn === provinceENVI || getAllProvince[i].valueVi === provinceENVI) {
+                curProvinceId = getAllProvince[i].keyMap;
+                break;
+            }
+        }
+        if (curProvinceId !== '' && !_.isEmpty(curProvinceId)) {
+            let res = await getDetailSpecialtyIdLocation(getParams.id, curProvinceId)
+            if (res?.errCode === 0) {
+                this.setState({
+                    doctorsBySpecialty: res.data[1],
+                })
+            }
+        }
+    }
     render() {
-        let doctorId = [47, 48, 49]
+        let language = this.props.language
+        let { description, doctorsBySpecialty, getAllProvince } = this.state;
+        console.log('>>>>>>>>check state Detail Specialty:', this.state)
         return (
             <div className='detail-secialty-all-container'>
                 <HomeHeader
                     isShowBanner={false}
                 />
                 <div className='detail-specialty-description'>
+                    <ReactMarkdown>{description}</ReactMarkdown>
+                </div>
+                <div className='detail-specialty-select-province'>
+                    <label>Filter by Province: </label>
+                    <select
+                        className='detSpec-select'
+                        onChange={(e) => this.handleOnChangeProvince(e)}
+                    >
+                        <option>Select a Province</option>
+                        {getAllProvince?.length > 0 &&
+                            getAllProvince.map((item, index) => {
+                                return (
+                                    <option key={index} keyMap={item.Keymap}>
+                                        {language === LANGUAGE.EN ? item.valueEn : item.valueVi}
+                                    </option>
+                                )
+                            })
+                        }
 
+                    </select>
                 </div>
                 <div className='detail-specialty-container'>
-                    {doctorId?.length > 0 &&
-                        doctorId.map((item, index) => {
+                    {doctorsBySpecialty?.length > 0 &&
+                        doctorsBySpecialty.map((item, index) => {
                             return (
                                 <div className='detSpec-content' key={index}>
                                     <span className='detSpec-left'>
                                         <DoctorProfile
-                                            doctorIdFromParent={item}
+                                            doctorIdFromParent={item.doctorId}
                                             isDoctorDescription={true}
                                         />
                                     </span>
                                     <span className='detSpec-right'>
-                                        <DoctorMoreInfo
-                                            doctorIdFromParent={item}
-                                            isShowPrice={true} />
+                                        <div className='detSpec-right-top'>
+                                            <DoctorSchedule
+                                                doctorIdFromParent={item.doctorId} />
+                                        </div>
+                                        <div className='detSpec-right-bottom'>
+                                            <DoctorMoreInfo
+                                                doctorIdFromParent={item.doctorId}
+                                                isShowPrice={false} />
+                                        </div>
                                     </span>
                                 </div>
                             )

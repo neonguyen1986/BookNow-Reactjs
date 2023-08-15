@@ -11,7 +11,6 @@ import * as actions from '../../../../store/actions'
 import Select from 'react-select';
 import { postPatientBookingAppointment } from '../../../../services/userService'
 import { toast } from 'react-toastify';
-import moment from 'moment';
 
 
 
@@ -106,29 +105,32 @@ class BookingModal extends Component {
 
     handleConfirmBooking = async () => {
         this.toggleModal();
-        let datebookedENVI = {
-            valueVi: moment.unix(+this.state.dateBooked / 1000).format('ddd - DD/MM/YYYY'),
-            valueEn: moment.unix(+this.state.dateBooked / 1000).locale('en').format('ddd-MM/DD/YYYY')
-        }
+        let language = this.props.language
+        // let datebookedENVI = language === LANGUAGE.VI
+        //     ? moment.unix(+this.state.dateBooked / 1000).format('ddd - DD/MM/YYYY')
+        //     : moment.unix(+this.state.dateBooked / 1000).locale('en').format('ddd-MM/DD/YYYY')
+        let timeBookedENVI = language === LANGUAGE.VI
+            ? this.state.timeBooked.valueVi
+            : this.state.timeBooked.valueEn
         let res = await postPatientBookingAppointment({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
             email: this.state.email,
             address: this.state.address,
             reason: this.state.reason,
-            date: CommonUtils.convertToTimestamp(this.state.birthday),
+            birthday: CommonUtils.convertToTimestamp(this.state.birthday),
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
             selectedGender: this.state.selectedGender.value,
-            timeBooked: this.state.timeBooked,
-            dateBooked: datebookedENVI,
+            timeBooked: timeBookedENVI,
+            dateBooked: this.state.dateBooked,
             doctorName: this.state.doctorName,
             language: this.props.language,
         })
         if (res && res.errCode === 0) {
             toast.success('Booking new appointment success')
         } else {
-            toast.warning('Booking error!')
+            toast.warning(res.errMessage)
         }
     }
     render() {
@@ -145,7 +147,7 @@ class BookingModal extends Component {
             reason,
             birthday,
             doctorId } = this.state
-        console.log('=====check state Booking Modal:', this.state)
+        // console.log('=====check state Booking Modal:', this.state)
         return (
             <div>
                 {/* <Button color="primary" onClick={this.toggleModal}>

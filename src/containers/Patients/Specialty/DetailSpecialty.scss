@@ -2,7 +2,24 @@
     background-color: #f0e8e8;
 
     .detail-specialty-description {
-        height: 30vh;
+        height: auto;
+        margin: 1rem 3rem;
+    }
+
+    .detail-specialty-select-province {
+        display: flex;
+        margin : 1rem 3rem;
+
+        label {
+            padding-top : 0.5rem;
+            font-weight : bold;
+            margin-right: 1rem;
+        }
+
+        .detSpec-select {
+            border : none;
+            padding: 0 1rem;
+        }
     }
 
     .detail-specialty-container {
@@ -15,7 +32,7 @@
             background-color: white;
             margin-bottom   : 1rem;
             padding-top     : 1rem;
-            height          : 50vh;
+            height          : auto;
             border-radius   : 5px;
             display         : flex;
             flex-direction  : row;
@@ -30,6 +47,14 @@
             .detSpec-right {
                 padding-right: 1.5rem;
                 width        : 100%;
+
+
+                .detSpec-right-top {
+                    padding-left: 1.2rem;
+                    border-left : 1px solid #ddd;
+                }
+
+                .detSpec-right-bottom {}
             }
         }
     }

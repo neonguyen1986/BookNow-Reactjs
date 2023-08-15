@@ -38,6 +38,7 @@ export const doctorMenu = [
     { //manage doctors' schedule
         name: 'menu.admin.manage-user', menus: [
             { name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule' },
+            { name: 'menu.doctor.manage-patient', link: '/doctor/manage-patient' },
         ]
     }
 ];

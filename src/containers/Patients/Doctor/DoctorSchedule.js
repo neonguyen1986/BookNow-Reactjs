@@ -62,7 +62,7 @@ class DoctorSchedule extends Component {
 
     componentDidMount() {
         this.setDateLanguage()
-
+        this.setAllAvailableTime()
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -71,23 +71,27 @@ class DoctorSchedule extends Component {
         }
 
         if (prevProps.doctorIdFromParent !== this.props.doctorIdFromParent) {
-            let curDate = moment(new Date()).add(0, 'days').startOf('day').valueOf();
-            let doctorId = this.props.doctorIdFromParent;
-            // console.log('curDate, doctorId', curDate, doctorId)
-            let res = await getDoctorScheduleByDate(doctorId, curDate)
-            // console.log('>>>>>check res:', res)
-            if (res && res.errCode === 0) {
-                this.setState({
-                    allAvailableTime: res.data ? res.data : []
-                })
-            }
+            this.setAllAvailableTime()
         }
     }
+    setAllAvailableTime = async () => {
+        let curDate = moment(new Date()).add(0, 'days').startOf('day').valueOf();
+        let doctorId = this.props.doctorIdFromParent;
+        // console.log('curDate, doctorId', curDate, doctorId)
+        let res = await getDoctorScheduleByDate(doctorId, curDate)
+        // console.log('>>>>>check res:', res)
+        if (res && res.errCode === 0) {
+            this.setState({
+                allAvailableTime: res.data ? res.data : []
+            })
+        }
+    }
+
     handleOnChangeSelect = async (e) => {
         if (this.props?.doctorIdFromParent !== -1) {
             let doctorId = this.props.doctorIdFromParent;
             let date = e.target.value
-            console.log('>>>check date', date)
+            // console.log('>>>check date', date)
             let res = await getDoctorScheduleByDate(doctorId, date)
 
             if (res && res.errCode === 0) {
@@ -116,7 +120,7 @@ class DoctorSchedule extends Component {
     render() {
         let { allDays, allAvailableTime } = this.state
         let language = this.props.language
-        console.log('>>>check state DoctorSchedule:', this.state)
+        // console.log('>>>check state DoctorSchedule:', this.state)
 
         return (
             <>

@@ -36,7 +36,7 @@ class Login extends Component {
 		this.state.errMessage = ''//clear mã lỗi
 		try {
 			let data = await handleLoginApi(this.state.username, this.state.password)
-			// console.log('>>>check', data)
+			console.log('>>>check Login data', data)
 			if (data && data.errCode !== 0) {
 				this.setState({
 					errMessage: data.errMessage,

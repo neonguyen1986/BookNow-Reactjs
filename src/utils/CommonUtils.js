@@ -1,7 +1,7 @@
 import { reject } from "lodash";
 import { resolveModuleName } from "typescript";
 import { NumericFormat } from 'react-number-format';
-
+import LoadingOverlay from 'react-loading-overlay';
 
 class CommonUtils {
     static convertBlobToBase64 = (blob) => {
