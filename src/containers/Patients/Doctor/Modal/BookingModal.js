@@ -106,10 +106,10 @@ class BookingModal extends Component {
     handleConfirmBooking = async () => {
         this.toggleModal();
         let language = this.props.language
-        // let datebookedENVI = language === LANGUAGE.VI
+        // let datebookedENVI = language === LANGUAGE.FR
         //     ? moment.unix(+this.state.dateBooked / 1000).format('ddd - DD/MM/YYYY')
         //     : moment.unix(+this.state.dateBooked / 1000).locale('en').format('ddd-MM/DD/YYYY')
-        let timeBookedENVI = language === LANGUAGE.VI
+        let timeBookedENVI = language === LANGUAGE.FR
             ? this.state.timeBooked.valueVi
             : this.state.timeBooked.valueEn
         let res = await postPatientBookingAppointment({

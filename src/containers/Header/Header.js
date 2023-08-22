@@ -50,14 +50,14 @@ class Header extends Component {
 
                     <span className='welcome'><FormattedMessage id='home-header.welcome' />
                         {userInfo && userInfo.firstName ? userInfo.firstName : ''}!
+                        <span
+                            className={language === LANGUAGE.EN ? 'language-en active' : 'language-en'}
+                            onClick={() => this.handleChangeLanguage(LANGUAGE.EN)}
+                        ><b>EN</b></span>
                     </span>
-                    <span className={language === LANGUAGE.VI ? 'language-vi active' : 'language-vi'}
-                        onClick={() => this.handleChangeLanguage(LANGUAGE.VI)}
-                    >VI</span>
-                    <span
-                        className={language === LANGUAGE.EN ? 'language-en active' : 'language-en'}
-                        onClick={() => this.handleChangeLanguage(LANGUAGE.EN)}
-                    >EN</span>
+                    <span className={language === LANGUAGE.FR ? 'language-fr active' : 'language-fr'}
+                        onClick={() => this.handleChangeLanguage(LANGUAGE.FR)}
+                    ><b>FR</b></span>
                     {/* nút logout */}
                     <div className="btn btn-logout" onClick={processLogout} title='Logout'>
                         <i className="fas fa-sign-out-alt"></i>

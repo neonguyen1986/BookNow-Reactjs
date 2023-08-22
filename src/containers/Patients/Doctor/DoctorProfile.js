@@ -82,10 +82,10 @@ class DoctorProfile extends Component {
                                     this.props?.dataTimeParent?.timeTypeData?.valueEn ? this.props.dataTimeParent.timeTypeData.valueEn : ''
                                     : this.props?.dataTimeParent?.timeTypeData?.valueVi ? this.props.dataTimeParent.timeTypeData.valueVi : ''
                                 } -&nbsp;
-                                {language === LANGUAGE.VI
+                                {language === LANGUAGE.FR
                                     ?
                                     this.props?.dataTimeParent?.date ?
-                                        moment.unix(+this.props.dataTimeParent.date / 1000).format('ddd - DD/MM/YYYY') : ''
+                                        moment.unix(+this.props.dataTimeParent.date / 1000).locale('fr').format('ddd - DD/MM/YYYY') : ''
                                     :
                                     this.props?.dataTimeParent?.date ?
                                         moment.unix(+this.props.dataTimeParent.date / 1000).locale('en').format('ddd-MM/DD/YYYY') : ''

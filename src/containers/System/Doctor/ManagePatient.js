@@ -179,7 +179,7 @@ class ManagePatient extends Component {
                                                     <td>
                                                         {language === LANGUAGE.EN
                                                             ? moment.unix(+item.date / 1000).locale('en').format('ddd-MM/DD/YYYY')
-                                                            : moment.unix(+item.date / 1000).locale('vi').format('dddd - DD/MM/YYYY')}
+                                                            : moment.unix(+item.date / 1000).locale('fr').format('dddd - DD/MM/YYYY')}
                                                     </td>
                                                     <td>
                                                         {language === LANGUAGE.EN

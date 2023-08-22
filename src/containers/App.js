@@ -25,6 +25,7 @@ import DetailDoctor from './Patients/Doctor/DetailDoctor';
 import VerifyEmail from './Patients/VerifyEmail';
 import DetailSpecialty from './Patients/Specialty/DetailSpecialty';
 import SpecialtyMore from './Patients/Specialty/SpecialtyMore';
+import test from './test';
 
 
 class App extends Component {
@@ -63,7 +64,8 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} exact component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} exact component={DetailDoctor} />
-                                    <Route path='/doctor/' component={userIsAuthenticated(Doctor)} />
+                                    <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={'/test'} component={test} />
 
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
                                     <Route path={path.DETAIL_SPECIALTY} exact component={DetailSpecialty} />

@@ -284,7 +284,7 @@ class UserRedux extends Component {
                                                     // console.log('====check key map:', item)
                                                     return (
                                                         <option value={item.keyMap} key={item.id}>
-                                                            {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
+                                                            {language === LANGUAGE.FR ? item.valueFr : item.valueEn}
                                                         </option>
                                                     )
                                                 })}
@@ -300,7 +300,7 @@ class UserRedux extends Component {
                                                 positionArr.map(item => {
                                                     return (
                                                         <option key={item.id} value={item.keyMap}>
-                                                            {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
+                                                            {language === LANGUAGE.FR ? item.valueFr : item.valueEn}
                                                         </option>
                                                     )
                                                 })}
@@ -317,7 +317,7 @@ class UserRedux extends Component {
                                                     // console.log('gender:', gender, 'position:', position, 'role:', role,)
                                                     return (
                                                         < option key={item.id} value={item.keyMap} >
-                                                            {language === LANGUAGE.VI ? item.valueVi : item.valueEn
+                                                            {language === LANGUAGE.FR ? item.valueFr : item.valueEn
                                                             }
                                                         </option>
                                                     )

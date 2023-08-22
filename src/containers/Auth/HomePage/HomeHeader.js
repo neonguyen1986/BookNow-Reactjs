@@ -58,7 +58,7 @@ class HomeHeader extends Component {
                                     onClick={() => this.handleOnClickChangeLanguage(LANGUAGE.EN)}
                                 ><b>EN</b></div>
                                 <div
-                                    className={language === LANGUAGE.VI ? 'language-vi active' : 'language-vi'}
+                                    className={language === LANGUAGE.FR ? 'language-fr active' : 'language-fr'}
                                     onClick={() => this.handleOnClickChangeLanguage(LANGUAGE.FR)}
                                 ><b>FR</b></div>
                             </div>

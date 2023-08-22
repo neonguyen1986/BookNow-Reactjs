@@ -10,7 +10,6 @@ import BookingModal from './Modal/BookingModal';
 
 //moment to dispay Vi
 import moment from 'moment';
-import localization from 'moment/locale/vi'
 
 class DoctorSchedule extends Component {
     constructor(props) {
@@ -27,22 +26,22 @@ class DoctorSchedule extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     setDateLanguage = () => {
-        // console.log('moment in Vi', moment(new Date()).format('dddd-DD/MM'))
+        // console.log('moment in Fr', moment(new Date()).locale('fr').format('dddd-DD/MM'))
         // console.log('moment in En', moment(new Date()).locale('en').format('ddd-DD/MM'))
 
         let allDays = []
         for (let i = 0; i < 7; i++) {
             let obj = {};
             if (i !== 0) {
-                if (this.props.language === LANGUAGE.VI) {
-                    let labelVi = moment(new Date()).add(i, 'days').format('dddd-DD/MM')
-                    obj.label = this.capitalizeFirstLetter(labelVi)
+                if (this.props.language === LANGUAGE.FR) {
+                    let labelFr = moment(new Date()).add(i, 'days').locale('fr').format('ddd-DD/MM')
+                    obj.label = this.capitalizeFirstLetter(labelFr)
 
                 } else {
                     obj.label = moment(new Date()).add(i, 'days').locale('en').format('ddd-DD/MM')
                 }
             } else {
-                if (this.props.language === LANGUAGE.VI) {
+                if (this.props.language === LANGUAGE.FR) {
                     obj.label = `Hôm nay-${moment(new Date()).add(i, 'days').format('DD/MM')}`
                 } else {
                     obj.label = `Today-${moment(new Date()).add(i, 'days').format('DD/MM')}`
