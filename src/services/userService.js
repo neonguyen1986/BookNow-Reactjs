@@ -133,7 +133,21 @@ const getlistPatienByIdDate = (doctorId, date) => {
         }
     })
 }
+const postUploadSingleFile = (formData) => {
+    return axios.post('/api/upload-single-file', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
 
+const getDownloadServerFile = (token) => {
+    return axios.get('/api/download-file', {
+        params: {
+            token
+        }
+    })
+}
 
 export {
     handleLoginApi,
@@ -157,4 +171,6 @@ export {
     getAllSpecialty,
     getDetailSpecialtyIdLocation,
     getlistPatienByIdDate,
+    postUploadSingleFile,
+    getDownloadServerFile,
 }
