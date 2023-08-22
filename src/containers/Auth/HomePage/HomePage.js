@@ -15,7 +15,7 @@ class HomePage extends Component {
     render() {
         let settings = {
             dots: true,
-            infinite: false,
+            infinite: true,
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 2,
@@ -25,8 +25,8 @@ class HomePage extends Component {
                 <HomeHeader isShowBanner={true} />
                 <Specialty
                     settings={settings} />
-                <MedicalFacility
-                    settings={settings} />
+                {/* <MedicalFacility
+                    settings={settings} /> */}
                 <OutstandingDoctors
                     settings={settings} />
                 <Handbooks

@@ -67,11 +67,11 @@
                 }
 
                 button {
-                    height          : 40px;
-                    border          : none;
-                    background-color: #ebebeb;
-                    margin-top      : -10px;
-                    padding         : 0 15px;
+                    border       : none;
+                    border-radius: 0.5rem;
+
+                    background-color: #e9e2e2;
+                    padding         : 0.5rem 1rem;
 
                     &:hover {
                         background-color: #f7d800;
@@ -94,6 +94,18 @@
                             height       : 100%;
                             // object-fit: cover;
                         }
+
+                        .image-specialty {
+                            width        : 98%;
+                            height       : 100%;
+                            border-radius: 2rem;
+                            box-shadow   : 4px 4px 8px rgba(0, 0, 0, 0.2);
+                        }
+                    }
+
+                    .specialty-text {
+                        margin        : 1rem;
+                        text-transform: capitalize;
                     }
 
                     cursor: pointer;

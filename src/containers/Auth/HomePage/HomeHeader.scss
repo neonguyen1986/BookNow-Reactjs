@@ -1,73 +1,73 @@
 .home-header-container {
-    position: sticky;
-    top: 0;
+    position        : sticky;
+    top             : 0;
     background-color: white;
-    z-index: 200;
+    z-index         : 200;
 
     height: 60px;
-    width: 100%;
+    width : 100%;
 
     .home-header-content {
-        width: 100%;
-        height: 100%;
-        display: flex;
+        width         : 100%;
+        height        : 100%;
+        display       : flex;
         flex-direction: row;
-        padding: 0 20px;
+        padding       : 0 20px;
 
         .left-content {
-            width: 25%;
-            display: flex;
-            align-items: center;
+            width          : 25%;
+            display        : flex;
+            align-items    : center;
             justify-content: start;
 
             .fas.fa-bars {
                 font-size: 20px;
-                width: 10%;
-                cursor: pointer;
+                width    : 10%;
+                cursor   : pointer;
             }
 
             .header-logo {
-                background: url('../../../assets/bookingcare-2020.svg') center left no-repeat;
+                background     : url('../../../assets/bookingcare-2020.svg') center left no-repeat;
                 background-size: auto 60%;
-                height: 100%;
-                width: 90%;
-                cursor: pointer;
+                height         : 100%;
+                width          : 90%;
+                cursor         : pointer;
             }
         }
 
         .center-content {
-            width: 65%;
-            display: flex;
-            flex-direction: row;
+            width          : 65%;
+            display        : flex;
+            flex-direction : row;
             justify-content: space-between;
-            align-items: center;
+            align-items    : center;
 
             .child-content {
                 .sub-title {
-                    font-size: 12px;
+                    font-size  : 12px;
                     font-weight: 200;
                 }
             }
         }
 
         .right-content {
-            width: 10%;
-            display: flex;
-            align-items: center;
+            width          : 10%;
+            display        : flex;
+            align-items    : center;
             justify-content: end;
-            gap: 7px;
+            gap            : 7px;
 
             .support {
                 cursor: pointer;
             }
 
             .language-en {
-                cursor: pointer;
+                cursor : pointer;
                 opacity: 0.3;
 
                 &.active {
                     //class languague and class active
-                    color: orange;
+                    color  : orange;
                     opacity: 1;
                 }
 
@@ -77,12 +77,12 @@
             }
 
             .language-vi {
-                cursor: pointer;
+                cursor : pointer;
                 opacity: 0.3;
 
                 &.active {
                     //class languague and class active
-                    color: blue;
+                    color  : blue;
                     opacity: 1;
                 }
 
@@ -95,70 +95,70 @@
 }
 
 .home-header-banner {
-    background: url('../../../assets/bookingcare-cover-4.jpg') no-repeat;
+    background         : url('../../../assets/bookingcare-cover-4.jpg') no-repeat;
     //opacity: 0.8;//tạo một lớp màng trắng
-    height: 600px;
-    background-size: cover;
+    height             : 600px;
+    background-size    : cover;
     background-position: center;
-    display: flex;
-    flex-direction: column;
+    display            : flex;
+    flex-direction     : column;
 
     .content-up {
         background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
-        height: 70%;
+        height          : 70%;
         // border: 1px solid red;
 
 
         .title1 {
-            text-align: center;
-            color: white;
-            font-size: 32;
+            text-align : center;
+            color      : white;
+            font-size  : 32;
             padding-top: 60px;
             text-shadow: 2px 2px 2px #000000
         }
 
         .title2 {
-            text-align: center;
-            color: white;
-            font-size: 32;
+            text-align : center;
+            color      : white;
+            font-size  : 32;
             font-weight: bold;
             text-shadow: 2px 2px 2px #000000
         }
 
         .search {
             background-color: #f7d800;
-            height: 50px;
-            width: 33%;
-            margin: 40px auto 0 auto;
-            border: 1px solid transparent;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            flex-direction: row;
+            height          : 50px;
+            width           : 33%;
+            margin          : 40px auto 0 auto;
+            border          : 1px solid transparent;
+            border-radius   : 25px;
+            display         : flex;
+            align-items     : center;
+            flex-direction  : row;
 
             .fas.fa-search {
                 font-size: 20px;
-                padding: 20px;
+                padding  : 20px;
             }
 
             .search-box {
                 background-color: transparent;
-                border: none;
-                outline: none;
-                width: 70%;
-                height: 80%;
-                font-size: 15px;
+                border          : none;
+                outline         : none;
+                width           : 70%;
+                height          : 80%;
+                font-size       : 15px;
             }
         }
     }
 
     .content-down {
-        width: 100%;
-        height: 30%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: start;
+        width           : 100%;
+        height          : 30%;
+        display         : flex;
+        flex-direction  : row;
+        justify-content : space-around;
+        align-items     : start;
         // border: 1px solid green;
         background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
 
@@ -168,26 +168,26 @@
 
 
             .icon {
-                height: 60px;
-                width: 60px;
-                border: 1px solid white;
+                height          : 60px;
+                width           : 60px;
+                border          : 1px solid white;
                 background-color: white;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                border-radius   : 50%;
+                display         : flex;
+                align-items     : center;
+                justify-content : center;
 
                 .img {
                     height: 40px;
-                    width: 40px;
+                    width : 40px;
                 }
             }
 
             .text {
-                width: 60px;
-                text-align: center;
+                width      : 60px;
+                text-align : center;
                 font-weight: 600;
-                font-size: 12px;
+                font-size  : 12px;
                 text-shadow: 1px 1px 1px #ffffff
             }
 

@@ -71,13 +71,13 @@ class ManageDoctors extends Component {
                 listProvince: this.props.allDoctorInfoRequirement.resProvince,
                 listSpecialty: this.props.allDoctorInfoRequirement.resSpecialty,
             })
-            console.log('check redux', this.props.allDoctorInfoRequirement)
+            // console.log('check redux', this.props.allDoctorInfoRequirement)
         }
         //===Display doctor Markdown and doctor_info when Doctor is Selected
         if (prevState.selectedDoctor !== this.state.selectedDoctor && this.state.selectedDoctor !== '') {
             let id = this.state.selectedDoctor.value;
             let res = await getDetailDoctorInfo(id)
-            console.log('???res:', res)
+            // console.log('???res:', res)
             let data = res.data
             if (data?.Markdown?.markdownContent ||
                 data?.Markdown?.description ||
@@ -198,7 +198,7 @@ class ManageDoctors extends Component {
         })
     }
 
-    handleSaveContentMarkdown = async () => {
+    handleSaveDoctorInfo = async () => {
         let res = await this.props.postDoctorsRedux({
             HTMLContent: this.state.HTMLContent,
             markdownContent: this.state.markdownContent,
@@ -238,7 +238,7 @@ class ManageDoctors extends Component {
         }
     }
 
-    handleCancelContentMarkdown = () => {
+    handleCancelDoctorInfo = () => {
         this.setState({
             markdownContent: '',
             description: '',
@@ -276,7 +276,7 @@ class ManageDoctors extends Component {
             note,
             description } = this.state
         // console.log('>>check doctor', selectedPrice)
-        console.log('=======check state:', this.state)
+        // console.log('=======check state:', this.state)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title title'>
@@ -386,14 +386,14 @@ class ManageDoctors extends Component {
                 </div>
                 <button
                     className='save-content-doctor'
-                    onClick={() => this.handleSaveContentMarkdown()}>
+                    onClick={() => this.handleSaveDoctorInfo()}>
                     {isNewDoctor === true
                         ? <FormattedMessage id='admin.manage-doctor.save' />
                         : <FormattedMessage id='admin.manage-doctor.update' />
                     }
                 </button>
                 <button className='cancel-content-doctor'
-                    onClick={() => this.handleCancelContentMarkdown()}>
+                    onClick={() => this.handleCancelDoctorInfo()}>
                     <FormattedMessage id='admin.manage-doctor.cancel' />
                 </button>
             </div>

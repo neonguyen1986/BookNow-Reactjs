@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import cardiology from '../../../../assets/img-specialty/1. cardiology.jpg'
 import { getAllSpecialty } from '../../../../services/userService';
 import { collapseToast } from 'react-toastify';
-import { CommonUtils } from '../../../../utils';
+import { CommonUtils, path } from '../../../../utils';
 import { Link } from 'react-router-dom';
 
 class Specialty extends Component {
@@ -30,6 +30,9 @@ class Specialty extends Component {
             })
         }
     }
+
+
+
     render() {
         let { allSpecialties } = this.state;
         console.log('>>>>>check state from Specialty:', this.state)
@@ -40,7 +43,13 @@ class Specialty extends Component {
                         <div className='section-container'>
                             <div className='section-header'>
                                 <div className='section-title'>Popular specialties</div>
-                                <button>VIEW MORE...</button>
+
+                                <button>
+                                    <Link to={path.SPECIALTY_MORE} style={{ textDecoration: 'none', color: 'inherit', }}>
+                                        VIEW MORE...
+                                    </Link>
+                                </button>
+
                             </div>
                             <div className='section-body'>
                                 <Slider {...this.props.settings}>
@@ -48,12 +57,17 @@ class Specialty extends Component {
                                         allSpecialties.map((item, index) => {
                                             let imgSrc = CommonUtils.convertBase64ToBinary(item.image)
                                             return (
-                                                <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
-                                                    <div key={index} className='img-customize'>
-                                                        <div className='tempdiv'><img className='image' src={imgSrc} /></div>
-                                                        <div><b>{item.name}</b></div>
-                                                    </div>
-                                                </Link>
+                                                // <Link to='/home' style={{ textDecoration: 'none', color: 'inherit', }}></Link>
+
+                                                <div key={index} className='img-customize'>
+                                                    <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
+                                                        <div className='tempdiv'><img className='image-specialty' src={imgSrc} /></div>
+                                                    </Link>
+                                                    <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
+                                                        <div className='specialty-text'><b>{item.name}</b></div>
+                                                    </Link>
+
+                                                </div>
                                             )
                                         })
                                     }

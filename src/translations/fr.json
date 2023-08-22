@@ -1,0 +1,133 @@
+{
+    "home-header": {
+        "specialty": "Spécialité",
+        "search-doctor": "Rechercher un médecin par spécialité",
+        "facilities": "Installations",
+        "choose-facilities": "Choisissez les installations",
+        "doctor": "Médecin",
+        "find-doctor": "Trouver un bon médecin",
+        "package": "Emballer",
+        "health-check": "Bilan de santé général",
+        "support": "Soutien",
+        "medical-background": "PLATEFORME MÉDICALE",
+        "comprehensive": "SOINS DE SANTÉ COMPLETS",
+        "specialist-exam": "Examen spécialiste",
+        "remote-exam": "Examen à distance",
+        "general-exam": "Examen général",
+        "medical-test": "Test médical",
+        "mental-health": "Santé mentale",
+        "dental-exam": "Examen dentaire",
+        "welcome": "Bienvenue "
+    },
+    "menu": {
+        "admin": {
+            "manage-user": "Système d'utilisateurs",
+            "manage-doctor": "Gérer les médecins",
+            "manage-admin": "Gérer les administrateurs",
+            "redux-CRUD": "CRUD Redux",
+            "user-CRUD": "CRUD utilisateur",
+            "clinic": "Cliniques",
+            "manage-clinic": "Gérer les cliniques",
+            "specialty": "Spécialités",
+            "manage-specialty": "Gérer les spécialités",
+            "handbook": "Manuels",
+            "manage-handbook": "Gérer les manuels"
+        },
+        "doctor": {
+            "manage-schedule": "Gérer le calendrier des médecins",
+            "manage-patient": "Gérer les patients"
+        }
+    },
+    "manage-user": {
+        "add": "Ajouter un nouvel utilisateur",
+        "email": "E-mail",
+        "password": "Mot de passe",
+        "first-name": "Prénom",
+        "last-name": "Nom de famille",
+        "phone-number": "Numéro de téléphone",
+        "address": "Adresse",
+        "gender": "Genre",
+        "position": "Poste",
+        "role-id": "ID du rôle",
+        "save": "Enregistrer",
+        "image": "Avatar",
+        "save-changes": "Enregistrer les modifications",
+        "cancel-btn": "Annuler"
+    },
+    "home-page": {
+        "outstanding-doctor": "Médecin exceptionnel",
+        "more-info": "PLUS D'INFORMATIONS"
+    },
+    "admin": {
+        "manage-doctor": {
+            "doctor-title": "Créer les informations des médecins",
+            "doctor-info": "Informations de référence sur le médecin",
+            "choose-doctor": "Médecin",
+            "choose-price": "Prix",
+            "choose-payment": "Paiement",
+            "choose-province": "Province",
+            "choose-specialty": "Spécialité",
+            "choose-clinic": "Clinique",
+            "choose-doctor-place-holder": "Choisir un médecin",
+            "choose-price-place-holder": "Choisir un prix",
+            "choose-payment-place-holder": "Choisir un mode de paiement",
+            "choose-province-place-holder": "Choisir une province",
+            "choose-specialty-place-holder": "Choisir une spécialité",
+            "choose-clinic-place-holder": "Choisir une clinique",
+            "save": "Enregistrer",
+            "update": "Mettre à jour",
+            "cancel": "Annuler",
+            "clinic-name": "Nom de la clinique",
+            "clinic-address": "Adresse de la clinique",
+            "note": "Note"
+        },
+        "manage-specialty": {
+            "title": "GERER LES SPÉCIALITÉS",
+            "name": "Nom de la spécialité",
+            "image": "Image de la spécialité",
+            "content": "Contenu de la spécialité",
+            "save": "Enregistrer"
+        }
+    },
+    "manage-schedule": {
+        "title": "Gérer le plan d'examen des médecins",
+        "choose-doctor": "Choisir le médecin",
+        "choose-date": "Choisir la date",
+        "save": "Enregistrer"
+    },
+    "patient": {
+        "detail-doctor": {
+            "calendar": "Calendrier",
+            "doctor-avai": "Temporairement, le médecin est complet",
+            "free-booking": "Réservation gratuite",
+            "clinic-address": "Adresse de la clinique",
+            "price": "Prix",
+            "hide": "Masquer l'information",
+            "more-detail": "Plus de détails",
+            "payment-text": "Les patients peuvent payer par",
+            "name": "Nom complet",
+            "phone-number": "Numéro de téléphone",
+            "address": "Adresse",
+            "date-of-birth": "Date de naissance",
+            "gender": "Genre",
+            "test-type": "Quel type de test souhaitez-vous ?"
+        },
+        "booking-modal": {
+            "price": "Prix :",
+            "free-booking": "Réservation gratuite",
+            "name": "Nom complet",
+            "phone-number": "Numéro de téléphone",
+            "address": "Adresse",
+            "date-of-birth": "Date de naissance",
+            "gender": "Genre",
+            "test-type": "Quel type de test souhaitez-vous ?",
+            "confirm": "Confirmer",
+            "cancel": "Annuler"
+        },
+        "verify": {
+            "verify-success": "Merci. Vous venez de vérifier votre réservation !",
+            "verify-fail": "Le rendez-vous n'existe pas ou a déjà été vérifié",
+            "back-to-homepage": "Retour à la page d'accueil"
+        }
+    }
+}
