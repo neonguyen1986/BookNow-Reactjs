@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import cardiology from '../../../../assets/img-specialty/1. cardiology.jpg'
 import { getAllSpecialty } from '../../../../services/userService';
 import { collapseToast } from 'react-toastify';
-import { CommonUtils, path } from '../../../../utils';
+import { CommonUtils, path, LANGUAGE } from '../../../../utils';
 import { Link } from 'react-router-dom';
 
 class Specialty extends Component {
@@ -36,6 +36,7 @@ class Specialty extends Component {
     render() {
         let { allSpecialties } = this.state;
         console.log('>>>>>check state from Specialty:', this.state)
+        let language = this.props.language
         return (
             <>
                 <div className='fit-height-width'>
@@ -46,7 +47,7 @@ class Specialty extends Component {
 
                                 <button>
                                     <Link to={path.SPECIALTY_MORE} style={{ textDecoration: 'none', color: 'inherit', }}>
-                                        VIEW MORE...
+                                        <FormattedMessage id='home-page.more-info' />
                                     </Link>
                                 </button>
 
@@ -55,16 +56,17 @@ class Specialty extends Component {
                                 <Slider {...this.props.settings}>
                                     {allSpecialties?.length > 0 &&
                                         allSpecialties.map((item, index) => {
-                                            let imgSrc = CommonUtils.convertBase64ToBinary(item.image)
                                             return (
                                                 // <Link to='/home' style={{ textDecoration: 'none', color: 'inherit', }}></Link>
 
                                                 <div key={index} className='img-customize'>
                                                     <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
-                                                        <div className='tempdiv'><img className='image-specialty' src={imgSrc} /></div>
+                                                        <div className='tempdiv'><img className='image-specialty' src={item.image} /></div>
                                                     </Link>
                                                     <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
-                                                        <div className='specialty-text'><b>{item.name}</b></div>
+                                                        <div className='specialty-text'>
+                                                            {language === LANGUAGE.EN ? item.nameEn : item.nameFr}
+                                                        </div>
                                                     </Link>
 
                                                 </div>

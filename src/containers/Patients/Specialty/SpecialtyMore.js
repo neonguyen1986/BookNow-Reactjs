@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-const SpecialtyMore = () => {
+const SpecialtyMore = (props) => {
     const [specialtyList, setSpecialtyList] = useState('')
 
     useEffect(async () => {
@@ -21,21 +21,22 @@ const SpecialtyMore = () => {
             console.log('Error on fetching data:', error)
         }
     }, [])
-
+    const language = props.language
     return (
         <div className='specMore-bkground'>
             <HomeHeader isShowBanner={false} />
             <div className='specMore-container container'>
                 {specialtyList?.length > 0 &&
                     specialtyList.map((item, index) => {
-                        const image = CommonUtils.convertBase64ToBinary(item.image);
                         return (
-                            <div className='specMore-content' key='index'>
+                            <div className='specMore-content' key={index}>
                                 <div className='specMore-img-div'>
-                                    <img className='specMore-img' src={image} />
+                                    <img className='specMore-img' src={item.image} />
                                 </div>
                                 <div className='specMore-text'>
-                                    <ReactMarkdown>{item.descriptionMarkdown}</ReactMarkdown>
+                                    <ReactMarkdown>
+                                        {language === LANGUAGE.EN ? item.descriptionMarkdown_En : item.descriptionMarkdown_Fr}
+                                    </ReactMarkdown>
                                 </div>
                             </div>
                         )

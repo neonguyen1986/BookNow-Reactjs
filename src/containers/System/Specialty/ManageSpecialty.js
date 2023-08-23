@@ -22,9 +22,12 @@ class ManageSpecialty extends Component {
         this.state = {
             previewImgURL: '',
             isOpen: false,
-            specialtyName: '',
-            markdownSpecialty: '',
-            HTMLSpecialty: '',
+            specialtyNameEn: '',
+            specialtyNameFr: '',
+            markdownSpecialtyEn: '',
+            markdownSpecialtyFr: '',
+            HTMLSpecialtyEn: '',
+            HTMLSpecialtyFr: '',
             specialtyImage: '',
         }
     }
@@ -41,12 +44,11 @@ class ManageSpecialty extends Component {
         let file = data[0];
         if (file) {
             let base64file = await CommonUtils.convertBlobToBase64(file)
-            // console.log('>>>check base64', base64file)
             //Ta sẽ tạo một link HTML (blob) của ảnh này
             let objectUrl = URL.createObjectURL(file)
             this.setState({
                 previewImgURL: objectUrl,
-                specialtyImage: base64file,
+                specialtyImage: file,
             })
         }
         // console.log('>>>check image:', objectUrl)
@@ -61,22 +63,44 @@ class ManageSpecialty extends Component {
     //================= Markdown Editor=================
     mdParser = new MarkdownIt(/* Markdown-it options */);
     // Finish!
-    handleEditorChange = ({ html, text }) => {
-        console.log('handleEditorChange', html, text);
+    handleEditorChangeEn = ({ html, text }) => {
+        console.log('handleEditorChangeEn', html, text);
         this.setState({
-            markdownSpecialty: text,
-            HTMLSpecialty: html,
+            markdownSpecialtyEn: text,
+            HTMLSpecialtyEn: html,
+        })
+    }
+    handleEditorChangeFr = ({ html, text }) => {
+        console.log('handleEditorChangeFr', html, text);
+        this.setState({
+            markdownSpecialtyFr: text,
+            HTMLSpecialtyFr: html,
         })
     }
     //================= Markdown Editor=================
-    handleOnChangeSpecialtyName = (e) => {
+    handleOnChangeSpecialtyNameEn = (e) => {
         this.setState({
-            specialtyName: e.target.value
+            specialtyNameEn: e.target.value
+        })
+    }
+    handleOnChangeSpecialtyNameFr = (e) => {
+        this.setState({
+            specialtyNameFr: e.target.value
         })
     }
 
     handleOnClickSave = async () => {
-        let res = await postCreateNewSpecialty(this.state)
+        const formData = new FormData();
+        formData.append('fileName', this.state.specialtyImage);
+        //data for DB
+        formData.append('specialtyNameEn', this.state.specialtyNameEn)
+        formData.append('specialtyNameFr', this.state.specialtyNameFr)
+        formData.append('markdownSpecialtyEn', this.state.markdownSpecialtyEn)
+        formData.append('markdownSpecialtyFr', this.state.markdownSpecialtyFr)
+        formData.append('HTMLSpecialtyEn', this.state.HTMLSpecialtyEn)
+        formData.append('HTMLSpecialtyFr', this.state.HTMLSpecialtyFr)
+
+        let res = await postCreateNewSpecialty(formData)
         if (res?.errCode === 0) {
             toast.success(`You're just add a new specialty`)
         }
@@ -85,7 +109,7 @@ class ManageSpecialty extends Component {
         }
     }
     render() {
-        let { previewImgURL, isOpen, specialtyName } = this.state
+        let { previewImgURL, isOpen } = this.state
         console.log('>>>>check state ManageSpecialty:', this.state)
         return (
             <>
@@ -100,16 +124,16 @@ class ManageSpecialty extends Component {
                                     Specialty name in English
                                 </label>
                                 <input className='form-control'
-                                    value={this.state.specialtyName}
-                                    onChange={(e) => this.handleOnChangeSpecialtyName(e)} />
+                                    value={this.state.specialtyNameEn}
+                                    onChange={(e) => this.handleOnChangeSpecialtyNameEn(e)} />
                             </div>
                             <div className='specialty-name col-12 form-group ml-3'>
                                 <label>
                                     Nom de la spécialité en français
                                 </label>
                                 <input className='form-control'
-                                    value={this.state.specialtyName}
-                                    onChange={(e) => this.handleOnChangeSpecialtyName(e)} />
+                                    value={this.state.specialtyNameFr}
+                                    onChange={(e) => this.handleOnChangeSpecialtyNameFr(e)} />
                             </div>
                         </div>
                         <div className='preview-image-container-specialty col-6 form-group'>
@@ -139,7 +163,7 @@ class ManageSpecialty extends Component {
                         <MdEditor
                             style={{ height: '300px' }}
                             renderHTML={text => this.mdParser.render(text)}
-                            onChange={this.handleEditorChange} />
+                            onChange={this.handleEditorChangeEn} />
 
                     </div>
                     <div className='markdown-content col-12'>
@@ -147,7 +171,7 @@ class ManageSpecialty extends Component {
                         <MdEditor
                             style={{ height: '300px' }}
                             renderHTML={text => this.mdParser.render(text)}
-                            onChange={this.handleEditorChange} />
+                            onChange={this.handleEditorChangeFr} />
 
                     </div>
                     <button className='btn btn-primary'
