@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 
 
-class test extends Component {
+class Test extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -22,7 +22,7 @@ class test extends Component {
     render() {
         return (
             <div>
-                hello from CustomToastCloseButton
+                this is Test
             </div>
         )
     }
@@ -42,4 +42,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(test);
+export default connect(mapStateToProps, mapDispatchToProps)(Test);

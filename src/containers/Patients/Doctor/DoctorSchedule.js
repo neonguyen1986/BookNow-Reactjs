@@ -154,8 +154,8 @@ class DoctorSchedule extends Component {
                                     <>
                                         {allAvailableTime.map((item, index) => {
                                             let time = '';
-                                            if (item?.timeTypeData?.valueEn && item?.timeTypeData?.valueVi) {
-                                                time = language === LANGUAGE.EN ? item.timeTypeData.valueEn : item.timeTypeData.valueVi
+                                            if (item?.timeTypeData?.valueEn && item?.timeTypeData?.valueFr) {
+                                                time = language === LANGUAGE.EN ? item.timeTypeData.valueEn : item.timeTypeData.valueFr
                                             }
                                             return (
                                                 <button key={index}

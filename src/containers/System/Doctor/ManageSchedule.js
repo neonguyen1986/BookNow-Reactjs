@@ -183,7 +183,7 @@ class ManageSchedule extends Component {
                                         >
                                             {language === LANGUAGE.EN
                                                 ? item.valueEn
-                                                : item.valueVi}
+                                                : item.valueFr}
                                         </button>
                                     )
                                 })

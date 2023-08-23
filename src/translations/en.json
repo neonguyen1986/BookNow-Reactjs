@@ -34,7 +34,7 @@
             "manage-handbook": "Manage Handbooks"
         },
         "doctor": {
-            "manage-schedule": "Manage doctors' schedule",
+            "manage-schedule": "Manage schedule",
             "manage-patient": "Manage patients"
         }
     },
@@ -61,31 +61,25 @@
     "admin": {
         "manage-doctor": {
             "doctor-title": "Create Doctors information",
-            "doctor-info": "Referral information about the doctor",
             "choose-doctor": "Doctor",
             "choose-price": "Price",
             "choose-payment": "Payment",
             "choose-province": "Province",
             "choose-specialty": "Specialty",
-            "choose-clinic": "Clinic",
             "choose-doctor-place-holder": "Choose Doctor",
             "choose-price-place-holder": "Choose Price",
             "choose-payment-place-holder": "Choose Payment Method",
             "choose-province-place-holder": "Choose Province",
             "choose-specialty-place-holder": "Choose Specialty",
-            "choose-clinic-place-holder": "Choose Clinic",
             "save": "Save",
             "update": "Update",
             "cancel": "Cancel",
             "clinic-name": "Clinic name",
-            "clinic-address": "Clinic address",
-            "note": "Note"
+            "clinic-address": "Clinic address"
         },
         "manage-specialty": {
             "title": "MANAGE SPECIALTIES",
-            "name": "Specialty name",
             "image": "Specialty Image",
-            "content": "Specialty content",
             "save": "Save"
         }
     },

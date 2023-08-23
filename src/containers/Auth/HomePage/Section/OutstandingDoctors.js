@@ -52,7 +52,7 @@ class OutstandingDoctors extends Component {
                                 <Slider {...this.props.settings}>
                                     {arrDoctors?.length > 0 &&
                                         arrDoctors.map((item, index) => {
-                                            let position = language === LANGUAGE.EN ? item.positionData.valueEn : item.positionData.valueVi
+                                            let position = language === LANGUAGE.EN ? item.positionData.valueEn : item.positionData.valueFr
                                             let name = language === LANGUAGE.EN ? `${item.firstName} ${item.lastName} ` : `${item.lastName} ${item.firstName} `
                                             // console.log('>>>image check;;;', item.image)
                                             return (

@@ -173,7 +173,7 @@ class ManagePatient extends Component {
                                                     <td>
                                                         {language === LANGUAGE.EN
                                                             ? item.patientInfo.genderData.valueEn
-                                                            : item.patientInfo.genderData.valueVi}
+                                                            : item.patientInfo.genderData.valueFr}
                                                     </td>
                                                     <td>{item.patientInfo.address}</td>
                                                     <td>
@@ -184,7 +184,7 @@ class ManagePatient extends Component {
                                                     <td>
                                                         {language === LANGUAGE.EN
                                                             ? item.timeBooking.valueEn
-                                                            : item.timeBooking.valueVi}
+                                                            : item.timeBooking.valueFr}
                                                     </td>
                                                     <td>
                                                         {item.statusId && item.statusId === 'S3'

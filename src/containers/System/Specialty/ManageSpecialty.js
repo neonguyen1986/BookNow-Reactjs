@@ -93,15 +93,24 @@ class ManageSpecialty extends Component {
                     <div className='title'>
                         <FormattedMessage id='admin.manage-specialty.title' />
                     </div>
-                    <div className='specialty-content row'>
-                        <div className='specialty-name col-6 form-group'>
-                            <label>
-                                <FormattedMessage id='admin.manage-specialty.name' />
-
-                            </label>
-                            <input className='form-control'
-                                value={this.state.specialtyName}
-                                onChange={(e) => this.handleOnChangeSpecialtyName(e)} />
+                    <div className='manage-specialty-content'>
+                        <div className='specialty-name'>
+                            <div className='specialty-name col-12 form-group ml-3'>
+                                <label>
+                                    Specialty name in English
+                                </label>
+                                <input className='form-control'
+                                    value={this.state.specialtyName}
+                                    onChange={(e) => this.handleOnChangeSpecialtyName(e)} />
+                            </div>
+                            <div className='specialty-name col-12 form-group ml-3'>
+                                <label>
+                                    Nom de la spécialité en français
+                                </label>
+                                <input className='form-control'
+                                    value={this.state.specialtyName}
+                                    onChange={(e) => this.handleOnChangeSpecialtyName(e)} />
+                            </div>
                         </div>
                         <div className='preview-image-container-specialty col-6 form-group'>
                             <div className='left-content'>
@@ -126,7 +135,15 @@ class ManageSpecialty extends Component {
                         </div>
                     </div>
                     <div className='markdown-content col-12'>
-                        <FormattedMessage id='admin.manage-specialty.content' />
+                        <p>Specialty content in English</p>
+                        <MdEditor
+                            style={{ height: '300px' }}
+                            renderHTML={text => this.mdParser.render(text)}
+                            onChange={this.handleEditorChange} />
+
+                    </div>
+                    <div className='markdown-content col-12'>
+                        <p>Contenu spécialisé en français</p>
                         <MdEditor
                             style={{ height: '300px' }}
                             renderHTML={text => this.mdParser.render(text)}

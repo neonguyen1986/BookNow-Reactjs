@@ -91,7 +91,7 @@ class BookingModal extends Component {
                 } else {
                     result.push({
                         value: type === 'USER' ? tempArr.id : tempArr.keyMap,
-                        label: type === 'USER' ? `${tempArr.lastName} ${tempArr.firstName}` : tempArr.valueVi
+                        label: type === 'USER' ? `${tempArr.lastName} ${tempArr.firstName}` : tempArr.valueFr
                     })
                 }
             }
@@ -110,7 +110,7 @@ class BookingModal extends Component {
         //     ? moment.unix(+this.state.dateBooked / 1000).format('ddd - DD/MM/YYYY')
         //     : moment.unix(+this.state.dateBooked / 1000).locale('en').format('ddd-MM/DD/YYYY')
         let timeBookedENVI = language === LANGUAGE.FR
-            ? this.state.timeBooked.valueVi
+            ? this.state.timeBooked.valueFr
             : this.state.timeBooked.valueEn
         let res = await postPatientBookingAppointment({
             fullName: this.state.fullName,

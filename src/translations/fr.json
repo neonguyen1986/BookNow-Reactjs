@@ -34,7 +34,7 @@
             "manage-handbook": "Gérer les manuels"
         },
         "doctor": {
-            "manage-schedule": "Gérer le calendrier des médecins",
+            "manage-schedule": "Gérer le planning",
             "manage-patient": "Gérer les patients"
         }
     },
@@ -61,31 +61,25 @@
     "admin": {
         "manage-doctor": {
             "doctor-title": "Créer les informations des médecins",
-            "doctor-info": "Informations de référence sur le médecin",
             "choose-doctor": "Médecin",
             "choose-price": "Prix",
             "choose-payment": "Paiement",
             "choose-province": "Province",
             "choose-specialty": "Spécialité",
-            "choose-clinic": "Clinique",
             "choose-doctor-place-holder": "Choisir un médecin",
             "choose-price-place-holder": "Choisir un prix",
             "choose-payment-place-holder": "Choisir un mode de paiement",
             "choose-province-place-holder": "Choisir une province",
             "choose-specialty-place-holder": "Choisir une spécialité",
-            "choose-clinic-place-holder": "Choisir une clinique",
             "save": "Enregistrer",
             "update": "Mettre à jour",
             "cancel": "Annuler",
             "clinic-name": "Nom de la clinique",
-            "clinic-address": "Adresse de la clinique",
-            "note": "Note"
+            "clinic-address": "Adresse de la clinique"
         },
         "manage-specialty": {
             "title": "GERER LES SPÉCIALITÉS",
-            "name": "Nom de la spécialité",
             "image": "Image de la spécialité",
-            "content": "Contenu de la spécialité",
             "save": "Enregistrer"
         }
     },

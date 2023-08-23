@@ -60,7 +60,7 @@ class DoctorMoreInfo extends Component {
                         {doctorMoreInfo?.addressClinic ? doctorMoreInfo.addressClinic : ''}- &nbsp;
                         {language === LANGUAGE.EN
                             ? doctorMoreInfo?.provinceTypeData?.valueEn ? doctorMoreInfo.provinceTypeData.valueEn : ''
-                            : doctorMoreInfo?.provinceTypeData?.valueVi ? doctorMoreInfo.provinceTypeData.valueEn : ''
+                            : doctorMoreInfo?.provinceTypeData?.valueFr ? doctorMoreInfo.provinceTypeData.valueEn : ''
                         }
                     </div>
                 </div>
@@ -71,8 +71,8 @@ class DoctorMoreInfo extends Component {
                         <span className='price'>
 
                             {language === LANGUAGE.EN
-                                ? doctorMoreInfo?.priceTypeData?.valueEn ? `${doctorMoreInfo.priceTypeData.valueEn} USD` : ''
-                                : doctorMoreInfo?.priceTypeData?.valueVi ? CommonUtils.numberFormat(doctorMoreInfo.priceTypeData.valueVi, 'đ', 70) : ''
+                                ? doctorMoreInfo?.priceTypeData?.valueEn ? `${doctorMoreInfo.priceTypeData.valueEn}` : ''
+                                : doctorMoreInfo?.priceTypeData?.valueFr ? CommonUtils.numberFormat(doctorMoreInfo.priceTypeData.valueFr, ' EUR', 70) : ''
                             }
                         </span>
                         <span className='more-detail'
@@ -84,19 +84,19 @@ class DoctorMoreInfo extends Component {
                         <div className='price-title'><FormattedMessage id='patient.detail-doctor.price' /></div>
                         <div className='price-text'>
                             <span><b><FormattedMessage id='patient.detail-doctor.price' />:</b> <br />
-                                {doctorMoreInfo?.note ? doctorMoreInfo.note : ''}
+                                {doctorMoreInfo?.note ? doctorMoreInfo.note : ''} Blank here
                             </span>
                             <span>
                                 {language === LANGUAGE.EN
-                                    ? doctorMoreInfo?.priceTypeData?.valueEn ? `${doctorMoreInfo.priceTypeData.valueEn} USD` : ''
-                                    : doctorMoreInfo?.priceTypeData?.valueVi ? CommonUtils.numberFormat(doctorMoreInfo.priceTypeData.valueVi, 'đ', 70) : ''
+                                    ? doctorMoreInfo?.priceTypeData?.valueEn ? `${doctorMoreInfo.priceTypeData.valueEn}` : ''
+                                    : doctorMoreInfo?.priceTypeData?.valueFr ? CommonUtils.numberFormat(doctorMoreInfo.priceTypeData.valueFr, ' EUR', 70) : ''
                                 }
                             </span>
                         </div>
                         <div className='note'><FormattedMessage id='patient.detail-doctor.payment-text' />
                             {language === LANGUAGE.EN
                                 ? doctorMoreInfo?.paymentTypeData?.valueEn ? doctorMoreInfo.paymentTypeData.valueEn : ''
-                                : doctorMoreInfo?.paymentTypeData?.valueVi ? doctorMoreInfo.paymentTypeData.valueVi : ''
+                                : doctorMoreInfo?.paymentTypeData?.valueFr ? doctorMoreInfo.paymentTypeData.valueFr : ''
                             }</div>
                         <div className='show-hide'
                             onClick={() => this.handleShowHidePrice(false)}

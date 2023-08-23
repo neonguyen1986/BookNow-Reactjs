@@ -52,7 +52,6 @@ class ManageDoctors extends Component {
     async componentDidMount() {
 
         await this.props.fetchAllDoctorsRedux();
-
         await this.props.getRequiredDoctorInfo();
 
 
@@ -91,15 +90,15 @@ class ManageDoctors extends Component {
             ) {
                 let tempSelectedPrice = {
                     value: data.Doctor_Info.priceId,
-                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.priceTypeData.valueEn : data.Doctor_Info.priceTypeData.valueVi
+                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.priceTypeData.valueEn : data.Doctor_Info.priceTypeData.valueFr
                 }
                 let tempSelectedPayment = {
                     value: data.Doctor_Info.paymentId,
-                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.paymentTypeData.valueEn : data.Doctor_Info.paymentTypeData.valueVi
+                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.paymentTypeData.valueEn : data.Doctor_Info.paymentTypeData.valueFr
                 }
                 let tempSelectedProvince = {
                     value: data.Doctor_Info.provinceId,
-                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.provinceTypeData.valueEn : data.Doctor_Info.provinceTypeData.valueVi
+                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.provinceTypeData.valueEn : data.Doctor_Info.provinceTypeData.valueFr
                 }
                 let tempselectedSpecialty = {
                     value: data.Doctor_Info.specialtyName.id,
@@ -166,18 +165,18 @@ class ManageDoctors extends Component {
                     result.push({
                         value: (type === 'USER' || type === 'SPECIALTY') ? tempArr.id : tempArr.keyMap,
                         label: type === 'USER' ? `${tempArr.firstName} ${tempArr.lastName}` :
-                            type === 'PRICE' ? `${tempArr.valueEn} USD` :
+                            type === 'PRICE' ? `${tempArr.valueEn}` :
                                 type === 'SPECIALTY' ? tempArr.name :
                                     tempArr.valueEn
 
                     })
                 } else {
                     result.push({
-                        value: type === 'USER' ? tempArr.id : tempArr.keyMap,
-                        label: type === 'USER' ? `${tempArr.lastName} ${tempArr.firstName}` :
-                            type === 'PRICE' ? `${tempArr.valueVi} VND` :
+                        value: (type === 'USER' || type === 'SPECIALTY') ? tempArr.id : tempArr.keyMap,
+                        label: type === 'USER' ? `${tempArr.firstName} ${tempArr.lastName}` :
+                            type === 'PRICE' ? `${tempArr.valueFr}` :
                                 type === 'SPECIALTY' ? tempArr.name :
-                                    tempArr.valueVi
+                                    tempArr.valueFr
                     })
                 }
             }
@@ -187,6 +186,7 @@ class ManageDoctors extends Component {
 
     handleChange = async (key, selectedValue) => {
         this.setState({ [key]: selectedValue });
+        console.log('key, value:', key, selectedValue)
     };
     //================================================
     //=======================Change description, Clinic name, address, note=========================
@@ -276,14 +276,14 @@ class ManageDoctors extends Component {
             note,
             description } = this.state
         // console.log('>>check doctor', selectedPrice)
-        // console.log('=======check state:', this.state)
+        console.log('=======check state:', this.state)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title title'>
                     <FormattedMessage id='admin.manage-doctor.doctor-title' />
                 </div>
                 <div className='doctor-info row' >
-                    <div className='content-left col-6 form-group'>
+                    <div className='content-left col-6 form-group mr-5'>
                         <label><FormattedMessage id='admin.manage-doctor.choose-doctor' /></label>
                         <Select
                             value={this.state.selectedDoctor}
@@ -293,11 +293,17 @@ class ManageDoctors extends Component {
                         />
                     </div>
                     <div className='content-right col-6 form-group'>
-                        <label><FormattedMessage id='admin.manage-doctor.doctor-info' /></label>
+                        <label> Doctor Biography in English</label>
                         <textarea className='form-control' rows='4'
                             onChange={(e) => this.handleOnChangeText(e, 'description')}
                             value={this.state.description}>
-
+                        </textarea>
+                    </div>
+                    <div className='content-right col-6 form-group'>
+                        <label>Biographie du docteur en français</label>
+                        <textarea className='form-control' rows='4'
+                            onChange={(e) => this.handleOnChangeText(e, 'description')}
+                            value={this.state.description}>
                         </textarea>
                     </div>
                 </div>
@@ -344,16 +350,6 @@ class ManageDoctors extends Component {
                         />
                     </div>
                     <div className='col-6 form-group'>
-                        <label> <FormattedMessage id='admin.manage-doctor.choose-clinic' /></label>
-                        <Select
-                            value={selectedClinic}
-                            onChange={(selectedValue) => this.handleChange('selectedClinic', selectedValue)}
-                            options={optionsListClinic}
-                            name='selectedClinic'
-                            placeholder={<FormattedMessage id='admin.manage-doctor.choose-clinic-place-holder' />}
-                        />
-                    </div>
-                    <div className='col-6 form-group'>
                         <label> <FormattedMessage id='admin.manage-doctor.clinic-name' /></label>
                         <input className='form-control'
                             onChange={(e) => this.handleOnChangeText(e, 'clinicName')}
@@ -367,18 +363,21 @@ class ManageDoctors extends Component {
                             value={clinicAddress}
                         />
                     </div>
-                    <div className='col-6 form-group'>
-                        <label> <FormattedMessage id='admin.manage-doctor.note' /></label>
-                        <input className='form-control'
-                            onChange={(e) => this.handleOnChangeText(e, 'note')}
-                            value={note}
-                        />
-                    </div>
 
                 </div>
                 <div className='manage-doctor-editor'>
+                    <p>Doctor information in English</p>
                     <MdEditor
-                        style={{ height: '500px' }}
+                        style={{ height: '50vh' }}
+                        renderHTML={text => this.mdParser.render(text)}
+                        value={this.state.markdownContent}
+                        onChange={this.handleEditorChange} />
+
+                </div>
+                <div className='manage-doctor-editor'>
+                    <p>Informations médicales en français</p>
+                    <MdEditor
+                        style={{ height: '50vh' }}
                         renderHTML={text => this.mdParser.render(text)}
                         value={this.state.markdownContent}
                         onChange={this.handleEditorChange} />

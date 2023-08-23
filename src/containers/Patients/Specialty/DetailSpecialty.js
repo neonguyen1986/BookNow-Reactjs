@@ -53,7 +53,7 @@ class DetailSpecialty extends Component {
         let getAllProvince = this.state.getAllProvince
         let curProvinceId = ''
         for (let i = 0; i < getAllProvince.length; i++) {
-            if (getAllProvince[i].valueEn === provinceENVI || getAllProvince[i].valueVi === provinceENVI) {
+            if (getAllProvince[i].valueEn === provinceENVI || getAllProvince[i].valueFr === provinceENVI) {
                 curProvinceId = getAllProvince[i].keyMap;
                 break;
             }
@@ -90,7 +90,7 @@ class DetailSpecialty extends Component {
                             getAllProvince.map((item, index) => {
                                 return (
                                     <option key={index} keyMap={item.Keymap}>
-                                        {language === LANGUAGE.EN ? item.valueEn : item.valueVi}
+                                        {language === LANGUAGE.EN ? item.valueEn : item.valueFr}
                                     </option>
                                 )
                             })

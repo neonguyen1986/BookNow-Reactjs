@@ -63,10 +63,10 @@ class DoctorProfile extends Component {
                                 profileData?.firstName &&
                                 profileData?.lastName &&
                                 `${profileData.positionData.valueEn} ${profileData.firstName} ${profileData.lastName}`
-                                : profileData?.positionData?.valueVi &&
+                                : profileData?.positionData?.valueFr &&
                                 profileData?.firstName &&
                                 profileData?.lastName &&
-                                `${profileData.positionData.valueVi} ${profileData.lastName} ${profileData.firstName}`
+                                `${profileData.positionData.valueFr} ${profileData.lastName} ${profileData.firstName}`
                             }
                         </div>
                         {isDescription === true
@@ -80,7 +80,7 @@ class DoctorProfile extends Component {
                                 {language === LANGUAGE.EN
                                     ?
                                     this.props?.dataTimeParent?.timeTypeData?.valueEn ? this.props.dataTimeParent.timeTypeData.valueEn : ''
-                                    : this.props?.dataTimeParent?.timeTypeData?.valueVi ? this.props.dataTimeParent.timeTypeData.valueVi : ''
+                                    : this.props?.dataTimeParent?.timeTypeData?.valueFr ? this.props.dataTimeParent.timeTypeData.valueFr : ''
                                 } -&nbsp;
                                 {language === LANGUAGE.FR
                                     ?
@@ -99,8 +99,8 @@ class DoctorProfile extends Component {
                 <div className='price'>
                     <FormattedMessage id='patient.booking-modal.price' />
                     {language === LANGUAGE.EN
-                        ? profileData?.Doctor_Info?.priceTypeData?.valueEn ? `${profileData.Doctor_Info.priceTypeData.valueEn} USD` : ''
-                        : profileData?.Doctor_Info?.priceTypeData?.valueVi ? CommonUtils.numberFormat(profileData.Doctor_Info.priceTypeData.valueVi, 'đ', 70) : ''
+                        ? profileData?.Doctor_Info?.priceTypeData?.valueEn ? `${profileData.Doctor_Info.priceTypeData.valueEn}` : ''
+                        : profileData?.Doctor_Info?.priceTypeData?.valueFr ? CommonUtils.numberFormat(profileData.Doctor_Info.priceTypeData.valueFr, ' EUR', 70) : ''
                     }
                 </div>
             </div>

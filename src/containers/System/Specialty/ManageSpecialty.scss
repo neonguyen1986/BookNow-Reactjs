@@ -1,6 +1,12 @@
 .manage-specialty-container {
-    .specialty-content {
-        margin: 1.5rem 1.5rem;
+    .manage-specialty-content {
+        margin         : 1.5rem 1.5rem;
+        display        : flex;
+        justify-content: space-between;
+
+        .specialty-name {
+            width: 100%;
+        }
 
         .preview-image-container-specialty {
             display        : flex;
@@ -8,6 +14,8 @@
             justify-content: center;
 
             .left-content {
+                padding-top   : 2.5rem;
+                margin-right  : 2rem;
                 display       : flex;
                 flex-direction: column;
 
