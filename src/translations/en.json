@@ -80,9 +80,10 @@
         "manage-specialty": {
             "create-title": "CREATE SPECIALTIES",
             "edit-title": "EDIT SPECIALTIES",
-            "delete-title": "DELETE SPECIALTIES",
             "image": "Specialty Image",
-            "save": "Save"
+            "save": "Save",
+            "create": " Create New",
+            "edit-delete": " Edit - Delete"
         }
     },
     "manage-schedule": {

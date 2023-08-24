@@ -234,10 +234,10 @@ class ManageSpecialty extends Component {
                 <div className="ManaSpec-navbar">
                     <div
                         onClick={(e) => this.handleClickCreateEvent(e)}
-                    ><i className="fas fa-plus"></i> Create New</div>
+                    ><i className="fas fa-plus"></i> &nbsp;<FormattedMessage id='admin.manage-specialty.create' /></div>
                     <div className="active"
                         onClick={(e) => this.handleClickEditEvent(e)}
-                    ><i className="far fa-edit"></i>Edit - Delete</div>
+                    ><i className="far fa-edit"></i>&nbsp;<FormattedMessage id='admin.manage-specialty.edit-delete' /></div>
                 </div >
                 {isCreate === true ?
                     // CREATE PART

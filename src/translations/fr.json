@@ -80,9 +80,10 @@
         "manage-specialty": {
             "create-title": "CRÉER DES SPÉCIALITÉS",
             "edit-title": "MODIFIER LES SPÉCIALITÉS",
-            "delete-title": "SUPPRIMER LES SPÉCIALITÉS",
             "image": "Image de la spécialité",
-            "save": "Enregistrer"
+            "save": "Enregistrer",
+            "create": " Créer un nouveau",
+            "edit-delete": " Modifier - Supprimer"
         }
     },
     "manage-schedule": {

@@ -50,11 +50,8 @@ class ManageDoctors extends Component {
         }
     }
     async componentDidMount() {
-
         await this.props.fetchAllDoctorsRedux();
         await this.props.getRequiredDoctorInfo();
-
-
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -76,7 +73,7 @@ class ManageDoctors extends Component {
         if (prevState.selectedDoctor !== this.state.selectedDoctor && this.state.selectedDoctor !== '') {
             let id = this.state.selectedDoctor.value;
             let res = await getDetailDoctorInfo(id)
-            // console.log('???res:', res)
+            console.log('??????res:', res)
             let data = res.data
             if (data?.Markdown?.markdownContent ||
                 data?.Markdown?.description ||
@@ -86,7 +83,7 @@ class ManageDoctors extends Component {
                 data?.Doctor_Info?.addressClinic ||
                 data?.Doctor_Info?.nameClinic ||
                 data?.Doctor_Info?.note ||
-                data?.Doctor_Info?.specialtyName?.name
+                data?.Doctor_Info?.specialtyName?.nameEn
             ) {
                 let tempSelectedPrice = {
                     value: data.Doctor_Info.priceId,
@@ -102,7 +99,7 @@ class ManageDoctors extends Component {
                 }
                 let tempselectedSpecialty = {
                     value: data.Doctor_Info.specialtyName.id,
-                    label: data.Doctor_Info.specialtyName.name,
+                    label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.specialtyName.nameEn : data.Doctor_Info.specialtyName.nameFr
                 }
 
                 this.setState({
@@ -166,7 +163,7 @@ class ManageDoctors extends Component {
                         value: (type === 'USER' || type === 'SPECIALTY') ? tempArr.id : tempArr.keyMap,
                         label: type === 'USER' ? `${tempArr.firstName} ${tempArr.lastName}` :
                             type === 'PRICE' ? `${tempArr.valueEn}` :
-                                type === 'SPECIALTY' ? tempArr.name :
+                                type === 'SPECIALTY' ? tempArr.nameEn :
                                     tempArr.valueEn
 
                     })
@@ -175,7 +172,7 @@ class ManageDoctors extends Component {
                         value: (type === 'USER' || type === 'SPECIALTY') ? tempArr.id : tempArr.keyMap,
                         label: type === 'USER' ? `${tempArr.firstName} ${tempArr.lastName}` :
                             type === 'PRICE' ? `${tempArr.valueFr}` :
-                                type === 'SPECIALTY' ? tempArr.name :
+                                type === 'SPECIALTY' ? tempArr.nameFr :
                                     tempArr.valueFr
                     })
                 }
