@@ -10,6 +10,7 @@ class TableManageUser extends Component {
         super(props);
         this.state = {
             userRedux: [],
+            currentPage: 1,
         }
     }
     componentDidMount() {
@@ -37,6 +38,14 @@ class TableManageUser extends Component {
     render() {
         let userRedux = this.state.userRedux;
         // let userRedux = this.props.getAllUserRedux
+
+        //VARIABLES FOR PAGING
+        let currentPage = this.state.currentPage
+        const itemPerPage = 5;
+        const startIndex = (currentPage - 1) * itemPerPage;
+        const endIndex = startIndex + itemPerPage;
+        const currentItems = userRedux.slice(startIndex, endIndex)
+
         return (
             <>
                 <div >
@@ -53,38 +62,50 @@ class TableManageUser extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {userRedux?.length > 0 && userRedux.map(item => {
-                                    return (
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
-                                            <td>{item.email}</td>
-                                            <td>{item.firstName}</td>
-                                            <td>{item.lastName}</td>
-                                            <td>{item.address}</td>
-                                            <td>
-                                                <div>
-                                                    <button
-                                                        className='btn-edit'
-                                                        onClick={() => this.handleOnClickEdit(item.id)}
-                                                    >
-                                                        <i className="fas fa-edit"></i>
-                                                    </button>
-                                                    <button
-                                                        className='btn-delete'
-                                                        onClick={() => this.handleOnClickDelete(item.id)}
-                                                    >
-                                                        <i className="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                {currentItems?.length > 0 &&
+                                    currentItems.map(item => {
+                                        return (
+                                            <tr key={item.id}>
+                                                <td>{item.id}</td>
+                                                <td>{item.email}</td>
+                                                <td>{item.firstName}</td>
+                                                <td>{item.lastName}</td>
+                                                <td>{item.address}</td>
+                                                <td>
+                                                    <div>
+                                                        <button
+                                                            className='btn-edit'
+                                                            onClick={() => this.handleOnClickEdit(item.id)}
+                                                        >
+                                                            <i className="fas fa-edit"></i>
+                                                        </button>
+                                                        <button
+                                                            className='btn-delete'
+                                                            onClick={() => this.handleOnClickDelete(item.id)}
+                                                        >
+                                                            <i className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
-                                    )
-                                })}
+                                        )
+                                    })}
                             </tbody>
 
 
                         </table>
+                        <div className='user-redux-pagination-controls'>
+                            {currentPage > 1
+                                ? <button className='prev-btn' onClick={() => this.setState({ currentPage: currentPage - 1 })}><i className="fas fa-arrow-left"></i></button>
+                                : <span className='prev-btn'></span>
+                            }
+                            <span className='number'>{currentPage}</span>
+                            {currentPage < Math.ceil(userRedux.length / itemPerPage)
+                                ? <button className='next-btn' onClick={() => this.setState({ currentPage: currentPage + 1 })}><i className="fas fa-arrow-right"></i></button>
+                                : <span className='next-btn'></span>
+                            }
+                        </div>
                     </div>
                 </div>
             </>

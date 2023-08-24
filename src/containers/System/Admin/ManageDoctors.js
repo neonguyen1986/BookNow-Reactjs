@@ -26,11 +26,14 @@ class ManageDoctors extends Component {
         super(props);
         this.state = {
             //save to markdown table
-            markdownContent: '',
-            HTMLContent: '',
+            markdownContentEn: '',
+            markdownContentFr: '',
+            HTMLContentEn: '',
+            HTMLContentFr: '',
+            descriptionEn: '',
+            descriptionFr: '',
             listDoctors: '',
             selectedDoctor: '',
-            description: '',
             isNewDoctor: true,
 
             //save to doctor_info table
@@ -75,16 +78,7 @@ class ManageDoctors extends Component {
             let res = await getDetailDoctorInfo(id)
             console.log('??????res:', res)
             let data = res.data
-            if (data?.Markdown?.markdownContent ||
-                data?.Markdown?.description ||
-                data?.Doctor_Info?.priceTypeData?.valueEn ||
-                data?.Doctor_Info?.paymentTypeData?.valueEn ||
-                data?.Doctor_Info?.provinceTypeData?.valueEn ||
-                data?.Doctor_Info?.addressClinic ||
-                data?.Doctor_Info?.nameClinic ||
-                data?.Doctor_Info?.note ||
-                data?.Doctor_Info?.specialtyName?.nameEn
-            ) {
+            if (data?.Markdown || data?.Doctor_Info) {
                 let tempSelectedPrice = {
                     value: data.Doctor_Info.priceId,
                     label: this.props.language === LANGUAGE.EN ? data.Doctor_Info.priceTypeData.valueEn : data.Doctor_Info.priceTypeData.valueFr
@@ -103,9 +97,12 @@ class ManageDoctors extends Component {
                 }
 
                 this.setState({
-                    description: !data.Markdown.description ? '' : data.Markdown.description,
-                    markdownContent: !data.Markdown.markdownContent ? '' : data.Markdown.markdownContent,
-                    HTMLContent: !data.Markdown.HTMLContent ? '' : data.Markdown.HTMLContent,
+                    descriptionEn: !data.Markdown.descriptionEn ? '' : data.Markdown.descriptionEn,
+                    descriptionFr: !data.Markdown.descriptionFr ? '' : data.Markdown.descriptionFr,
+                    markdownContentEn: !data.Markdown.markdownContentEn ? '' : data.Markdown.markdownContentEn,
+                    markdownContentFr: !data.Markdown.markdownContentFr ? '' : data.Markdown.markdownContentFr,
+                    HTMLContentEn: !data.Markdown.HTMLContentEn ? '' : data.Markdown.HTMLContentEn,
+                    HTMLContentFr: !data.Markdown.HTMLContentFr ? '' : data.Markdown.HTMLContentFr,
                     selectedPrice: !tempSelectedPrice ? '' : tempSelectedPrice,
                     selectedPayment: !tempSelectedPayment ? '' : tempSelectedPayment,
                     selectedProvince: !tempSelectedProvince ? '' : tempSelectedProvince,
@@ -117,9 +114,12 @@ class ManageDoctors extends Component {
                 })
             } else {
                 this.setState({
-                    description: '',
-                    markdownContent: '',
-                    HTMLContent: '',
+                    descriptionEn: '',
+                    descriptionFr: '',
+                    markdownContentEn: '',
+                    markdownContentFr: '',
+                    HTMLContentEn: '',
+                    HTMLContentFr: '',
                     selectedDoctor: '',
                     selectedPrice: '',
                     selectedPayment: '',
@@ -139,11 +139,18 @@ class ManageDoctors extends Component {
     //================= Markdown Editor=================
     mdParser = new MarkdownIt(/* Markdown-it options */);
     // Finish!
-    handleEditorChange = ({ html, text }) => {
+    handleEditorChangeEn = ({ html, text }) => {
         // console.log('handleEditorChange', html, text);
         this.setState({
-            HTMLContent: html,
-            markdownContent: text
+            HTMLContentEn: html,
+            markdownContentEn: text
+        })
+    }
+    handleEditorChangeFr = ({ html, text }) => {
+        // console.log('handleEditorChange', html, text);
+        this.setState({
+            HTMLContentFr: html,
+            markdownContentFr: text
         })
     }
     //================= React Select=================
@@ -197,9 +204,12 @@ class ManageDoctors extends Component {
 
     handleSaveDoctorInfo = async () => {
         let res = await this.props.postDoctorsRedux({
-            HTMLContent: this.state.HTMLContent,
-            markdownContent: this.state.markdownContent,
-            description: this.state.description,
+            HTMLContentEn: this.state.HTMLContentEn,
+            HTMLContentFr: this.state.HTMLContentFr,
+            markdownContentEn: this.state.markdownContentEn,
+            markdownContentFr: this.state.markdownContentFr,
+            descriptionEn: this.state.descriptionEn,
+            descriptionFr: this.state.descriptionFr,
             doctorId: this.state.selectedDoctor.value,
 
             selectedPrice: this.state.selectedPrice.value,
@@ -215,9 +225,12 @@ class ManageDoctors extends Component {
         if (res?.errCode == 0) {
             toast.success("Doctor info's just added")
             this.setState({
-                markdownContent: '',
-                description: '',
-                HTMLContent: '',
+                markdownContentEn: '',
+                markdownContentFr: '',
+                descriptionEn: '',
+                descriptionFr: '',
+                HTMLContentEn: '',
+                HTMLContentFr: '',
                 selectedDoctor: '',
                 selectedPrice: '',
                 selectedPayment: '',
@@ -237,9 +250,12 @@ class ManageDoctors extends Component {
 
     handleCancelDoctorInfo = () => {
         this.setState({
-            markdownContent: '',
-            description: '',
-            HTMLContent: '',
+            markdownContentEn: '',
+            markdownContentFr: '',
+            descriptionEn: '',
+            descriptionFr: '',
+            HTMLContentEn: '',
+            HTMLContentFr: '',
             selectedDoctor: '',
             selectedPrice: '',
             selectedPayment: '',
@@ -267,11 +283,9 @@ class ManageDoctors extends Component {
             selectedPayment,
             selectedProvince,
             selectedSpecialty,
-            selectedClinic,
             clinicName,
             clinicAddress,
-            note,
-            description } = this.state
+        } = this.state
         // console.log('>>check doctor', selectedPrice)
         console.log('=======check state:', this.state)
         return (
@@ -292,15 +306,15 @@ class ManageDoctors extends Component {
                     <div className='content-right col-6 form-group'>
                         <label> Doctor Biography in English</label>
                         <textarea className='form-control' rows='4'
-                            onChange={(e) => this.handleOnChangeText(e, 'description')}
-                            value={this.state.description}>
+                            onChange={(e) => this.handleOnChangeText(e, 'descriptionEn')}
+                            value={this.state.descriptionEn}>
                         </textarea>
                     </div>
                     <div className='content-right col-6 form-group'>
                         <label>Biographie du docteur en français</label>
                         <textarea className='form-control' rows='4'
-                            onChange={(e) => this.handleOnChangeText(e, 'description')}
-                            value={this.state.description}>
+                            onChange={(e) => this.handleOnChangeText(e, 'descriptionFr')}
+                            value={this.state.descriptionFr}>
                         </textarea>
                     </div>
                 </div>
@@ -367,8 +381,8 @@ class ManageDoctors extends Component {
                     <MdEditor
                         style={{ height: '50vh' }}
                         renderHTML={text => this.mdParser.render(text)}
-                        value={this.state.markdownContent}
-                        onChange={this.handleEditorChange} />
+                        value={this.state.markdownContentEn}
+                        onChange={this.handleEditorChangeEn} />
 
                 </div>
                 <div className='manage-doctor-editor'>
@@ -376,8 +390,8 @@ class ManageDoctors extends Component {
                     <MdEditor
                         style={{ height: '50vh' }}
                         renderHTML={text => this.mdParser.render(text)}
-                        value={this.state.markdownContent}
-                        onChange={this.handleEditorChange} />
+                        value={this.state.markdownContentFr}
+                        onChange={this.handleEditorChangeFr} />
 
                 </div>
                 <button
