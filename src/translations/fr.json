@@ -78,7 +78,9 @@
             "clinic-address": "Adresse de la clinique"
         },
         "manage-specialty": {
-            "title": "GERER LES SPÉCIALITÉS",
+            "create-title": "CRÉER DES SPÉCIALITÉS",
+            "edit-title": "MODIFIER LES SPÉCIALITÉS",
+            "delete-title": "SUPPRIMER LES SPÉCIALITÉS",
             "image": "Image de la spécialité",
             "save": "Enregistrer"
         }

@@ -108,8 +108,8 @@ const postVerifyBookingAppointment = (data) => {
     return axios.post('/api/verify-book-appointment', data)
 }
 
-const postCreateNewSpecialty = (data) => {
-    return axios.post('/api/create-new-specialty', data)
+const postCreateEditNewSpecialty = (data) => {
+    return axios.post('/api/create-edit-new-specialty', data)
 }
 
 const getAllSpecialty = () => {
@@ -149,6 +149,14 @@ const getDownloadServerFile = (token) => {
     })
 }
 
+const deleteSpecialtyById = (id) => {
+    return axios.delete('/api/delete-specialty-by-id', {
+        data: {
+            id: id
+        }
+    })
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -167,10 +175,11 @@ export {
     getDoctorDetail,
     postPatientBookingAppointment,
     postVerifyBookingAppointment,
-    postCreateNewSpecialty,
+    postCreateEditNewSpecialty,
     getAllSpecialty,
     getDetailSpecialtyIdLocation,
     getlistPatienByIdDate,
     postUploadSingleFile,
     getDownloadServerFile,
+    deleteSpecialtyById,
 }
