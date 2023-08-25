@@ -56,7 +56,10 @@
     },
     "home-page": {
         "outstanding-doctor": "Outstanding Doctor",
-        "more-info": "MORE INFO..."
+        "more-info": "MORE INFO...",
+        "detail-specialty": {
+            "filter": "Filter By Province:"
+        }
     },
     "admin": {
         "manage-doctor": {
@@ -101,13 +104,14 @@
             "price": "Price ",
             "hide": "Hide information",
             "more-detail": "More detail",
-            "payment-text": "Patiens can pay by ",
+            "payment-text": "Patients can pay by ",
             "name": "Full name",
             "phone-number": "Phone Number",
             "address": "Address",
             "date-of-birth": "Date of birth",
             "gender": "Gender",
-            "test-type": "What do you want to test?"
+            "test-type": "What do you want to test?",
+            "price-text": "This price is influenced by the doctor's title and years of experience"
         },
         "booking-modal": {
             "price": "Price: ",

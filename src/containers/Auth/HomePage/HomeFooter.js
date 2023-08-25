@@ -16,7 +16,7 @@ class HomeFooter extends Component {
         return (
             <>
                 <div className='home-footer'>
-                    &copy; This page is copied by Minh Nguyen from Bookingcare.vn
+                    &copy; This page is copied by Minh Nguyen from Bookingcare
                 </div>
             </>
         )

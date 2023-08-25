@@ -43,7 +43,7 @@ class DoctorProfile extends Component {
     render() {
         let { profileData } = this.state
         let language = this.props.language
-        // console.log('check state from DoctorProfile:', this.props.dataTimeParent)
+        console.log('=========check state from DoctorProfile:', this.state)
         let isDescription = this.props.isDoctorDescription
 
         return (
@@ -72,14 +72,13 @@ class DoctorProfile extends Component {
                         {isDescription === true
                             ?
                             <div className='down-description'>
-                                {profileData?.Markdown?.description &&
-                                    profileData.Markdown.description}
+                                {profileData.Markdown?.descriptionEn && profileData.Markdown?.descriptionFr &&
+                                    (language === LANGUAGE.EN ? profileData.Markdown.descriptionEn : profileData.Markdown.descriptionFr)}
                             </div>
                             :
                             <div className='down-date-time'>
                                 {language === LANGUAGE.EN
-                                    ?
-                                    this.props?.dataTimeParent?.timeTypeData?.valueEn ? this.props.dataTimeParent.timeTypeData.valueEn : ''
+                                    ? this.props?.dataTimeParent?.timeTypeData?.valueEn ? this.props.dataTimeParent.timeTypeData.valueEn : ''
                                     : this.props?.dataTimeParent?.timeTypeData?.valueFr ? this.props.dataTimeParent.timeTypeData.valueFr : ''
                                 } -&nbsp;
                                 {language === LANGUAGE.FR

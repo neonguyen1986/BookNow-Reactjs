@@ -84,7 +84,7 @@ class DoctorMoreInfo extends Component {
                         <div className='price-title'><FormattedMessage id='patient.detail-doctor.price' /></div>
                         <div className='price-text'>
                             <span><b><FormattedMessage id='patient.detail-doctor.price' />:</b> <br />
-                                {doctorMoreInfo?.note ? doctorMoreInfo.note : ''} Blank here
+                                <FormattedMessage id='patient.detail-doctor.price-text' />
                             </span>
                             <span>
                                 {language === LANGUAGE.EN

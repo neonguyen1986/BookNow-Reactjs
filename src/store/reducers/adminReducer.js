@@ -11,6 +11,7 @@ const initialState = {
     allDoctors: {},
     allScheduleTime: [],
     allDoctorInfoRequirement: [],
+    resCreateUser: ''
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -147,6 +148,18 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 // isLoadingGender: false,
+            }
+        case actionTypes.CREATE_USER_SUCCESS:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                resCreateUser: action.payload,
+            }
+        case actionTypes.CREATE_USER_FAILED:
+            // console.log('fetch fail:', action)
+            return {
+                ...state,
+                resCreateUser: action.payload,
             }
         default:
             return state;

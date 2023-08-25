@@ -103,12 +103,12 @@ export const createNewUser = (data) => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await createNewUserService(data);
-        // console.log('check create user Redux:', res)
+        console.log('check create user Redux:', res)
         if (res && res.errCode === 0) {
-            dispatch(saveUserSuccess());
+            dispatch(saveUserSuccess(res));
         } else {
-            const errorMessage = res?.message ? res.message : 'Failed to create user';
-            dispatch(saveUserFailed(errorMessage));
+            // const errorMessage = res?.errMessage ? res.errMessage : 'Failed to create user';
+            dispatch(saveUserFailed(res));
         }
     } catch (error) {
         dispatch(saveUserFailed());
@@ -116,8 +116,9 @@ export const createNewUser = (data) => async (dispatch, getState) => {
     }
 };
 
-export const saveUserSuccess = () => ({
+export const saveUserSuccess = (data) => ({
     type: actionTypes.CREATE_USER_SUCCESS,
+    payload: data,
 })
 export const saveUserFailed = (error) => ({
     type: actionTypes.CREATE_USER_FAILED,

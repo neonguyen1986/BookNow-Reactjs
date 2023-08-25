@@ -127,24 +127,39 @@ class UserRedux extends Component {
             return;
         } else {
             //truyền state vào DB bằng redux
-            await this.props.createNewUser(this.state)
-            await this.props.fetchAllUsersStart()
-            // console.log('check state after save:', this.state)
-
-            this.setState({
-                email: '',
-                password: '',
-                firstName: '',
-                lastName: '',
-                phoneNumber: '',
-                address: '',
-                gender: 'M',
-                position: 'P0',
-                role: 'R1',
-                avatar: '',
-                previewIgmURL: '',
+            await this.props.createNewUser({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                phoneNumber: this.state.phoneNumber,
+                address: this.state.address,
+                gender: this.state.gender,
+                position: this.state.position,
+                role: this.state.role,
+                avatar: this.state.avatar,
             })
-            toast.success("One user just added")
+            const res = this.props.resCreateUser
+            if (res?.errCode === 0) {
+                toast.success(res.errMessage)
+                await this.props.fetchAllUsersStart()
+                // console.log('check state after save:', this.state)
+                this.setState({
+                    email: '',
+                    password: '',
+                    firstName: '',
+                    lastName: '',
+                    phoneNumber: '',
+                    address: '',
+                    gender: 'M',
+                    position: 'P0',
+                    role: 'R1',
+                    avatar: '',
+                    previewIgmURL: '',
+                })
+            } else {
+                toast.warning(res.errMessage)
+            }
         }
 
     }
@@ -382,7 +397,7 @@ const mapStateToProps = state => {
         isLoadingGenderRedux: state.admin.isLoadingGender,
         positionRedux: state.admin.positions,
         roleRedux: state.admin.roles,
-
+        resCreateUser: state.admin.resCreateUser,
     };
 };
 

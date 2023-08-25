@@ -56,7 +56,10 @@
     },
     "home-page": {
         "outstanding-doctor": "Médecin exceptionnel",
-        "more-info": "VOIR PLUS..."
+        "more-info": "VOIR PLUS...",
+        "detail-specialty": {
+            "filter": "Filtrer par province:"
+        }
     },
     "admin": {
         "manage-doctor": {
@@ -101,13 +104,14 @@
             "price": "Prix",
             "hide": "Masquer l'information",
             "more-detail": "Plus de détails",
-            "payment-text": "Les patients peuvent payer par",
+            "payment-text": "Les patients peuvent payer par ",
             "name": "Nom complet",
             "phone-number": "Numéro de téléphone",
             "address": "Adresse",
             "date-of-birth": "Date de naissance",
             "gender": "Genre",
-            "test-type": "Quel type de test souhaitez-vous ?"
+            "test-type": "Quel type de test souhaitez-vous ?",
+            "price-text": "Ce prix est influencé par le titre du médecin et ses années d'expérience"
         },
         "booking-modal": {
             "price": "Prix :",

@@ -68,8 +68,8 @@ class DetailDoctor extends Component {
                                 }
                             </div>
                             <div className='down'>
-                                {detailDoctor?.Markdown?.description &&
-                                    detailDoctor.Markdown.description}
+                                {detailDoctor?.Markdown?.descriptionEn && detailDoctor?.Markdown?.descriptionFr &&
+                                    (language === LANGUAGE.EN ? detailDoctor.Markdown.descriptionEn : detailDoctor.Markdown.descriptionFr)}
                             </div>
                         </div>
                     </div>

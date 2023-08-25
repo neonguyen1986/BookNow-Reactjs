@@ -287,7 +287,7 @@ class ManageDoctors extends Component {
             clinicAddress,
         } = this.state
         // console.log('>>check doctor', selectedPrice)
-        console.log('=======check state:', this.state)
+        // console.log('=======check state:', this.state)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title title'>

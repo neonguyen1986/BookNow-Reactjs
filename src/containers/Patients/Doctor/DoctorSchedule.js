@@ -42,7 +42,7 @@ class DoctorSchedule extends Component {
                 }
             } else {
                 if (this.props.language === LANGUAGE.FR) {
-                    obj.label = `Hôm nay-${moment(new Date()).add(i, 'days').format('DD/MM')}`
+                    obj.label = `Aujourd'hui-${moment(new Date()).add(i, 'days').format('DD/MM')}`
                 } else {
                     obj.label = `Today-${moment(new Date()).add(i, 'days').format('DD/MM')}`
                 }

@@ -16,7 +16,8 @@ class DetailSpecialty extends Component {
         super(props)
         this.state = {
             doctorsBySpecialty: '',
-            description: '',
+            descriptionEn: '',
+            descriptionFr: '',
             getAllProvince: '',
             selectedProvince: '',
             isAllProvince: true,
@@ -29,13 +30,14 @@ class DetailSpecialty extends Component {
         // console.log('===========check data:', res)
         if (res?.errCode === 0) {
             this.setState({
-                description: res.data[0].descriptionMarkdown,
+                descriptionEn: res.data[0].descriptionMarkdown_En,
+                descriptionFr: res.data[0].descriptionMarkdown_Fr,
                 doctorsBySpecialty: res.data[1],
             })
         }
 
         let resAllCode = await getAllCodeService('PROVINCE')
-        console.log('===========check resAllCode:', resAllCode)
+        // console.log('===========check resAllCode:', resAllCode)
         if (resAllCode.errCode === 0) {
             this.setState({
                 getAllProvince: resAllCode.data
@@ -49,11 +51,11 @@ class DetailSpecialty extends Component {
 
     handleOnChangeProvince = async (e) => {
         let getParams = await this.props.match.params
-        let provinceENVI = e.target.value;
+        let provinceENFR = e.target.value;
         let getAllProvince = this.state.getAllProvince
         let curProvinceId = ''
         for (let i = 0; i < getAllProvince.length; i++) {
-            if (getAllProvince[i].valueEn === provinceENVI || getAllProvince[i].valueFr === provinceENVI) {
+            if (getAllProvince[i].valueEn === provinceENFR || getAllProvince[i].valueFr === provinceENFR) {
                 curProvinceId = getAllProvince[i].keyMap;
                 break;
             }
@@ -66,10 +68,18 @@ class DetailSpecialty extends Component {
                 })
             }
         }
+        if (e.target.value === 'Select a Province') {
+            let res = await getDetailSpecialtyIdLocation(getParams.id, getParams.locationId)
+            if (res?.errCode === 0) {
+                this.setState({
+                    doctorsBySpecialty: res.data[1],
+                })
+            }
+        }
     }
     render() {
         let language = this.props.language
-        let { description, doctorsBySpecialty, getAllProvince } = this.state;
+        let { descriptionEn, descriptionFr, doctorsBySpecialty, getAllProvince } = this.state;
         console.log('>>>>>>>>check state Detail Specialty:', this.state)
         return (
             <div className='detail-secialty-all-container'>
@@ -77,15 +87,15 @@ class DetailSpecialty extends Component {
                     isShowBanner={false}
                 />
                 <div className='detail-specialty-description'>
-                    <ReactMarkdown>{description}</ReactMarkdown>
+                    <ReactMarkdown>{language === LANGUAGE.EN ? descriptionEn : descriptionFr}</ReactMarkdown>
                 </div>
                 <div className='detail-specialty-select-province'>
-                    <label>Filter by Province: </label>
+                    <label><FormattedMessage id='home-page.detail-specialty.filter' /> </label>
                     <select
                         className='detSpec-select'
                         onChange={(e) => this.handleOnChangeProvince(e)}
                     >
-                        <option>Select a Province</option>
+                        <option>{language === LANGUAGE.EN ? 'Select a Province' : 'Sélectionnez une province'}</option>
                         {getAllProvince?.length > 0 &&
                             getAllProvince.map((item, index) => {
                                 return (

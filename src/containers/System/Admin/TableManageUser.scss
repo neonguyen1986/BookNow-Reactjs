@@ -3,6 +3,10 @@
     width : 100%;
 }
 
+.user-redux-table {
+    min-height: 300px;
+}
+
 #TableManageUser {
     font-family    : Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -74,4 +78,24 @@
         text-align      : right;
         border-radius   : 0 1rem 1rem 0;
     }
+}
+
+//DELETE MODAL
+.delete-modal-content {
+    margin-top     : 1rem;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    gap            : 0.5rem;
+
+    .far.fa-times-circle {
+        font-size: 3rem;
+        color    : #dc3545
+    }
+}
+
+.delete-modal-footer {
+    display        : flex;
+    justify-content: space-around;
 }
