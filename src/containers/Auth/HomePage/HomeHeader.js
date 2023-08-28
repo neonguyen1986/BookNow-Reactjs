@@ -5,6 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { LANGUAGE } from '../../../utils'
 import { changeLanguageApp } from './../../../store/actions/appActions';
 import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -79,7 +81,7 @@ class HomeHeader extends Component {
                                 <input
                                     className='search-box'
                                     type='text'
-                                    placeholder='Find a clinic ' />
+                                    placeholder={language === LANGUAGE.EN ? 'Find a doctor' : 'Trouver un médecin'} />
                             </div>
                         </div>
                         <div className='content-down'>
@@ -87,37 +89,41 @@ class HomeHeader extends Component {
                                 <div className='icon'>
                                     <img className='img' src={require('../../../assets/icon1-specialist-examination.png').default} />
                                 </div>
-                                <div className='text'><FormattedMessage id="home-header.specialist-exam" /></div>
+                                <Link to='/introduction-articles?name=specialist' style={{ textDecoration: 'none', color: 'inherit', }}>
+                                    <div className='text'><FormattedMessage id="home-header.specialist-exam" /></div>
+                                </Link>
                             </div>
                             <div className='icon-block'>
                                 <div className='icon'>
                                     <img className='img' src={require('../../../assets/icon2-remote-examination.png').default} />
                                 </div>
-                                <div className='text'><FormattedMessage id="home-header.remote-exam" /></div>
+                                <Link to='/introduction-articles?name=remote' style={{ textDecoration: 'none', color: 'inherit', }}>
+                                    <div className='text'><FormattedMessage id="home-header.remote-exam" /></div>
+                                </Link>
                             </div>
                             <div className='icon-block'>
                                 <div className='icon'>
                                     <img className='img' src={require('../../../assets/icon3-general-examination.png').default} />
                                 </div>
-                                <div className='text'><FormattedMessage id="home-header.general-exam" /></div>
+                                <Link to='/introduction-articles?name=general' style={{ textDecoration: 'none', color: 'inherit', }}>
+                                    <div className='text'><FormattedMessage id="home-header.general-exam" /></div>
+                                </Link>
                             </div>
                             <div className='icon-block'>
                                 <div className='icon'>
                                     <img className='img' src={require('../../../assets/icon4-medical-test.png').default} />
                                 </div>
-                                <div className='text'><FormattedMessage id="home-header.medical-test" /></div>
+                                <Link to='/introduction-articles?name=medical' style={{ textDecoration: 'none', color: 'inherit', }}>
+                                    <div className='text'><FormattedMessage id="home-header.medical-test" /></div>
+                                </Link>
                             </div>
                             <div className='icon-block'>
                                 <div className='icon'>
                                     <img className='img' src={require('../../../assets/icon5-mental-health.png').default} />
                                 </div>
-                                <div className='text'><FormattedMessage id="home-header.mental-health" /></div>
-                            </div>
-                            <div className='icon-block'>
-                                <div className='icon'>
-                                    <img className='img' src={require('../../../assets/icon6-dental-examination.png').default} />
-                                </div>
-                                <div className='text'><FormattedMessage id="home-header.dental-exam" /></div>
+                                <Link to='/introduction-articles?name=mental' style={{ textDecoration: 'none', color: 'inherit', }}>
+                                    <div className='text'><FormattedMessage id="home-header.mental-health" /></div>
+                                </Link>
                             </div>
                         </div>
                     </div>

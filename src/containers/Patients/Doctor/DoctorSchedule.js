@@ -7,6 +7,7 @@ import { LANGUAGE, CommonUtils } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
 import { getDoctorScheduleByDate } from '../../../services/userService'
 import BookingModal from './Modal/BookingModal';
+import 'moment/locale/fr';
 
 //moment to dispay Vi
 import moment from 'moment';
@@ -119,7 +120,7 @@ class DoctorSchedule extends Component {
     render() {
         let { allDays, allAvailableTime } = this.state
         let language = this.props.language
-        // console.log('>>>check state DoctorSchedule:', this.state)
+        console.log('>>>check state DoctorSchedule:', this.state)
 
         return (
             <>

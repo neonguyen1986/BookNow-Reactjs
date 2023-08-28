@@ -9,6 +9,7 @@ export const path = {
     DETAIL_SPECIALTY: '/detail-specialty/:id/:locationId',
     SPECIALTY_MORE: '/specialty-more',
     DOCTOR: '/doctor/',
+    ADVERTISING_ARTICLES: '/introduction-articles'
 };
 
 export const LANGUAGE = {

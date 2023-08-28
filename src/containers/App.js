@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import './App.scss'
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
@@ -26,6 +27,8 @@ import VerifyEmail from './Patients/VerifyEmail';
 import DetailSpecialty from './Patients/Specialty/DetailSpecialty';
 import SpecialtyMore from './Patients/Specialty/SpecialtyMore';
 import Test from './test';
+import AdvertisingArticles from './Articles/AdvertisingArticles';
+
 
 
 class App extends Component {
@@ -70,6 +73,9 @@ class App extends Component {
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
                                     <Route path={path.DETAIL_SPECIALTY} exact component={DetailSpecialty} />
                                     <Route path={path.SPECIALTY_MORE} exact component={SpecialtyMore} />
+
+                                    {/* Articles */}
+                                    <Route path={path.ADVERTISING_ARTICLES} exact component={AdvertisingArticles} />
 
                                 </Switch>
                             </CustomScrollbars>
