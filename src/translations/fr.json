@@ -58,6 +58,9 @@
         "more-info": "VOIR PLUS...",
         "detail-specialty": {
             "filter": "Filtrer par province:"
+        },
+        "all-doctors": {
+            "specialty-filter": "Filtrer par spécialité"
         }
     },
     "admin": {

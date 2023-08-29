@@ -120,7 +120,7 @@ class DoctorSchedule extends Component {
     render() {
         let { allDays, allAvailableTime } = this.state
         let language = this.props.language
-        console.log('>>>check state DoctorSchedule:', this.state)
+        // console.log('>>>check state DoctorSchedule:', this.state)
 
         return (
             <>

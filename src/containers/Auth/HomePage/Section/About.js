@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import './Specialty.scss';
 import { FormattedMessage } from 'react-intl';
-
-// Import slider files
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import aboutImg from '../../../../assets/about.jpg'
+import '../../HomePage/HomePage.scss'
 
 
 class About extends Component {
@@ -17,14 +14,14 @@ class About extends Component {
             <>
                 <div className='fit-height-width about-section'>
                     <div className='about-footer'>
-                        What people say about Bookingcare
+                        Book Now offers an efficient way to access top-notch medical services
                     </div>
                     <div className='about-footer-content'>
-                        <div className='left-content'>
-                            <iframe width="100%" height="400px" src="https://www.youtube.com/embed/ViFYbu_u4j0" title="MÀN RA MẮT CÀN QUÉT NƯỚC MỸ - VÌ MESSI &quot;OUT TRÌNH&quot; HAY MLS QUÁ TỆ?" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                        <div className='afc-left-content'>
+                            <img className='afc-left-img' src={aboutImg} />
                         </div>
-                        <div className='right-content'>
-                            Good specialist, information was authentic, many patients believe, colleagues appreciated, respected in the industry. Already, working in leading hospitals in Hanoi.
+                        <div className='afc-right-content'>
+                            Our platform connects you with skilled doctors across various specialties, ensuring you receive the care you need. Whether it's a routine check-up or a specialized consultation, our user-friendly interface makes booking appointments a breeze. With a wide range of available time slots, you can choose what suits your schedule best. Our dedicated professionals are committed to providing personalized care, addressing your concerns, and guiding you towards better health. Experience the convenience of modern healthcare by booking a doctor through us. Your well-being is our priority.
                         </div>
                     </div>
                 </div>

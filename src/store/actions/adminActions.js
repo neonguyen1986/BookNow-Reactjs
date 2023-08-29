@@ -238,7 +238,7 @@ export const fetchTopDoctors = () => async (dispatch, getState) => {
     try {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
-        const res = await getTopDoctorService(10)
+        const res = await getTopDoctorService(20)
         // console.log('check top Doctor:', res)
         if (res && res.errCode === 0) {
             dispatch(fetchTopDoctorsSuccess(res.data));

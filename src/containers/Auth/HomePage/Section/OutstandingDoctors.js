@@ -8,8 +8,9 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as actions from '../../../../store/actions'
-import { LANGUAGE, CommonUtils } from '../../../../utils'
+import { LANGUAGE, CommonUtils, path } from '../../../../utils'
 import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 
 class OutstandingDoctors extends Component {
     constructor(props) {
@@ -46,7 +47,12 @@ class OutstandingDoctors extends Component {
                         <div className='section-container'>
                             <div className='section-header'>
                                 <div className='section-title'><FormattedMessage id='home-page.outstanding-doctor' /></div>
-                                <button><FormattedMessage id='home-page.more-info' /></button>
+
+                                <button>
+                                    <Link to={path.ALLDOCTORS} style={{ textDecoration: 'none', color: 'inherit', }}>
+                                        <FormattedMessage id='home-page.more-info' />
+                                    </Link>
+                                </button>
                             </div>
                             <div className='section-body'>
                                 <Slider {...this.props.settings}>

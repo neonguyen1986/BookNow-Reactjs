@@ -7,7 +7,7 @@
     }
 
     &.about-section {
-        height    : 600px;
+        height    : 60vh;
         margin-top: 30px;
 
         .about-footer {
@@ -20,21 +20,24 @@
 
         .about-footer-content {
             display        : flex;
-            justify-content: start;
+            justify-content: space-between;
+            align-items    : start;
 
-            .left-content {
+            .afc-left-content {
                 width  : 50%;
                 margin : 0 30px;
                 padding: 0 10px 0 60px;
 
+                .afc-left-img {
+                    height: 40vh;
+                }
             }
 
-            .right-content {
+            .afc-right-content {
                 width         : 50%;
                 vertical-align: middle;
-                padding       : 30px 60px 0 10px;
+                padding       : 0 4rem 0 0;
                 font-style    : italic;
-
             }
         }
     }

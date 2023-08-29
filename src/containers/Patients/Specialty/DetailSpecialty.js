@@ -68,7 +68,7 @@ class DetailSpecialty extends Component {
                 })
             }
         }
-        if (e.target.value === 'Select a Province') {
+        if (e.target.value === 'All Provinces' || e.target.value === 'Toutes les provinces') {
             let res = await getDetailSpecialtyIdLocation(getParams.id, getParams.locationId)
             if (res?.errCode === 0) {
                 this.setState({
@@ -80,7 +80,7 @@ class DetailSpecialty extends Component {
     render() {
         let language = this.props.language
         let { descriptionEn, descriptionFr, doctorsBySpecialty, getAllProvince } = this.state;
-        console.log('>>>>>>>>check state Detail Specialty:', this.state)
+        // console.log('>>>>>>>>check state Detail Specialty:', this.state)
         return (
             <div className='detail-secialty-all-container'>
                 <HomeHeader
@@ -95,7 +95,7 @@ class DetailSpecialty extends Component {
                         className='detSpec-select'
                         onChange={(e) => this.handleOnChangeProvince(e)}
                     >
-                        <option>{language === LANGUAGE.EN ? 'Select a Province' : 'Sélectionnez une province'}</option>
+                        <option>{language === LANGUAGE.EN ? 'All Provinces' : 'Toutes les provinces'}</option>
                         {getAllProvince?.length > 0 &&
                             getAllProvince.map((item, index) => {
                                 return (
