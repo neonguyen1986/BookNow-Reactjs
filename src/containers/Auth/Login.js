@@ -48,7 +48,7 @@ class Login extends Component {
 				this.props.userLoginSuccess(data.user)
 			}
 		} catch (error) {
-			console.log(error.response)
+			// console.log(error.response)
 			if (error.response.data) {
 				this.setState({
 					errMessage: error.response.data.message,

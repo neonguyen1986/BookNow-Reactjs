@@ -103,7 +103,7 @@ export const createNewUser = (data) => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await createNewUserService(data);
-        console.log('check create user Redux:', res)
+        console.log('===============check create user Redux:', res)
         if (res && res.errCode === 0) {
             dispatch(saveUserSuccess(res));
         } else {

@@ -138,6 +138,7 @@ class UserRedux extends Component {
                 position: this.state.position,
                 role: this.state.role,
                 avatar: this.state.avatar,
+                accessToken: this.props.userInfo.accessToken,
             })
             const res = this.props.resCreateUser
             if (res?.errCode === 0) {
@@ -157,6 +158,9 @@ class UserRedux extends Component {
                     avatar: '',
                     previewIgmURL: '',
                 })
+            } else if (res?.errCode === 10) {
+                toast.warning(res.errMessage)
+                this.props.processLogout()
             } else {
                 toast.warning(res.errMessage)
             }
@@ -392,6 +396,7 @@ class UserRedux extends Component {
 
 const mapStateToProps = state => {
     return {
+        userInfo: state.user.userInfo,
         language: state.app.language,
         genderRedux: state.admin.genders,
         isLoadingGenderRedux: state.admin.isLoadingGender,
@@ -406,6 +411,7 @@ const mapDispatchToProps = dispatch => {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        processLogout: () => dispatch(actions.processLogout()),
 
         //CRUD with Redux
         createNewUser: (data) => dispatch(actions.createNewUser(data)),

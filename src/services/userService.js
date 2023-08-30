@@ -17,7 +17,7 @@ const getAllUsers = (inputId) => {
 }
 
 const createNewUserService = (newUser) => {
-    return axios.post('/api/create-new-users', newUser)
+    return axios.post('/api/create-new-users', newUser, { headers: { token: `Bearer ${newUser.accessToken}` } })
 }
 
 const deleteUserService = (userId) => {

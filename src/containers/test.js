@@ -1,51 +1,55 @@
-import React, { useState } from "react";
-import './test.scss'
-
-const ToolBar = ({ openSidebar }) => {
-    return (
-        <div className="tool-bar">
-            <div className="burger" onClick={openSidebar}>
-                H/S
-            </div>
-            <div className="title-bar"> The code</div>
-        </div>
-    )
-}
-
-const Sidebar = ({ sidebar }) => {
-    return (
-        <div className={sidebar ? "sidebar sidebar--open" : "sidebar"}>
-            < li > Home</ li>
-            <li>Products</li>
-            <li>Carrer</li>
-            <li>Contact</li>
-            <li>About</li>
-        </div>
-    )
-}
-
-const Backdrop = ({ sidebar, closeSidebar }) => {
-    return (
-        <div className={sidebar ? "backdrop backdrop--open" : "backdrop"}
-            onClick={closeSidebar}>
-
-        </div>
-    )
-}
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { FormattedMessage } from 'react-intl';
+import { createAxiosJWT } from '../axiosJWT';
 
 
-const Text = () => {
-    const [sidebar, setSidebar] = useState(false);
-    const toggleSidebar = () => {
-        setSidebar((prevState) => !prevState)
+
+class DefaultClass extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
     }
-    return (
-        <>
-            <ToolBar openSidebar={toggleSidebar} />{/* when click on HS of Toolbar, switch sidebar:true<>false */}
-            <Backdrop sidebar={sidebar} closeSidebar={toggleSidebar} />
-            <Sidebar sidebar={sidebar} />{/*pass sidebar state to Sidebar: if true, show '.sidebar--open' else show '.sidebar'*/}
-        </>
-    )
+    async componentDidMount() {
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+    }
+    clickMe = () => {
+        let user = {
+            id: '1',
+            roleId: 'R1',
+            accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZUlkIjoiUjEiLCJpYXQiOjE2OTM0MDgzMzksImV4cCI6MTY5MzQwODM2OX0.w0HmPa4gtn9LnpY4OpMKTjLHUql2x8V6AieYgZE6w8I'
+        }
+        createAxiosJWT(user)
+    }
+    render() {
+        return (
+            <div>
+                <button onClick={() => this.clickMe()}>
+                    this
+                </button>
+            </div>
+        )
+    }
+
 }
 
-export default Text;
+const mapStateToProps = state => {
+    return {
+        language: state.app.language,
+
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultClass);
