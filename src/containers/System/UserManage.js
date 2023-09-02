@@ -5,6 +5,8 @@ import { getAllUsers, createNewUserService, deleteUserService, editUserService }
 import UserModal from './UserModal';
 import EditUserModal from './EditUserModal';
 import { emitter } from '../../utils/emitter'
+import { FormattedMessage } from 'react-intl';
+
 
 class UserManage extends Component {
 
@@ -122,7 +124,7 @@ class UserManage extends Component {
         // console.log('check user:', arrUser)
 
         return (
-            <div className="user-container">
+            <div className="user-container container">
                 <UserModal
                     isOpen={this.state.isOpenUserModal}
                     toggleFromParent={this.toggleUserModal}
@@ -138,14 +140,14 @@ class UserManage extends Component {
                 }
 
                 <div className='title text-center'>
-                    MANAGE USER
+                    <FormattedMessage id='manage-user.title' />
                 </div>
                 <div className='mx-1 '>
                     <button
-                        className='btn btn-primary px-3'
+                        className='btn btn-secondary px-3'
                         onClick={() => this.handleAddNewUser()}>
                         <i className="fas fa-plus">&nbsp; </i>
-                        Add New Users
+                        <FormattedMessage id='manage-user.add' />
                     </button>
                 </div>
                 <div className='user-table mt-3 mx-2'>
@@ -153,11 +155,11 @@ class UserManage extends Component {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Email</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Address</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id='manage-user.email' /></th>
+                                <th><FormattedMessage id='manage-user.first-name' /></th>
+                                <th><FormattedMessage id='manage-user.last-name' /></th>
+                                <th><FormattedMessage id='manage-user.address' /></th>
+                                <th><FormattedMessage id='manage-user.action' /></th>
                             </tr>
                         </thead>
                         <tbody>

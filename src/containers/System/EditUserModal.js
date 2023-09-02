@@ -158,11 +158,11 @@ class EditUserModal extends Component {
                 <ModalFooter>
                     <Button
                         className='btn px-2'
-                        color="primary"
+                        color="secondary"
                         onClick={() => this.handleEditUser()}>
                         Save Changes
                     </Button>{' '}
-                    <Button className='btn px-2' color="secondary" onClick={() => this.toggle()}>
+                    <Button className='btn px-2' color="secondary" outline onClick={() => this.toggle()}>
                         Cancel
                     </Button>
 

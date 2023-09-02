@@ -19,13 +19,14 @@ class DefaultClass extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
-    clickMe = () => {
+    clickMe = async () => {
         let user = {
             id: '1',
             roleId: 'R1',
             accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZUlkIjoiUjEiLCJpYXQiOjE2OTM0MDgzMzksImV4cCI6MTY5MzQwODM2OX0.w0HmPa4gtn9LnpY4OpMKTjLHUql2x8V6AieYgZE6w8I'
         }
-        createAxiosJWT(user)
+        let res = await createAxiosJWT(user)
+        console.log('=====res', res.newInstance)
     }
     render() {
         return (

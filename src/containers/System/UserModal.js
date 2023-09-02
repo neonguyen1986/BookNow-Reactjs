@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
+import { FormattedMessage } from 'react-intl';
 
 import { createNewUser } from '../../services/userService'
 
@@ -90,11 +91,11 @@ class UserModal extends Component {
                 className={'modal-user-container'}
                 size='lg'
                 centered={true}>
-                <ModalHeader toggle={() => this.toggle()}>Create a new user</ModalHeader>
+                <ModalHeader toggle={() => this.toggle()}><FormattedMessage id='manage-user.modal-title' /></ModalHeader>
                 <ModalBody>
                     <div className='modal-user-body'>
                         <div className='input-container' >
-                            <label>Email</label>
+                            <label><FormattedMessage id='manage-user.email' /></label>
                             <input
                                 type='email'
                                 name='email'
@@ -102,49 +103,49 @@ class UserModal extends Component {
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
-                            <label>Password</label>
+                            <label><FormattedMessage id='manage-user.password' /></label>
                             <input type='password'
                                 name='password'
                                 value={this.state.password}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
-                            <label>First Name</label>
+                            <label><FormattedMessage id='manage-user.first-name' /></label>
                             <input type='text'
                                 name='firstName'
                                 value={this.state.firstName}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
-                            <label>Last Name</label>
+                            <label><FormattedMessage id='manage-user.last-name' /></label>
                             <input type='text'
                                 name='lastName'
                                 value={this.state.lastName}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
-                            <label>Address</label>
+                            <label><FormattedMessage id='manage-user.address' /></label>
                             <input type='text'
                                 name='address'
                                 value={this.state.address}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
-                            <label>Phone Number</label>
+                            <label><FormattedMessage id='manage-user.phone-number' /></label>
                             <input type='email'
                                 name='phoneNumber'
                                 value={this.state.phoneNumber}
                                 onChange={(e) => this.handleOnChangeInput(e)} />
                         </div>
                         <div className='input-container' >
-                            <label>Gender</label>
+                            <label><FormattedMessage id='manage-user.gender' /></label>
                             <select name="gender" className="form-control" defaultValue='1'>
                                 <option value="1">Male</option>
                                 <option value="0">Female</option>
                             </select>
                         </div>
                         <div className="input-container">
-                            <label>Role</label>
+                            <label><FormattedMessage id='manage-user.role-id' /></label>
                             <select name="roleId" className="form-control" defaultValue='1'>
                                 <option value="1">Admin</option>
                                 <option value="2">Doctor</option>
@@ -156,12 +157,12 @@ class UserModal extends Component {
                 <ModalFooter>
                     <Button
                         className='btn px-2'
-                        color="primary"
+                        color="secondary"
                         onClick={() => this.handleAddNewUser()}>
-                        Save Changes
+                        <FormattedMessage id='manage-user.save-change' />
                     </Button>{' '}
-                    <Button className='btn px-2' color="secondary" onClick={() => this.toggle()}>
-                        Cancel
+                    <Button className='btn px-2' outline color="secondary" onClick={() => this.toggle()}>
+                        <FormattedMessage id='manage-user.cancel' />
                     </Button>
 
                 </ModalFooter>

@@ -5,6 +5,9 @@ import * as actions from "../../store/actions";
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 import { handleLoginApi } from '../../services/userService';
+import jwtDecode from 'jwt-decode';
+import { CommonUtils } from "../../utils";
+
 
 class Login extends Component {
 	constructor(props) {
@@ -32,6 +35,7 @@ class Login extends Component {
 			this.handleLogin()
 		}
 	}
+
 	handleLogin = async () => {
 		this.state.errMessage = ''//clear mã lỗi
 		try {
@@ -43,9 +47,14 @@ class Login extends Component {
 				})
 			}
 			if (data && data.errCode === 0) {
-				//todo
-				// console.log('login successful')
 				this.props.userLoginSuccess(data.user)
+				let roleId = CommonUtils.getIdOrRoleFromToken(data.user.accessToken, 'role')
+				console.log('==========check role', roleId)
+				if (roleId === 'R1') {
+					this.props.navigate('/system/user-redux');
+				} else if (roleId === 'R2') {
+					this.props.navigate('/doctor/manage-schedule');
+				}
 			}
 		} catch (error) {
 			// console.log(error.response)
@@ -72,23 +81,26 @@ class Login extends Component {
 					<div className="login-content row">
 						<div className="login-text col-12">Login</div>
 						<div className="col-12 form-group login-input">
-							<label>Username:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="Enter your username"
-								value={username}
-								name="username"
-								onChange={(e) => this.handleOnChangeInput(e)}
-							/>
+							{/* <label>Email:</label> */}
+							<div className="login-input-email">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Email"
+									value={username}
+									name="username"
+									onChange={(e) => this.handleOnChangeInput(e)}
+								/>
+								<span><i class="fas fa-envelope"></i></span>
+							</div>
 						</div>
 						<div className="col-12 form-group login-input">
-							<label>Password:</label>
+							{/* <label>Password:</label> */}
 							<div className="custom-input-password">
 								<input
 									type={isShowPassword === false ? "password" : "text"}
 									className="form-control"
-									placeholder="Enter your password"
+									placeholder="Password"
 									value={password}
 									name="password"
 									onChange={(e) => this.handleOnChangeInput(e)}
@@ -99,22 +111,24 @@ class Login extends Component {
 								>
 									<i className={isShowPassword === false ? "fas fa-eye-slash" : "fas fa-eye"}></i>
 								</span>
+								<span className="login-icon"><i class="fas fa-lock"></i></span>
 							</div>
 						</div>
-						<div className="col-12 err-code">
-							{errMessage}
-						</div>
+
 						<div className="col-12">
 							<button className="login-btn"
 								onClick={() => this.handleLogin()}>
-								Login
+								Sign In
 							</button>
 						</div>
 						<div className="col-12">
-							<span className="forgot-password">Forgot your password?</span>
+							{/* <span className="forgot-password">Forgot your password?</span> */}
 						</div>
 						<div className="col-12 text-center mt-2">
 							<span className="other-login"> Or Login with:</span>
+						</div>
+						<div className="col-12 err-code">
+							{errMessage}
 						</div>
 						<div className="col-12 social-login">
 							<i className="fab fa-google-plus-g"></i>

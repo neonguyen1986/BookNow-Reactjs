@@ -1,4 +1,7 @@
 import actionTypes from './actionTypes';
+import { createAxiosJWT } from '../../axiosJWT';
+import { userLoginSuccess } from '../actions/userActions'
+import { toast } from 'react-toastify';
 import {
     getAllCodeService,
     createNewUserService,
@@ -11,6 +14,7 @@ import {
     getAllSpecialty,
 }
     from '../../services/userService'
+import { useDispatch } from 'react-redux';
 
 //=================== Fetch Gender ====================
 export const fetchGenderStart = () => async (dispatch, getState) => {
@@ -103,7 +107,7 @@ export const createNewUser = (data) => async (dispatch, getState) => {
         // //FETCH_GENDER_START: to show isLoadingGender
         // dispatch({ type: actionTypes.FETCH_GENDER_START });
         const res = await createNewUserService(data);
-        console.log('===============check create user Redux:', res)
+        // console.log('===============check create user Redux:', res)
         if (res && res.errCode === 0) {
             dispatch(saveUserSuccess(res));
         } else {
@@ -208,14 +212,18 @@ export const getUsersFailed = (error) => ({
 })
 //============
 export const updateUserStart = (data) => async (dispatch, getState) => {
+    // console.log("=========check 1 data:", data)
     try {
-        // //FETCH_GENDER_START: to show isLoadingGender
-        // dispatch({ type: actionTypes.FETCH_GENDER_START });
-        const res = await editUserService(data);
+        // const dispatch = useDispatch();
+        let axiosJWT = createAxiosJWT(data, dispatch, userLoginSuccess)
+        const res = await axiosJWT.put('/api/edit-user', data)
+        console.log("=========check 3 res:", res)
         // console.log('check data after:', res)
-        if (res && res.errCode === 0) {
+        if (res && res.data?.errCode === 0) {
+            toast.success(res.data.errMessage)
             dispatch(updateUsersSuccess());
         } else {
+            toast.warning(res.data.errMessage)
             const errorMessage = res?.message ? res.message : 'Failed to update user';
             dispatch(updateUsersFailed(errorMessage));
         }

@@ -6,7 +6,7 @@ import Navigator from '../../components/Navigator';
 import { adminMenu, doctorMenu } from './menuApp';
 import './Header.scss';
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGE, USER_ROLE } from '../../utils';
+import { LANGUAGE, USER_ROLE, CommonUtils } from '../../utils';
 import _ from 'lodash';
 import jwtDecode from 'jwt-decode';
 
@@ -22,7 +22,7 @@ class Header extends Component {
         let { userInfo } = this.props
         let menu = []
         if (userInfo && !_.isEmpty(userInfo)) {
-            let role = this.getRoleIdFromToken(userInfo.accessToken)
+            let role = CommonUtils.getIdOrRoleFromToken(userInfo.accessToken, 'role')
             if (role === USER_ROLE.ADMIN) {
                 menu = adminMenu
             }
@@ -34,10 +34,6 @@ class Header extends Component {
             menuApp: menu,
         })
         // console.log('check userInfo:', this.props.userInfo)
-    }
-    getRoleIdFromToken = (inputToken) => {
-        let decodedToken = jwtDecode(inputToken)
-        return decodedToken.roleId
     }
     handleChangeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)

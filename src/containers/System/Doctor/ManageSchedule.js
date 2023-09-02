@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import './ManageSchedule.scss'
 import Select from 'react-select';
 import * as actions from "../../../store/actions"
-import { LANGUAGE, dateFormat } from '../../../utils'
+import { LANGUAGE, dateFormat, CommonUtils, USER_ROLE } from '../../../utils'
 import DatePicker from '../../../components/Input/DatePicker'
 import _ from 'lodash'
 import moment from 'moment';
@@ -12,15 +12,12 @@ import { collapseToast, toast } from 'react-toastify';
 import { saveBulkScheduleDoctor } from '../../../services/userService'
 
 
-
-
-
 class ManageSchedule extends Component {
     constructor(props) {
         super(props)
         this.state = {
             listDoctors: [],
-            selectedDoctor: {},
+            selectedDoctor: '',
             currentDate: '',
             timeRange: [],
         }
@@ -51,22 +48,14 @@ class ManageSchedule extends Component {
     }
     //================SELECT==============
     buildDataSelect = (arrInput) => {
-        let language = this.props.language;
         let result = [];
         if (arrInput?.length > 0) {
             for (let i = 0; i < arrInput.length; i++) {
                 let tempArr = arrInput[i]
-                if (language === LANGUAGE.EN) {
-                    result.push({
-                        value: tempArr.id,
-                        label: `${tempArr.firstName} ${tempArr.lastName}`
-                    })
-                } else {
-                    result.push({
-                        value: tempArr.id,
-                        label: `${tempArr.lastName} ${tempArr.firstName}`
-                    })
-                }
+                result.push({
+                    value: tempArr.id,
+                    label: `${tempArr.firstName} ${tempArr.lastName}`
+                })
             }
         }
         return result
@@ -140,8 +129,17 @@ class ManageSchedule extends Component {
 
     }
     render() {
-        let options = this.buildDataSelect(this.state.listDoctors)
-        console.log('>>>check state Manage Schedule:', this.state)
+        let options = ''
+        if (CommonUtils.getIdOrRoleFromToken(this.props.userInfo.accessToken, 'role') === USER_ROLE.ADMIN) {
+            options = this.buildDataSelect(this.state.listDoctors)
+        } else {
+            let curDoctor = [{
+                value: CommonUtils.getIdOrRoleFromToken(this.props.userInfo.accessToken, 'id'),
+                label: `${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`
+            }]
+            options = curDoctor
+        }
+        // console.log('>>>check state Manage Schedule:', this.state)
         let { timeRange } = this.state
         let language = this.props.language
 
@@ -190,7 +188,7 @@ class ManageSchedule extends Component {
                             }
                         </div>
                         <div className='col-12'>
-                            <button className='btn btn-primary'
+                            <button className='btn btn-secondary'
                                 onClick={() => this.handleSaveSchedule()}>
                                 <FormattedMessage id="manage-schedule.save" />
                             </button>
@@ -209,6 +207,7 @@ const mapStateToProps = state => {
         language: state.app.language,
         allDoctorsRedux: state.admin.allDoctors,
         allScheduleTime: state.admin.allScheduleTime,
+        userInfo: state.user.userInfo,
     };
 };
 

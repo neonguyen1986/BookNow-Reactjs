@@ -22,7 +22,7 @@ class ManageSpecialty extends Component {
         this.myRef = React.createRef();
         this.state = {
             //Create New Specialty
-            isCreate: false,
+            isCreate: true,
             previewImgURL: '',
             isOpen: false,
             specialtyNameEn: '',
@@ -34,7 +34,7 @@ class ManageSpecialty extends Component {
             specialtyImage: '',
 
             //Edit Specialty
-            isEdit: true,
+            isEdit: false,
             specialtyData: '',
             id: '',
 
@@ -232,10 +232,10 @@ class ManageSpecialty extends Component {
         return (
             <>
                 <div className="ManaSpec-navbar">
-                    <div
+                    <div className="active"
                         onClick={(e) => this.handleClickCreateEvent(e)}
                     ><i className="fas fa-plus"></i> &nbsp;<FormattedMessage id='admin.manage-specialty.create' /></div>
-                    <div className="active"
+                    <div
                         onClick={(e) => this.handleClickEditEvent(e)}
                     ><i className="far fa-edit"></i>&nbsp;<FormattedMessage id='admin.manage-specialty.edit-delete' /></div>
                 </div >
@@ -308,7 +308,7 @@ class ManageSpecialty extends Component {
                                     onChange={this.handleEditorChangeFr} />
 
                             </div>
-                            <button className='btn btn-primary'
+                            <button className='btn btn-secondary'
                                 onClick={() => this.handleOnClickSave()}
                             >
                                 <FormattedMessage id='admin.manage-specialty.save' />
@@ -424,7 +424,7 @@ class ManageSpecialty extends Component {
                                         onChange={this.handleEditorChangeFr} />
 
                                 </div>
-                                <button className='btn btn-primary'
+                                <button className='btn btn-secondary'
                                     onClick={() => this.handleOnClickSaveEdit()}
                                 >
                                     <FormattedMessage id='admin.manage-specialty.save' />

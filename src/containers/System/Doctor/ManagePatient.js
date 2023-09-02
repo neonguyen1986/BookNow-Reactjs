@@ -104,17 +104,7 @@ class ManagePatient extends Component {
         // console.log('>>>result:', res)
         if (res?.fileName) window.open(res.fileName, '_blank')
     }
-    // fetchPdf = async () => {
-    //     try {
-    //         const response = await fetch('/api/pdf'); // Adjust the URL if your backend runs on a different port or domain
-    //         console.log('+++++++res ', response)
-    //         const blob = await response.blob();
-    //         const url = URL.createObjectURL(blob);
-    //         this.setState({ pdfUrl: url })
-    //     } catch (error) {
-    //         console.error('Error fetching PDF:', error);
-    //     }
-    // }
+
     render() {
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 15));
         // console.log('==========check state from ManagePatients:', this.state)
@@ -134,10 +124,10 @@ class ManagePatient extends Component {
 
                 <div className='Manage-patient-container'>
                     <div className='manaPati-title title'>
-                        Manage Patients
+                        <FormattedMessage id='manage-patients.title' />
                     </div>
                     <div className='col-6 form-group'>
-                        <label>Chọn ngày</label>
+                        <label><FormattedMessage id='manage-patients.choose-date' /></label>
                         <DatePicker
                             onChange={this.handleOnChangeDatePicker}
                             className='form-control choose-date'
@@ -153,13 +143,13 @@ class ManagePatient extends Component {
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Email</th>
-                                        <th>Full Name</th>
-                                        <th>gender</th>
-                                        <th>Address</th>
-                                        <th>Booking Date</th>
-                                        <th>Booking Time</th>
-                                        <th>Action</th>
+                                        <th><FormattedMessage id='manage-patients.email' /></th>
+                                        <th><FormattedMessage id='manage-patients.full-name' /></th>
+                                        <th><FormattedMessage id='manage-patients.gender' /></th>
+                                        <th><FormattedMessage id='manage-patients.address' /></th>
+                                        <th><FormattedMessage id='manage-patients.booking-date' /></th>
+                                        <th><FormattedMessage id='manage-patients.booking-time' /></th>
+                                        <th><FormattedMessage id='manage-patients.action' /></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -198,7 +188,7 @@ class ManagePatient extends Component {
                                                             :
                                                             <>
                                                                 <input type="file" onChange={(e) => this.handleOnChangeFile(e)} />
-                                                                <button className='btn btn-primary' onClick={() => this.handleOnClickUploadFile(item)}>Send</button>
+                                                                <button className='btn btn-secondary' onClick={() => this.handleOnClickUploadFile(item)}>Send</button>
                                                             </>
                                                         }
                                                     </td>
@@ -207,7 +197,7 @@ class ManagePatient extends Component {
                                         })
                                         :
                                         <tr >
-                                            <td colSpan='8' style={{ textAlign: 'center' }}>No data</td>
+                                            <td colSpan='8' style={{ textAlign: 'center' }}><FormattedMessage id='manage-patients.no-data' /></td>
                                         </tr>
                                     }
 

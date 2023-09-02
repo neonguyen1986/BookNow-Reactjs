@@ -2,6 +2,7 @@ import { reject } from "lodash";
 import { resolveModuleName } from "typescript";
 import { NumericFormat } from 'react-number-format';
 import LoadingOverlay from 'react-loading-overlay';
+import jwtDecode from 'jwt-decode';
 
 class CommonUtils {
     static convertBlobToBase64 = (blob) => {
@@ -38,6 +39,11 @@ class CommonUtils {
         const timestamp = new Date(year, month - 1, day).getTime();
         return timestamp;
     };
+    static getIdOrRoleFromToken = (inputToken, IdOrRole) => {
+        let decodedToken = jwtDecode(inputToken);
+        let result = IdOrRole === 'id' ? decodedToken.id : IdOrRole === 'role' ? decodedToken.roleId : null;
+        return result
+    }
 }
 
 

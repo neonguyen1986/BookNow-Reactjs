@@ -191,9 +191,25 @@ class UserRedux extends Component {
         })
     }
     handleOnClickEdit = async () => {
-        await this.props.updateUserStart(this.state)
+        let data = { ...this.state, accessToken: this.props.userInfo.accessToken }
+        await this.props.updateUserStart(data)
         await this.props.fetchAllUsersStart()
-        toast.success("The user has just edited")
+        // clear the form
+        this.setState({
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            address: '',
+            gender: '',
+            position: '',
+            role: '',
+            avatar: '',
+            previewIgmURL: '',
+
+            isEditForm: false,
+        })
     }
 
     handleOnClickCancel = () => {
@@ -218,13 +234,11 @@ class UserRedux extends Component {
         let language = this.props.language
         let { genderArr, positionArr, roleArr, previewIgmURL, isOpen } = this.state
         let isLoadingGenderReact = this.props.isLoadingGenderRedux
-
-        // console.log('>>>check genderArr:', genderArr)
-
         let { email, password, firstName, lastName, phoneNumber,
             address, gender, position, role, avatar, isEditForm
         } = this.state
 
+        // console.log('===========check state', this.props.userInfo.accessToken)
         return (
             <div className="user-redux-container" >
                 <div className='title'>
@@ -362,7 +376,7 @@ class UserRedux extends Component {
                                 </div>
                                 {isEditForm === false
                                     ?
-                                    <button className='btn btn-primary my-3'
+                                    <button className='btn btn-secondary my-3'
                                         onClick={() => this.handleOnClickSave()}
                                     ><FormattedMessage id='manage-user.save' />
                                     </button>
@@ -372,7 +386,7 @@ class UserRedux extends Component {
                                             onClick={() => this.handleOnClickEdit()}
                                         ><FormattedMessage id='manage-user.save-changes' />
                                         </button>
-                                        <button className='btn btn-secondary my-3 mx-2'
+                                        <button className='btn btn-secondary outline my-3 mx-2'
                                             onClick={() => this.handleOnClickCancel()}
                                         ><FormattedMessage id='manage-user.cancel-btn' />
                                         </button>

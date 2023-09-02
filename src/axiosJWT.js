@@ -1,21 +1,24 @@
-import axios from "axios";
+import axios from "./axios";
 import jwt_decode from "jwt-decode"
 
+// const localAxios = axios.create({
+//     baseURL: process.env.REACT_APP_BACKEND_URL
+// });
 
 const refreshToken = async () => {
     try {
         const res = await axios.post('/api/refresh', {
             withCredentials: true, //add cookie from browser cookies
         })
-        return res.data; //it will return new accessToken, refreshToken
+        console.log('++++++++++res:', res)
+        return res; //it will return new accessToken, refreshToken
     } catch (error) {
         console.log(error)
     }
 }
-export const createAxiosJWT = (user) => {
-
+export const createAxiosJWT = (user, dispatch, stateSuccess) => {
+    console.log('++++++++++ user:', user)
     let newInstance = axios.create()
-    console.log('=====================check1', newInstance)
 
     //interceptor: before seding any request using axiosJWT, it will check condition inside this logic
     newInstance.interceptors.request.use(
@@ -37,10 +40,11 @@ export const createAxiosJWT = (user) => {
                     ...user,
                     accessToken: data.accessToken,
                 }
-                // dispatch(stateSuccess(refreshUser))//use refreshUser to add data in loginSuccess in Redux
-                // config.headers["token"] = `Bearer ${data.accessToken}`
+                dispatch(stateSuccess(refreshUser))//use refreshUser to add data in loginSuccess in Redux
+                config.headers["token"] = `Bearer ${data.accessToken}`
                 //????????? add token to headers in case user want to use in deleteUser function
-                console.log('=====================check', config)
+            } else {
+                config.headers["token"] = `Bearer ${user.accessToken}`
             }
             return config;
         },
