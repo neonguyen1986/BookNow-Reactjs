@@ -35,15 +35,18 @@ class Specialty extends Component {
 
     render() {
         let { allSpecialties } = this.state;
-        console.log('>>>>>check state from Specialty:', this.state)
+        // console.log('>>>>>check state from Specialty:', this.state)
         let language = this.props.language
         return (
             <>
                 <div className='fit-height-width'>
-                    <div className='section-shared'>
+                    <div className='section-shared container'>
                         <div className='section-container'>
                             <div className='section-header'>
-                                <div className='section-title'>Popular specialties</div>
+                                <div className='section-title'>
+                                    <b><FormattedMessage id='home-page.Specialties' /></b>
+                                    <FormattedMessage id='home-page.home-specialties' />
+                                </div>
 
                                 <button>
                                     <Link to={path.SPECIALTY_MORE} style={{ textDecoration: 'none', color: 'inherit', }}>
@@ -59,7 +62,7 @@ class Specialty extends Component {
                                             return (
                                                 // <Link to='/home' style={{ textDecoration: 'none', color: 'inherit', }}></Link>
 
-                                                <div key={index} className='img-customize'>
+                                                <div key={index} className='specialties-img-customize'>
                                                     <Link to={`/detail-specialty/${item.id}/ALL`} style={{ textDecoration: 'none', color: 'inherit', }}>
                                                         <div className='tempdiv'><img className='image-specialty' src={item.image} /></div>
                                                     </Link>

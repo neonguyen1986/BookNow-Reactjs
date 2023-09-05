@@ -10,6 +10,7 @@ import DoctorSchedule from '../Doctor/DoctorSchedule';
 import { getDetailSpecialtyIdLocation, getAllCodeService } from '../../../services/userService'
 import ReactMarkdown from 'react-markdown';
 import _ from 'lodash'
+import HomeFooter from '../../Auth/HomePage/HomeFooter';
 
 class DetailSpecialty extends Component {
     constructor(props) {
@@ -135,6 +136,7 @@ class DetailSpecialty extends Component {
                         })
                     }
                 </div>
+                <HomeFooter />
             </div>
         )
     }

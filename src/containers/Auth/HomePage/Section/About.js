@@ -12,16 +12,37 @@ class About extends Component {
 
         return (
             <>
-                <div className='fit-height-width about-section'>
-                    <div className='about-footer'>
-                        Book Now offers an efficient way to access top-notch medical services
-                    </div>
-                    <div className='about-footer-content'>
-                        <div className='afc-left-content'>
-                            <img className='afc-left-img' src={aboutImg} />
+                <div className='fit-height-width about-background'>
+                    <div className='about-section container'>
+                        <div className='about-left-content'>
+                            <div className='alc-title'><FormattedMessage id="about.book-now" /></div>
+                            <div className='alc-content'>
+                                <FormattedMessage id="about.book-now-content" />
+                            </div>
                         </div>
-                        <div className='afc-right-content'>
-                            Our platform connects you with skilled doctors across various specialties, ensuring you receive the care you need. Whether it's a routine check-up or a specialized consultation, our user-friendly interface makes booking appointments a breeze. With a wide range of available time slots, you can choose what suits your schedule best. Our dedicated professionals are committed to providing personalized care, addressing your concerns, and guiding you towards better health. Experience the convenience of modern healthcare by booking a doctor through us. Your well-being is our priority.
+                        <div className='about-right-content'>
+                            <div className='arc-contact'>
+                                <FormattedMessage id="about.contact" />
+                            </div>
+                            <div className='arc-email-address-phone'>
+                                <div className='arceap-left'>
+                                    <i className="fa fa-envelope"></i> &nbsp; <FormattedMessage id="about.email" /> <br />
+                                    <i className="fa fa-phone"></i>&nbsp; &nbsp;<FormattedMessage id="about.phone" /><br />
+                                    <i className="fa fa-home"></i>&nbsp;&nbsp;<FormattedMessage id="about.address" /><br />
+                                </div>
+                                <div className='arceap-right'>
+                                    <FormattedMessage id="about.email-input" /> <br />
+                                    <FormattedMessage id="about.phone-input" /><br />
+                                    <FormattedMessage id="about.address-input" />
+                                </div>
+                            </div>
+                            <div className='arc-social-media'>
+                                <i><a href="#" className="fab fa-twitter"></a></i>
+                                <i><a href="#" className="fab fa-facebook-f"></a></i>
+                                <i><a href="#" className="fab fa-snapchat-ghost"></a></i>
+                                <i><a href="#" className="fab fa-instagram"></a></i>
+                                <i><a href="#" className="fab fa-github"></a></i>
+                            </div>
                         </div>
                     </div>
                 </div>

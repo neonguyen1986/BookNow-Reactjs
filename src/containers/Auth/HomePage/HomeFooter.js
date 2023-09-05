@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import neoLogo from '../../../assets/neo logo.png'
 
 
 class HomeFooter extends Component {
@@ -16,7 +17,7 @@ class HomeFooter extends Component {
         return (
             <>
                 <div className='home-footer'>
-                    &copy; This page is copied by Minh Nguyen from Bookingcare
+                    <img src={neoLogo} /> &nbsp;&nbsp;<FormattedMessage id="home-footer.text" />
                 </div>
             </>
         )

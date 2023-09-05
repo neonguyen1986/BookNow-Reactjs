@@ -8,7 +8,7 @@
         "find-doctor": "Find good doctor",
         "package": "Package",
         "health-check": "General health check",
-        "support": "Support",
+        "language": "Language",
         "medical-background": "MEDICAL PLATFORM",
         "comprehensive": "COMPREHENSIVE HEALTH CARE",
         "specialist-exam": "Specialist Examination",
@@ -16,7 +16,22 @@
         "general-exam": "General Examination",
         "medical-test": "Medical Test",
         "mental-health": "Mental Health",
-        "welcome": "Welcome "
+        "welcome": "Welcome ",
+        "ads": "Effortless Online Doctor Booking: Your Health, Your Schedule, Your Choice - Book Today!"
+    },
+    "about": {
+        "book-now": "book now",
+        "book-now-content": "Our platform seamlessly connects you with highly experienced and caring doctors who specialize in a wide spectrum of medical requirements. Utilizing our intuitive and user-friendly interface, you can effortlessly schedule appointments, choosing from a diverse array of flexible time slots that accommodate your busy schedule. Our team of dedicated healthcare professionals is committed to delivering tailor-made care and expert guidance, with an unwavering focus on your overall well-being and health.",
+        "contact": "contact us",
+        "email": "Email:",
+        "phone": "Phone:",
+        "address": "Address",
+        "email-input": "booknow@example.ltd",
+        "phone-input": "000-000-0000",
+        "address-input": "1234 Book Now St, Calgary AB 0T0 0A0"
+    },
+    "home-footer": {
+        "text": "This page is created by Neo Nguyen"
     },
     "menu": {
         "admin": {
@@ -76,7 +91,10 @@
         "no-data": "No Data"
     },
     "home-page": {
-        "outstanding-doctor": "Outstanding Doctor",
+        "Specialties": "Specialties: ",
+        "home-specialties": "Expert Care, On Demand, Streamline Your Healthcare",
+        "best-doctors": "Best Doctors: ",
+        "doctor-ads": "Care You Can Trust",
         "more-info": "MORE INFO...",
         "detail-specialty": {
             "filter": "Filter By Province:"

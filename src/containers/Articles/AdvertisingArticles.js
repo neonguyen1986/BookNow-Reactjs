@@ -10,6 +10,7 @@ import MentalHealth from './MentalHealth';
 import { useEffect } from 'react';
 import { LANGUAGE } from '../../utils';
 import { useLocation } from 'react-router-dom';
+import HomeFooter from '../Auth/HomePage/HomeFooter';
 
 
 const AdvertisingArticles = (props) => {
@@ -47,6 +48,7 @@ const AdvertisingArticles = (props) => {
 
                 }
             </div>
+            <HomeFooter />
         </div>
     )
 }

@@ -126,8 +126,6 @@ class TableManageUser extends Component {
                                         )
                                     })}
                             </tbody>
-
-
                         </table>
 
                     </div>

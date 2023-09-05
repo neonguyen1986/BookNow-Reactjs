@@ -8,6 +8,7 @@ import DoctorProfile from './DoctorProfile';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorMoreInfo from './DoctorMoreInfo';
 import HomeHeader from '../../Auth/HomePage/HomeHeader';
+import HomeFooter from '../../Auth/HomePage/HomeFooter';
 
 
 
@@ -138,6 +139,7 @@ class DoctorMorePage extends Component {
                         }
                     </div>
                 </div >
+                <HomeFooter />
             </>
         )
     }

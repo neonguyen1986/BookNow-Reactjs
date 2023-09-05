@@ -25,12 +25,8 @@ class HomePage extends Component {
                 <HomeHeader isShowBanner={true} />
                 <Specialty
                     settings={settings} />
-                {/* <MedicalFacility
-                    settings={settings} /> */}
                 <OutstandingDoctors
                     settings={settings} />
-                {/* <Handbooks
-                    settings={settings} /> */}
                 <About />
                 <HomeFooter />
             </div>

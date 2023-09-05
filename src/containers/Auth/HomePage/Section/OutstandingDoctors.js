@@ -39,14 +39,17 @@ class OutstandingDoctors extends Component {
     render() {
         let arrDoctors = this.state.arrDoctors;
         let language = this.props.language;
-        // console.log('check topDoctorsRedux:', arrDoctors)
+        console.log('check topDoctorsRedux:', this.state)
         return (
             <>
                 <div className='fit-height-width doctors'>
                     <div className='section-shared'>
-                        <div className='section-container'>
+                        <div className='section-container container'>
                             <div className='section-header'>
-                                <div className='section-title'><FormattedMessage id='home-page.outstanding-doctor' /></div>
+                                <div className='section-title'>
+                                    <b><FormattedMessage id='home-page.best-doctors' /></b>
+                                    <FormattedMessage id='home-page.doctor-ads' />
+                                </div>
 
                                 <button>
                                     <Link to={path.ALLDOCTORS} style={{ textDecoration: 'none', color: 'inherit', }}>
@@ -59,7 +62,7 @@ class OutstandingDoctors extends Component {
                                     {arrDoctors?.length > 0 &&
                                         arrDoctors.map((item, index) => {
                                             let position = language === LANGUAGE.EN ? item.positionData.valueEn : item.positionData.valueFr
-                                            let name = language === LANGUAGE.EN ? `${item.firstName} ${item.lastName} ` : `${item.lastName} ${item.firstName} `
+                                            let name = `${item.firstName} ${item.lastName} `
                                             // console.log('>>>image check;;;', item.image)
                                             return (
                                                 <div className='img-customize-doctor' key={index}
@@ -67,7 +70,7 @@ class OutstandingDoctors extends Component {
                                                     <div className='tempdiv'><img
                                                         className='image' src={CommonUtils.convertBase64ToBinary(item.image)} /></div>
                                                     <div className='title-name'>
-                                                        {position} {name}
+                                                        <b>{position}</b>: {name}
                                                         {/* Phó giáo sư, Tiến sĩ, Bác sĩ Nguyễn Thị Hoài An */}
                                                     </div>
                                                     {/* <div>Tai Mũi Họng - Nhi Khoa</div> */}

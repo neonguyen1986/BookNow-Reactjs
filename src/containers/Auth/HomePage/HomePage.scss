@@ -6,48 +6,93 @@
         aspect-ratio: 5.5/2;
     }
 
-    &.about-section {
-        height    : 60vh;
-        margin-top: 30px;
+    &.about-background {
+        margin-top            : 7rem;
+        // margin-bottom   : -6rem;
+        background-color      : #b65752;
+        height                : 23rem;
+        // border             : 1px solid lime;
 
-        .about-footer {
-            font-size  : 30px;
-            font-weight: 600;
-            margin     : 0 30px;
-            padding    : 20px 60px;
-            border-top : 1px solid black;
-        }
-
-        .about-footer-content {
+        .about-section {
             display        : flex;
+            flex-direction : row;
             justify-content: space-between;
-            align-items    : start;
+            gap            : 5rem;
 
-            .afc-left-content {
-                width  : 50%;
-                margin : 0 30px;
-                padding: 0 10px 0 60px;
+            .about-left-content {
+                width: 50%;
 
-                .afc-left-img {
-                    height: 40vh;
+                .alc-title {
+                    font-size     : 1.8rem;
+                    text-transform: uppercase;
+                    color         : white;
+                    padding-top   : 3rem;
+                    margin-bottom : 2rem;
+                }
+
+                .alc-content {
+                    color      : white;
+                    line-height: 2rem;
+                    height     : 12rem;
+                    overflow   : hidden;
                 }
             }
 
-            .afc-right-content {
-                width         : 50%;
-                vertical-align: middle;
-                padding       : 0 4rem 0 0;
-                font-style    : italic;
+            .about-right-content {
+                width: 50%;
+
+                .arc-contact {
+                    font-size     : 1.8rem;
+                    text-transform: uppercase;
+                    color         : white;
+                    padding-top   : 3rem;
+                    margin-bottom : 2rem;
+                }
+
+                .arc-email-address-phone {
+                    color         : white;
+                    display       : flex;
+                    flex-direction: row;
+                    gap           : 3rem;
+
+                    .arceap-left {
+                        font-weight: bold;
+                        line-height: 2rem;
+                    }
+
+                    .arceap-right {
+                        line-height: 2rem;
+
+                    }
+                }
+
+                .arc-social-media {
+                    display   : flex;
+                    gap       : 2rem;
+                    margin-top: 2rem;
+                    font-size : 1.3rem;
+                    color     : white;
+
+                    a {
+                        display        : flex;
+                        justify-content: center;
+                        align-items    : center;
+                        border         : 1px solid white;
+                        padding        : 1rem;
+                        border-radius  : 50%;
+                        height         : 3.5rem;
+                        width          : 3.5rem;
+                        color          : inherit;
+                        text-decoration: none;
+                    }
+                }
             }
         }
     }
 
     .section-shared {
-        background: #f5f5f5;
-        // height: 360px;
-        width     : 100%;
-        height    : 100%;
-        padding   : 0 60px;
+        width : 100%;
+        height: 100%;
 
         &.medical-facility-section,
         &.handbooks {
@@ -56,59 +101,60 @@
 
 
         .section-container {
+
             .section-header {
-                height         : 60px;
+                height         : 5rem;
                 display        : flex;
                 justify-content: space-between;
                 align-items    : center;
-                margin-bottom  : 20px;
-                padding-top    : 20px;
+                margin-bottom  : 2rem;
+                padding-top    : 2rem;
+                margin-top     : 6.5rem;
+
 
                 .section-title {
-                    font-size  : 30px;
-                    font-weight: 700;
+                    font-size     : 1.8rem;
+                    text-transform: uppercase;
                 }
 
                 button {
-                    border       : none;
-                    border-radius: 0.5rem;
-
-                    background-color: #e9e2e2;
+                    border          : none;
+                    border-radius   : 0.5rem;
+                    color           : white;
+                    background-color: #e7746f;
                     padding         : 0.5rem 1rem;
 
                     &:hover {
-                        background-color: #f7d800;
+                        background-color: #c74a44;
                     }
                 }
             }
 
             .section-body {
+                margin-top: 3.5rem;
 
-                .img-customize {
-                    // border: 1px solid green;
-                    text-align: center;
+                .specialties-img-customize {
+                    display       : flex !important;
+                    flex-direction: column !important;
+                    align-items   : center !important;
 
                     .tempdiv {
-                        width       : 100%;
-                        aspect-ratio: 500/291;
-
-                        .image {
-                            width        : 100%;
-                            height       : 100%;
-                            // object-fit: cover;
-                        }
+                        display        : flex;
+                        justify-content: center;
+                        width          : 100%;
+                        aspect-ratio   : 500/291;
 
                         .image-specialty {
-                            width        : 98%;
-                            height       : 100%;
-                            border-radius: 2rem;
-                            box-shadow   : 4px 4px 8px rgba(0, 0, 0, 0.2);
+                            border: 0.4rem solid #b1b6b9;
+                            width : 88%;
+                            height: auto;
                         }
                     }
 
                     .specialty-text {
                         margin        : 1rem;
-                        text-transform: capitalize;
+                        text-transform: uppercase;
+                        font-size     : 1.2rem;
                     }
 
                     cursor: pointer;
@@ -128,33 +174,34 @@
 
 
                         .image {
-                            width        : 60%;
-                            height       : 60%;
-                            border-radius: 50%;
+                            width : 88%;
+                            height: 88%;
+                            border: 0.4rem solid #b1b6b9;
+
                         }
                     }
                 }
 
                 .title-name {
-                    width : 60%;
-                    margin: 0 auto;
+                    margin        : 1rem;
+                    text-transform: uppercase;
+                    font-size     : 1.2rem;
                 }
 
 
                 //config slick slider
 
                 .slick-prev {
-                    border    : 1px solid red !important;
-                    left      : -12px !important;
-                    height    : 48px !important;
-                    width     : 44px !important;
-                    z-index   : 100;
-                    background: #fff !important;
-                    border    : 2px solid #d7d7d7 !important;
+                    left            : -12px !important;
+                    height          : 48px !important;
+                    width           : 44px !important;
+                    z-index         : 100;
+                    // background   : #fff !important;
+                    // border    : 2px solid #d7d7d7 !important;
 
-                    &:hover {
-                        background: #eceaea !important;
-                    }
+                    // &:hover {
+                    //     background: #eceaea !important;
+                    // }
                 }
 
                 .slick-prev:before {
@@ -169,17 +216,16 @@
                 }
 
                 .slick-next {
-                    border    : 1px solid red !important;
-                    right     : -12px !important;
-                    height    : 48px !important;
-                    width     : 44px !important;
+                    right        : -12px !important;
+                    height       : 48px !important;
+                    width        : 44px !important;
                     // z-index: 1000;
-                    background: #fff !important;
-                    border    : 2px solid #d7d7d7 !important;
+                    // background: #fff !important;
+                    // border    : 2px solid #d7d7d7 !important;
 
-                    &:hover {
-                        background: #eceaea !important;
-                    }
+                    // &:hover {
+                    //     background: #eceaea !important;
+                    // }
                 }
 
                 .slick-next:before {
@@ -200,9 +246,13 @@
 
 .home-footer {
     text-align      : left;
-    padding         : 15px 15px;
-    background-color: #64b9e5;
+    padding         : 1rem 1.5rem;
+    background-color: #3b414d;
     color           : white;
+
+    img {
+        height: 2.5rem;
+    }
 }
 
 .slick-disabled {
@@ -212,4 +262,18 @@
 .wingdings {
     font-family: "Wingdings", sans-serif;
     /* Provide fallback fonts */
+}
+
+@media (max-width: 768px) {
+    .fit-height-width {
+        font-size: 16px !important;
+        /* Change font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .fit-height-width {
+        font-size: 12px !important;
+        /* Change font size for smaller screens */
+    }
 }

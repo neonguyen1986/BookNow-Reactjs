@@ -8,7 +8,7 @@
         "find-doctor": "Trouver un bon médecin",
         "package": "Emballer",
         "health-check": "Bilan de santé général",
-        "support": "Soutien",
+        "language": "Langue",
         "medical-background": "PLATEFORME MÉDICALE",
         "comprehensive": "SOINS DE SANTÉ COMPLETS",
         "specialist-exam": "Examen spécialiste",
@@ -16,7 +16,22 @@
         "general-exam": "Examen général",
         "medical-test": "Test médical",
         "mental-health": "Santé mentale",
-        "welcome": "Bienvenue "
+        "welcome": "Bienvenue ",
+        "ads": "Réservation de médecin en ligne sans effort : votre santé, votre emploi du temps, votre choix - Réservez dès aujourd'hui !"
+    },
+    "about": {
+        "book-now": "réserver maintenant",
+        "book-now-content": "Notre plateforme vous met en relation de manière transparente avec des médecins hautement expérimentés et attentionnés spécialisés dans un large éventail de besoins médicaux. En utilisant notre interface intuitive et conviviale, vous pouvez facilement prendre rendez-vous en choisissant parmi une gamme diversifiée de créneaux horaires flexibles qui s'adaptent à votre emploi du temps chargé. Notre équipe de professionnels de la santé dévoués s'engage à fournir des soins sur mesure et des conseils d'experts, avec une attention constante portée à votre bien-être global et à votre santé.",
+        "contact": "contactez-nous",
+        "email": "E-mail :",
+        "phone": "Téléphone :",
+        "address": "Adresse",
+        "email-input": "booknow@example.ltd",
+        "phone-input": "000-000-0000",
+        "address-input": "1234 Book Now St, Calgary AB 0T0 0A0"
+    },
+    "home-footer": {
+        "text": "Cette page est créée par Neo Nguyen"
     },
     "menu": {
         "admin": {
@@ -76,7 +91,10 @@
         "no-data": "Pas de données"
     },
     "home-page": {
-        "outstanding-doctor": "Médecin exceptionnel",
+        "Specialties": "Spécialités: ",
+        "home-specialties": "Soins experts, à la demande, rationalisez vos soins de santé",
+        "best-doctors": "Meilleurs Médecins: ",
+        "doctor-ads": "Des Soins en Qui Vous Pouvez Avoir Confiance",
         "more-info": "VOIR PLUS...",
         "detail-specialty": {
             "filter": "Filtrer par province:"

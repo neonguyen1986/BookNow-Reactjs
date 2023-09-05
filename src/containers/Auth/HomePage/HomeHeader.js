@@ -6,13 +6,48 @@ import { LANGUAGE } from '../../../utils'
 import { changeLanguageApp } from './../../../store/actions/appActions';
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom';
-
-
-
-
+import * as actions from "../../../store/actions"
+import logoImg from '../../../assets/book now.png'
+import Select from 'react-select';
 
 
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            listDoctor: '',
+            selectedDoctor: ''
+        }
+    }
+
+    async componentDidMount() {
+        await this.props.fetchAllDoctorsRedux();
+        // console.log('---------allDoctores:', this.props.allDoctorsRedux)
+        this.setState({ listDoctor: this.props.allDoctorsRedux })
+    }
+
+    buildDataSelect = (arrInput) => {
+        let language = this.props.language;
+        let result = [];
+        if (arrInput?.length > 0) {
+            for (let i = 0; i < arrInput.length; i++) {
+                let tempObj = arrInput[i]
+                result.push({
+                    value: tempObj.id,
+                    label: `${tempObj.firstName} ${tempObj.lastName}`,
+                })
+            }
+        }
+        return result
+    }
+
+    handleChangeSelect = async (key, selectedValue) => {
+        this.setState({ [key]: selectedValue });
+        console.log('---check selected:', key, selectedValue)
+        this.props.history.push(`/detail-doctor/${selectedValue.value}`)
+    };
+
+
     handleOnClickChangeLanguage = (language) => {
         //fire redux event: actions
         this.props.changeLanguageAppRedux(language)
@@ -24,14 +59,15 @@ class HomeHeader extends Component {
     render() {
         // console.log('>>>check redux props:', this.props);
         let language = this.props.language;
+        let optionsListDoctor = this.buildDataSelect(this.state.listDoctor)
+        let { selectedDoctor } = this.state;
         return (
             <>
                 <div className='home-header-container'>
                     <div className='home-header-content'>
                         <div className='left-content'
                             onClick={() => this.handleClickBackHome()}>
-                            <i className="fas fa-bars"></i>
-                            <div className='header-logo'></div>
+                            <img src={logoImg} className='header-logo' />
                         </div>
                         <div className='center-content'>
                             <div className='child-content'>
@@ -52,8 +88,8 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                         <div className='right-content'>
-                            <i className="fas fa-question-circle"></i>
-                            <div className='support'><FormattedMessage id="home-header.support" /></div>
+                            <i class="fas fa-language"></i>
+                            <div className='language'><FormattedMessage id="home-header.language" /></div>
                             <div>
                                 <div
                                     className={language === LANGUAGE.EN ? 'language-en active' : 'language-en'}
@@ -68,23 +104,8 @@ class HomeHeader extends Component {
                     </div>
                 </div>
                 {this.props.isShowBanner === true &&
-                    <div className='home-header-banner'>
+                    <div className='home-header-banner container'>
                         <div className='content-up'>
-                            <h1 className='title1'>
-                                <FormattedMessage id="home-header.medical-background" />
-                            </h1>
-                            <h1 className='title2'>
-                                <FormattedMessage id="home-header.comprehensive" />
-                            </h1>
-                            <div className='search'>
-                                <i className="fas fa-search"></i>
-                                <input
-                                    className='search-box'
-                                    type='text'
-                                    placeholder={language === LANGUAGE.EN ? 'Find a doctor' : 'Trouver un médecin'} />
-                            </div>
-                        </div>
-                        <div className='content-down'>
                             <div className='icon-block'>
                                 <div className='icon'>
                                     <img className='img' src={require('../../../assets/icon1-specialist-examination.png').default} />
@@ -126,6 +147,32 @@ class HomeHeader extends Component {
                                 </Link>
                             </div>
                         </div>
+                        <div className='content-down'>
+                            <h1 className='title1'>
+                                <FormattedMessage id="home-header.medical-background" />
+                            </h1>
+                            <h1 className='title2'>
+                                <FormattedMessage id="home-header.comprehensive" />
+                            </h1>
+                            <div className='condow-ads'><FormattedMessage id="home-header.ads" /></div>
+                            <div className='search'>
+                                <i className="fas fa-search"></i>
+                                {/* <input
+                                    className='search-box'
+                                    type='text'
+                                    placeholder={language === LANGUAGE.EN ? 'Find a doctor' : 'Trouver un médecin'} /> */}
+                                <Select
+                                    className='content-down-select-doctors'
+                                    value={selectedDoctor}
+                                    onChange={(selectedValue) => this.handleChangeSelect('selectedDoctor', selectedValue)}
+                                    options={optionsListDoctor}
+                                    name='selectedDoctor'
+                                    placeholder={language === LANGUAGE.EN ? 'Find a doctor' : 'Trouver un médecin'}
+                                />
+
+                            </div>
+                        </div>
+
                     </div>
                 }
             </>
@@ -138,12 +185,14 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        allDoctorsRedux: state.admin.allDoctors,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        fetchAllDoctorsRedux: () => dispatch(actions.fetchAllDoctors()),
     };
 };
 

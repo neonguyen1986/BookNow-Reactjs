@@ -53,9 +53,11 @@
         }
 
         .show-hide {
-            margin: 10px 0;
-            color : rgb(0, 174, 255);
-            cursor: pointer;
+            margin     : 10px 0;
+            font-weight: 400;
+            font-size  : 14px;
+            color      : #e7746f;
+            cursor     : pointer;
         }
     }
 
@@ -73,9 +75,9 @@
         }
 
         .more-detail {
-            font-weight: 200;
+            font-weight: 400;
             font-size  : 14px;
-            color      : rgb(0, 174, 255);
+            color      : #e7746f;
             cursor     : pointer;
         }
 

@@ -7,6 +7,8 @@ import { LANGUAGE, CommonUtils } from '../../../utils'
 import { FormattedMessage } from 'react-intl';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorMoreInfo from './DoctorMoreInfo';
+import ReactMarkdown from 'react-markdown';
+import HomeFooter from '../../Auth/HomePage/HomeFooter';
 
 
 class DetailDoctor extends Component {
@@ -40,7 +42,7 @@ class DetailDoctor extends Component {
     render() {
 
         let detailDoctor = this.state.detailDoctor
-        // console.log('>>>>check state:', detailDoctor)
+        // console.log('>>>>---------check state:', detailDoctor)
 
         let language = this.props.language
 
@@ -52,50 +54,53 @@ class DetailDoctor extends Component {
         return (
             <>
                 <HomeHeader isShowBanner={false} />
-                <div className='doctor-detail-container'>
-                    <div className='doctor-intro'>
-                        <div className='left-content'>
-                            {detailDoctor?.image &&
-                                <img className='doctor-avatar'
-                                    src={CommonUtils.convertBase64ToBinary(detailDoctor.image)} />
-                            }
-                        </div>
-                        <div className='right-content'>
-                            <div className='up'>
-                                {language === LANGUAGE.EN
-                                    ? nameEn
-                                    : nameVi
+                <div className='doctor-detail-wrap'>
+                    <div className='doctor-detail-container container'>
+                        <div className='doctor-intro'>
+                            <div className='left-content'>
+                                {detailDoctor?.image &&
+                                    <img className='doctor-avatar'
+                                        src={CommonUtils.convertBase64ToBinary(detailDoctor.image)} />
                                 }
                             </div>
-                            <div className='down'>
-                                {detailDoctor?.Markdown?.descriptionEn && detailDoctor?.Markdown?.descriptionFr &&
-                                    (language === LANGUAGE.EN ? detailDoctor.Markdown.descriptionEn : detailDoctor.Markdown.descriptionFr)}
+                            <div className='right-content'>
+                                <div className='up'>
+                                    {language === LANGUAGE.EN
+                                        ? nameEn
+                                        : nameVi
+                                    }
+                                </div>
+                                <div className='down'>
+                                    {detailDoctor?.Markdown?.descriptionEn && detailDoctor?.Markdown?.descriptionFr &&
+                                        (language === LANGUAGE.EN ? detailDoctor.Markdown.descriptionEn : detailDoctor.Markdown.descriptionFr)}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='doctor-schedule'>
-                        <div className='left-content'>
-                            <DoctorSchedule
-                                doctorIdFromParent={this.state.curDoctorId} />
-                        </div>
-                        <div className='right-content'>
-                            <DoctorMoreInfo
-                                doctorIdFromParent={this.state.curDoctorId}
-                                isShowPrice={false}
-                            />
-                        </div>
-                    </div>
-                    <div className='doctor-detail'>
-                        {detailDoctor?.Markdown?.HTMLContent &&
-                            <div dangerouslySetInnerHTML={{ __html: detailDoctor.Markdown.HTMLContent }}>
+                        <div className='doctor-schedule'>
+                            <div className='left-content'>
+                                <DoctorSchedule
+                                    doctorIdFromParent={this.state.curDoctorId} />
                             </div>
-
-                        }
-                    </div>
-                    <div className='doctor-comment'>
+                            <div className='right-content'>
+                                <DoctorMoreInfo
+                                    doctorIdFromParent={this.state.curDoctorId}
+                                    isShowPrice={false}
+                                />
+                            </div>
+                        </div>
+                        <div className='doctor-detail'>
+                            {detailDoctor?.Markdown?.markdownContentEn &&
+                                <ReactMarkdown>
+                                    {language === LANGUAGE.EN
+                                        ? detailDoctor.Markdown.markdownContentEn
+                                        : detailDoctor.Markdown.markdownContentFr
+                                    }
+                                </ReactMarkdown>
+                            }
+                        </div>
                     </div>
                 </div>
-                {/* } */}
+                <HomeFooter />
             </>
         );
     }
